@@ -52,7 +52,7 @@
 	<!-- Pie de página -->
 	<footer class="pieDePagina">
 		<p>Creado por</p>
-		<img class="imagenEquipo" src="../..//utils/img/error404.png"
+		<img class="imagenEquipo" src="../../utils/img/error404.png"
 			alt="Logo de Error404">
 	</footer>
 </body>
