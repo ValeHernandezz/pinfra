@@ -6,6 +6,16 @@
 	<persistence-unit name="Proyecto-PInfra">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:/PROYECTO_PINFRA</jta-data-source>
+		<class>com.servidor.entidades.Analista</class>
+		<class>com.servidor.entidades.Area</class>
+		<class>com.servidor.entidades.Departamento</class>
+		<class>com.servidor.entidades.Estudiante</class>
+		<class>com.servidor.entidades.Genero</class>
+		<class>com.servidor.entidades.Itr</class>
+		<class>com.servidor.entidades.Localidad</class>
+		<class>com.servidor.entidades.Rol</class>
+		<class>com.servidor.entidades.Tutor</class>
+		<class>com.servidor.entidades.Usuario</class>
 		<validation-mode>AUTO</validation-mode>
 		<properties>
 			<property name="hibernate.dialect"
