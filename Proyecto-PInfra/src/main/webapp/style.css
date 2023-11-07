@@ -133,7 +133,7 @@ body {
 	gap: 80px;
 }
 
-.contenido section {
+.contenido .inicioContenido{
 	min-width: 100%;
 	display: flex;
 	gap: 50px;

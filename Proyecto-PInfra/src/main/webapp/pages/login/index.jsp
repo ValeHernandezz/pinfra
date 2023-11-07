@@ -8,7 +8,7 @@
 <!-- Creemos contenido dentro del main con clases personalizadas -->
 <!-- pero solo las utilizamos en la hoja de estilo que este en la misma carpeta que este archivo -->
 <!-- Nos ayuda a tener más organizado el .css y no todo en un mismo archivo jajaja -->
-<link rel="stylesheet" type="text/css" href="./style.css">
+<link rel="stylesheet" type="text/css" href="style.css">
 <link rel="stylesheet" type="text/css" href="../../style.css">
 <meta name="description"
 	content="Página de gestión de constancias de UTEC. Inicia sesión y ponte al día de tus constanciass.">
@@ -44,8 +44,24 @@
 	<!-- Contenido de la página -->
 	<main class="contenido">
 		<!-- Modificar a gusto -->
-		<section>
-			<h2>Login</h2>
+		<section class="loginContenido">
+			<div class="columnaIzq">
+				<div class="bannerLogin">
+					<h2 class="eslogan">Encontrate en UTEC</h2>
+				</div>
+			</div>
+
+			<div class="columnaDer">
+				<form class="formularioLogin">
+					<h2>Iniciar sesión</h2>
+					<label> Nombre de Usuario <input type="text" name="usuario"
+						placeholder="Ingrese su nombre de usuario...">
+					</label> <label> Contraseña <input type="password"
+						name="contrasenia" placeholder="Ingrese su contraseña...">
+					</label>
+					<button type="submit">Ingresar</button>
+				</form>
+			</div>
 		</section>
 	</main>
 
