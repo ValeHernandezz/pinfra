@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500&display=swap');
 
 @font-face {
 	font-family: 'Geist-UltraBlack';
@@ -228,7 +229,8 @@ body {
 	justify-content: center;
 	align-items: center;
 	gap: 20px;
-	font-size: 20px;
+	font-size: 30px;
+	font-family: 'Pixelify Sans', sans-serif;
 }
 
 .pieDePagina .imagenEquipo {
