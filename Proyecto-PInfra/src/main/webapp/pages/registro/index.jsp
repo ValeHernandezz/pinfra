@@ -14,7 +14,7 @@
 	content="Página de gestión de constancias de UTEC. Inicia sesión y ponte al día de tus constanciass.">
 <meta name="viewport" content="width=device-width">
 <link rel="icon" type="image/ico" href="../../utils/img/favicon.ico">
-<title>Inicio de sesión</title>
+<title>Registro</title>
 </head>
 
 <body>
@@ -36,8 +36,8 @@
 			</ul>
 
 			<div class="btnSesion">
-				<a href="./index.jsp">Iniciar sesión</a>
-				<a href="../registro/index.jsp">Registrarme</a>
+				<a href="../login/index.jsp">Iniciar sesión</a> <a
+					href="./index.jsp">Registrarme</a>
 			</div>
 		</nav>
 	</header>
@@ -47,24 +47,51 @@
 		<!-- Modificar a gusto -->
 		<section class="loginContenido">
 			<div class="columnaIzq">
-				<div class="bannerLogin">
-					<h2 class="eslogan">Encontrate en UTEC</h2>
-				</div>
-			</div>
-
-			<div class="columnaDer">
+					<h2>Registro</h2>
 				<form class="formularioLogin">
-					<h2>Iniciar sesión</h2>
-					<label> Nombre de Usuario <input type="text" name="usuario"
-						placeholder="Ingrese su nombre de usuario...">
-					</label> <label> Contraseña <input type="password"
-						name="contrasenia" placeholder="Ingrese su contraseña...">
+					<label>Nombres<input type="text" name="nombres"
+						placeholder="Ingrese sus nombres...">
+					</label> <label>Apellidos<input type="text" name="apellidos"
+						placeholder="Ingrese sus apellidos...">
+					</label> <label>Cédula<input type="number" name="cedula"
+						placeholder="Ingrese su cédula...">
+					</label> <label>Teléfono<input type="number" name="telefono"
+						placeholder="Ingrese su teléfono...">
+					</label> <label>Mail Personal<input type="text" name="mailPersonal"
+						placeholder="Ingrese su mail personal...">
+					</label> <label>Mail Institucional<input type="text"
+						name="mailInstitucional"
+						placeholder="Ingrese su mail institucional...">
+					</label> <label>Contraseña<input type="password" name="contrasenia"
+						placeholder="Ingrese su contraseña...">
 					</label>
-					<button type="submit">Ingresar</button>
-					<p class="registrarse">
-						¿No tienes una cuenta? <a href="../registro/index.jsp">Registrate aquí</a>
+					<label>Fecha de Nacimiento<input type="text"
+						name="fechaNacimeinto"
+						placeholder="Ingrese su fecha de nacimiento...">
+					</label>
+					<label>Género
+						<select name="genero">
+							<option selected>Selecciona un género</option>
+						</select>
+					</label>
+					<label>ITR<select name="itr">
+						<option selected>Selecciona un ITR</option>
+					</select></label>
+					<label>Departamento<select name="departamento">
+						<option selected>Selecciona un departamento</option>
+					</select></label>
+					<label>Localidad<select name="localidad">
+						<option selected>Selecciona una localidad</option>
+					</select></label>
+
+
+					<button type="submit">Registrarme</button>
+					<p class="loguearse">
+						¿Ya tienes una cuenta? <a href="../login/index.jsp">Inicia
+							sesión aquí</a>
 					</p>
 				</form>
+
 			</div>
 		</section>
 	</main>

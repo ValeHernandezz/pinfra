@@ -13,7 +13,7 @@
 <meta name="description"
 	content="Página de gestión de constancias de UTEC. Crea tus usuarios y gestionalos de una manera sencilla.">
 <meta name="viewport" content="width=device-width">
-<link rel="icon" type="image/ico" href="./utils/img/favicon.ico">
+<link rel="icon" type="image/ico" href="../../utils/img/favicon.ico">
 <title>Gestión de usuarios</title>
 </head>
 
@@ -36,7 +36,8 @@
 			</ul>
 
 			<div class="btnSesion">
-				<a href="../login/index.jsp">Iniciar sesión</a> <a href="#">Registrarme</a>
+				<a href="../login/index.jsp">Iniciar sesión</a>
+				<a href="../registro/index.jsp">Registrarme</a>
 			</div>
 		</nav>
 	</header>
