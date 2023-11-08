@@ -150,13 +150,13 @@ body {
 	padding-top: 50px;
 	justify-content: space-between;
 	gap: 10px;
-	max-width: 1080px;
+	max-width: 1180px;
 }
 
 /*Informacion principal*/
 
 .contenido section .imageninicio {
-	max-width: 380px;
+	max-width: 420px;
 	padding-top: 10px;
 	border-radius: 15px;
 	filter: drop-shadow(-2px 2px 15px rgba(0, 0, 0, 0.273));
@@ -174,8 +174,7 @@ body {
 	flex-direction: column;
 	gap: 20px;
 	max-width: 580px;
-	filter: drop-shadow(-2px 2px 15px rgba(0, 0, 0, 0.273));
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 }
 
 .contenido section .informacion div .btnSaberMas {
@@ -205,7 +204,7 @@ body {
 
 .contenido section .informacion .informacionPrincipal p {
 	color: #00161E;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 }
 
 
@@ -225,7 +224,6 @@ body {
 	justify-content: center;
 	text-align: center;
 	gap: 10px;
-	filter: drop-shadow(-2px 2px 15px rgba(0, 0, 0, 0.273));
 }
 
 .contenido section .estadistica .estadisticaItem span {

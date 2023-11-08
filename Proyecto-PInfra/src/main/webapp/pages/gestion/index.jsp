@@ -47,9 +47,9 @@
 		<!-- Contenido de la página -->
 		<main class="contenido">
 			<!-- Modificar a gusto -->
-			<section>
+			<section class="gestionContenido">
 				<br>
-				<h2>Gestión de usuarios</h2>
+				<h2>Gestión de usuarios test</h2>
 
 			</section>
 		</main>

@@ -45,45 +45,51 @@
 		<!-- Contenido de la página -->
 		<main class="contenido">
 			<!-- Modificar a gusto -->
-			<section class="loginContenido">
+			<section class="registroContenido">
 				<div class="columnaIzq">
-					<h2>Registro</h2>
+					<h2 class="tituloRegistro">Registro</h2>
 					<form class="formularioLogin">
-						<label>Nombres<input type="text" name="nombres"
-							placeholder="Ingrese sus nombres...">
-						</label> <label>Apellidos<input type="text" name="apellidos"
-							placeholder="Ingrese sus apellidos...">
-						</label> <label>Cédula<input type="number" name="cedula"
-							placeholder="Ingrese su cédula...">
-						</label> <label>Teléfono<input type="number" name="telefono"
-							placeholder="Ingrese su teléfono...">
-						</label> <label>Mail Personal<input type="text"
-							name="mailPersonal" placeholder="Ingrese su mail personal...">
-						</label> <label>Mail Institucional<input type="text"
-							name="mailInstitucional"
-							placeholder="Ingrese su mail institucional...">
-						</label> <label>Contraseña<input type="password"
-							name="contrasenia" placeholder="Ingrese su contraseña...">
-						</label> <label>Fecha de Nacimiento<input type="text"
-							name="fechaNacimeinto"
-							placeholder="Ingrese su fecha de nacimiento...">
-						</label> <label>Género <select name="genero">
-								<option selected>Selecciona un género</option>
-						</select>
-						</label> <label>ITR<select name="itr">
-								<option selected>Selecciona un ITR</option>
-						</select></label> <label>Departamento<select name="departamento">
-								<option selected>Selecciona un departamento</option>
-						</select></label> <label>Localidad<select name="localidad">
-								<option selected>Selecciona una localidad</option>
-						</select></label>
+						<div class="formularioContenido">
+							<label>Nombres <input type="text" name="nombres"
+								placeholder="Ingrese sus nombres...">
+							</label> <label>Apellidos <input type="text" name="apellidos"
+								placeholder="Ingrese sus apellidos...">
+							</label> <label>Cédula <input type="number" name="cedula"
+								placeholder="Ingrese su cédula...">
+							</label> <label>Teléfono <input type="number" name="telefono"
+								placeholder="Ingrese su teléfono...">
+							</label> <label>Mail Personal <input type="text"
+								name="mailPersonal" placeholder="Ingrese su mail personal...">
+							</label> <label>Mail Institucional <input type="text"
+								name="mailInstitucional"
+								placeholder="Ingrese su mail institucional...">
+							</label> <label>Contraseña <input type="password"
+								name="contrasenia" placeholder="Ingrese su contraseña...">
+							</label> <label>Fecha de Nacimiento <input type="text"
+								name="fechaNacimeinto"
+								placeholder="Ingrese su fecha de nacimiento...">
+							</label> <label>Género <select name="genero">
+									<option selected>Selecciona un género</option>
+							</select>
+							</label> <label>ITR <select name="itr">
+									<option selected>Selecciona un ITR</option>
+							</select>
+							</label> <label>Departamento <select name="departamento">
+									<option selected>Selecciona un departamento</option>
+							</select>
+							</label> <label>Localidad <select name="localidad">
+									<option selected>Selecciona una localidad</option>
+							</select>
+							</label>
+						</div>
 
-
-						<button type="submit">Registrarme</button>
-						<p class="loguearse">
-							¿Ya tienes una cuenta? <a href="../login/index.jsp">Inicia
-								sesión aquí</a>
-						</p>
+						<div class="btnContenido">
+							<button type="submit">Registrarme</button>
+							<p class="loguearse">
+								¿Ya tienes una cuenta? <a href="../login/index.jsp">Inicia
+									sesión aquí</a>
+							</p>
+						</div>
 					</form>
 
 				</div>
