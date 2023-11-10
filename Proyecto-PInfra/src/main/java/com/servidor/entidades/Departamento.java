@@ -35,6 +35,12 @@ public class Departamento implements Serializable {
 	private List<Usuario> usuarios;
 
 	public Departamento() {
+
+	}
+
+	public Departamento(String nombre) {
+		super();
+		this.nombre = nombre;
 	}
 
 	public long getIdDepartamento() {

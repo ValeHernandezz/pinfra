@@ -34,6 +34,14 @@ public class Itr implements Serializable {
 	private List<Usuario> usuarios;
 
 	public Itr() {
+
+	}
+
+	public Itr(String nombre, Departamento departamento, String activo) {
+		super();
+		this.nombre = nombre;
+		this.departamento = departamento;
+		this.activo = activo;
 	}
 
 	public long getIdItr() {

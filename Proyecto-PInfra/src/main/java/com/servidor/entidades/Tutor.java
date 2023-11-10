@@ -30,6 +30,18 @@ public class Tutor implements Serializable {
 	private Usuario usuario;
 
 	public Tutor() {
+
+	}
+
+	public Tutor(Area area, Usuario usuario) {
+		super();
+		this.area = area;
+		this.usuario = usuario;
+	}
+
+	public Tutor(Area area) {
+		super();
+		this.area = area;
 	}
 
 	public long getIdTutor() {

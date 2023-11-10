@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%-- <%@ page import="com.cliente.contexto.utils.CargarDatos"%> --%>
+
+<%-- <% --%>
+<%-- CargarDatos.empezar(); --%> 
+<%-- %> --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +24,9 @@
 </head>
 
 <body>
+
+
+
 	<div class="app">
 		<!-- Encabezado de la página -->
 		<header class="encabezado">
@@ -56,14 +65,14 @@
 				</div>
 
 				<div class="columnaDer">
-					<form class="formularioLogin">
+					<form action="Login" method="POST" class="formularioLogin">
 						<img class="imagenapp" src="../../utils/img/logo-app.png"
 							alt="Logo de la aplicación">
 						<h2>Iniciar sesión</h2>
 						<label> Nombre de Usuario <input type="text"
-							name="usuario" placeholder="Ingrese su nombre de usuario...">
+							name="nombreUsuario" placeholder="Ingrese su nombre de usuario...">
 						</label> <label> Contraseña <input type="password"
-							name="contrasenia" placeholder="Ingrese su contraseña...">
+							name="clave" placeholder="Ingrese su contraseña...">
 						</label>
 						<button type="submit">Ingresar</button>
 						<p class="registrarse">

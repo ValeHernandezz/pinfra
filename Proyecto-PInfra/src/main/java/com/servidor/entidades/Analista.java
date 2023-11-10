@@ -28,6 +28,17 @@ public class Analista implements Serializable {
 	private Usuario usuario;
 
 	public Analista() {
+
+	}
+
+	public Analista(Usuario usuario) {
+		super();
+		this.usuario = usuario;
+	}
+
+	public Analista(long idAnalista) {
+		super();
+		this.idAnalista = idAnalista;
 	}
 
 	public long getIdAnalista() {

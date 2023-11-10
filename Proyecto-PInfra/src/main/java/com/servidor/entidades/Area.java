@@ -27,6 +27,12 @@ public class Area implements Serializable {
 	private List<Tutor> tutores;
 
 	public Area() {
+
+	}
+
+	public Area(String descripcion) {
+		super();
+		this.descripcion = descripcion;
 	}
 
 	public long getIdArea() {

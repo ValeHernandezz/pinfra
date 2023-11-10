@@ -4,30 +4,35 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the GENEROS database table.
  * 
  */
 @Entity
-@Table(name="GENEROS")
-@NamedQuery(name="Genero.findAll", query="SELECT g FROM Genero g")
+@Table(name = "GENEROS")
+@NamedQuery(name = "Genero.findAll", query = "SELECT g FROM Genero g")
 public class Genero implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="seq_id_genero" )
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_id_genero")
-	@Column(name="ID_GENERO")
+	@SequenceGenerator(name = "seq_id_genero")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_id_genero")
+	@Column(name = "ID_GENERO")
 	private long idGenero;
 
 	private String nombre;
 
-	//bi-directional many-to-one association to Usuario
-	@OneToMany(mappedBy="genero")
+	// bi-directional many-to-one association to Usuario
+	@OneToMany(mappedBy = "genero")
 	private List<Usuario> usuarios;
 
 	public Genero() {
+
+	}
+
+	public Genero(String nombre) {
+		super();
+		this.nombre = nombre;
 	}
 
 	public long getIdGenero() {

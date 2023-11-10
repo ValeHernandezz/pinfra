@@ -32,6 +32,13 @@ public class Localidad implements Serializable {
 	private List<Usuario> usuarios;
 
 	public Localidad() {
+
+	}
+
+	public Localidad(String nombre, Departamento departamento) {
+		super();
+		this.nombre = nombre;
+		this.departamento = departamento;
 	}
 
 	public long getIdLocalidad() {

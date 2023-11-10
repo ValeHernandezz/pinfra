@@ -95,6 +95,54 @@ public class Usuario implements Serializable {
 	private Rol rol;
 
 	public Usuario() {
+
+	}
+
+	public Usuario(String clave, BigDecimal documento, Date fechaNacimiento, String mailInstitucional,
+			String mailPersonal, String nombreUsuario, String primerApellido, String primerNombre,
+			String segundoApellido, String segundoNombre, String telefono, String activo, String confirmado,
+			Departamento departamento, Genero genero, Itr itr, Localidad localidad, Rol rol) {
+		this.clave = clave;
+		this.documento = documento;
+		this.fechaNacimiento = fechaNacimiento;
+		this.mailInstitucional = mailInstitucional;
+		this.mailPersonal = mailPersonal;
+		this.nombreUsuario = nombreUsuario;
+		this.primerApellido = primerApellido;
+		this.primerNombre = primerNombre;
+		this.segundoApellido = segundoApellido;
+		this.segundoNombre = segundoNombre;
+		this.telefono = telefono;
+		this.activo = activo;
+		this.confirmado = confirmado;
+		this.departamento = departamento;
+		this.genero = genero;
+		this.itr = itr;
+		this.localidad = localidad;
+		this.rol = rol;
+	}
+
+	public Usuario(String clave, BigDecimal documento, Date fechaNacimiento, String mailInstitucional,
+			String mailPersonal, String nombreUsuario, String primerApellido, String primerNombre,
+			String segundoApellido, String segundoNombre, String telefono, Departamento departamento, Genero genero,
+			Itr itr, Localidad localidad, Rol rol) {
+		super();
+		this.clave = clave;
+		this.documento = documento;
+		this.fechaNacimiento = fechaNacimiento;
+		this.mailInstitucional = mailInstitucional;
+		this.mailPersonal = mailPersonal;
+		this.nombreUsuario = nombreUsuario;
+		this.primerApellido = primerApellido;
+		this.primerNombre = primerNombre;
+		this.segundoApellido = segundoApellido;
+		this.segundoNombre = segundoNombre;
+		this.telefono = telefono;
+		this.departamento = departamento;
+		this.genero = genero;
+		this.itr = itr;
+		this.localidad = localidad;
+		this.rol = rol;
 	}
 
 	public long getIdUsuario() {
