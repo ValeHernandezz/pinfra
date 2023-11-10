@@ -85,3 +85,7 @@
 	font-size: 12px;
 	text-align: center;
 }
+
+.columnaIzq .formularioLogin .btnContenido .loguearse a:visited {
+	color: #10A8E1;
+}

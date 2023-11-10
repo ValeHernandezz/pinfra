@@ -35,12 +35,11 @@ public class UsuarioBean implements UsuarioBeanRemote {
 			if (usuario != null && usuario.getConfirmado().equals("S")) {
 				return new Respuesta("success", "Inicio de sesión exitoso", usuario);
 			} else {
-				return new Respuesta("error",
-						"Error: Tu cuenta aún no ha sido confirmada.\nVuelva a intentarlo más tarde.", null);
+				return new Respuesta("error", "Tu cuenta aún no ha sido confirmada.\nVuelva a intentarlo más tarde.",
+						null);
 			}
 		} catch (Exception e) {
-			return new Respuesta("error", "Error: Nombre de usuario o contraseña inválida.\nVuelva a intentarlo.",
-					null);
+			return new Respuesta("error", "Nombre de usuario o contraseña inválida.\nVuelva a intentarlo.", null);
 		}
 
 	}

@@ -61,7 +61,16 @@
 	min-width: 300px;
 }
 
-.columnaDer .formularioLogin h2 {}
+.columnaDer .formularioLogin .textoContenido {
+	max-width: 200px;
+}
+
+.columnaDer .formularioLogin .textoContenido h2 {}
+
+.mensajeDeFormulario {
+	text-align: center;
+	font-size: 12px;
+}
 
 .columnaDer .formularioLogin label {
 	font-size: 15px;
@@ -97,4 +106,8 @@
 .columnaDer .formularioLogin .registrarse {
 	font-size: 12px;
 	text-align: center;
+}
+
+.columnaDer .formularioLogin .registrarse a:visited {
+	color: #10A8E1;
 }
