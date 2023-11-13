@@ -12,7 +12,7 @@
 }
 
 .columnaIzq {
-	width: 50%;
+	width: 30%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -22,31 +22,13 @@
 	border-radius: 15px 0 0 15px;
 }
 
-.columnaIzq .bannerLogin {
-	height: 300px;
-	width: 80%;
-	background-color: rgba(255, 255, 255, 0.35);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	border-radius: 15px;
-	padding: 15px 20px;
-}
-
 .imagenapp {
 	max-width: 40px;
 	filter: drop-shadow(-2px 2px 15px rgba(0, 0, 0, 0.173));
 }
 
-.columnaIzq div .eslogan {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-}
-
 .columnaDer {
-	width: 50%;
+	width: 70%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -58,14 +40,16 @@
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	min-width: 300px;
+	min-width: 400px;
 }
 
 .columnaDer .formularioLogin .textoContenido {
-	max-width: 200px;
+	max-width: 400px;
 }
 
-.columnaDer .formularioLogin .textoContenido h2 {}
+.columnaDer .formularioLogin .textoContenido h2 {
+	font-size: 30px;
+}
 
 .mensajeDeFormulario {
 	text-align: center;

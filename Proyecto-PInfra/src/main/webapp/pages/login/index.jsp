@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.cliente.contexto.utils.CargarDatos"%>
 <%@page import="com.servidor.entidades.Usuario"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
 
@@ -8,10 +7,6 @@
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
 Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado");
 %>
-<%
-CargarDatos.empezar();
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +49,6 @@ CargarDatos.empezar();
 			<%
 			if (usuarioLogueado != null) {
 			%>
-			<!-- Mostrar nombre de usuario y botón de cerrar sesión -->
 			<div class="btnSesion">
 				<p style="font-size: 12px; font-weight: bold;"><%=usuarioLogueado.getNombreUsuario()%></p>
 				<a href="/Proyecto-PInfra/CerrarSesion">Cerrar sesión</a>
@@ -62,7 +56,6 @@ CargarDatos.empezar();
 			<%
 			} else {
 			%>
-			<!-- Mostrar enlaces de inicio de sesión y registro -->
 			<div class="btnSesion">
 				<a href="/Proyecto-PInfra/pages/login/index.jsp">Iniciar sesión</a>
 				<a href="/Proyecto-PInfra/pages/registro/index.jsp">Registrarme</a>
@@ -78,12 +71,7 @@ CargarDatos.empezar();
 			<!-- Modificar a gusto -->
 			<section class="loginContenido">
 				<div class="columnaIzq">
-					<div class="bannerLogin">
-						<div class="eslogan">
-							<h2>Gestión de Constancias UTEC</h2>
-							<p>La puerta a tus constancias, a solo un clic de distancia.</p>
-						</div>
-					</div>
+					
 				</div>
 
 				<div class="columnaDer">

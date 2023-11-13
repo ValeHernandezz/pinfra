@@ -4,7 +4,8 @@
 	pageEncoding="UTF-8"%>
 <%
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
-Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado");
+Usuario usuarioLogueado = (Usuario) sessionActual
+		.getAttribute("usuarioLogueado");
 %>
 <!DOCTYPE html>
 <html>
@@ -47,7 +48,6 @@ Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado"
 			<%
 			if (usuarioLogueado != null) {
 			%>
-			<!-- Mostrar nombre de usuario y botón de cerrar sesión -->
 			<div class="btnSesion">
 				<p style="font-size: 12px; font-weight: bold;"><%=usuarioLogueado.getNombreUsuario()%></p>
 				<a href="/Proyecto-PInfra/CerrarSesion">Cerrar sesión</a>
@@ -55,7 +55,6 @@ Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado"
 			<%
 			} else {
 			%>
-			<!-- Mostrar enlaces de inicio de sesión y registro -->
 			<div class="btnSesion">
 				<a href="/Proyecto-PInfra/pages/login/index.jsp">Iniciar sesión</a>
 				<a href="/Proyecto-PInfra/pages/registro/index.jsp">Registrarme</a>

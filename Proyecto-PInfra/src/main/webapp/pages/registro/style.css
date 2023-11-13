@@ -1,16 +1,17 @@
 @charset "UTF-8";
 
-.registroContenido {
+.registroSeccion {
 	width: 100%;
-	max-width: 900px;
+	max-width: 840px;
 	margin: 0 auto;
 	display: flex;
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 	border-radius: 15px;
+	margin-top: 30px;
 	margin-bottom: 40px;
 }
 
-.columnaIzq {
+.registroContenido {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -21,14 +22,15 @@
 	padding-bottom: 30px;
 }
 
-.columnaIzq .formularioLogin .formularioContenido {
+.registroContenido .formularioLogin .formularioContenido {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	gap: 20px 40px;
 	margin: 30px 0;
+	padding: 0 20px;
 }
 
-.columnaIzq .tituloRegistro {
+.registroContenido .tituloRegistro {
 	padding: 30px 0;
 	width: 100%;
 	background: url("../../utils/img/imagenFondoLogin2.png");
@@ -38,27 +40,28 @@
 	text-align: center;
 }
 
-.columnaIzq .formularioLogin label {
-	font-size: 15px;
+.registroContenido .formularioLogin label {
+	font-size: 12px;
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
 }
 
-.columnaIzq .formularioLogin label input,
-.columnaIzq .formularioLogin label select {
+.registroContenido .formularioLogin label input,
+.registroContenido .formularioLogin label select {
 	border-style: none;
 	border-radius: 5px;
 	border: solid 1px lightgrey;
-	padding: 10px 15px;
-	color: grey;
+	padding: 10px 12px;
+	color: #332f2c;
+	font: 12px;
 }
 
-.columnaIzq .formularioLogin label select:hover {
+.registroContenido .formularioLogin label select:hover {
 	cursor: pointer;
 }
 
-.columnaIzq .formularioLogin .btnContenido {
+.registroContenido .formularioLogin .btnContenido {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -67,7 +70,7 @@
 	justify-content: center;
 }
 
-.columnaIzq .formularioLogin button {
+.registroContenido .formularioLogin button {
 	padding: 10px 15px;
 	border-style: none;
 	border-radius: 5px;
@@ -76,16 +79,16 @@
 	color: #fefefe;
 }
 
-.columnaIzq .formularioLogin .btnContenido button:hover {
+.registroContenido .formularioLogin .btnContenido button:hover {
 	cursor: pointer;
 	background-color: #10A8E1;
 }
 
-.columnaIzq .formularioLogin .btnContenido .loguearse {
+.registroContenido .formularioLogin .btnContenido .loguearse {
 	font-size: 12px;
 	text-align: center;
 }
 
-.columnaIzq .formularioLogin .btnContenido .loguearse a:visited {
+.registroContenido .formularioLogin .btnContenido .loguearse a:visited {
 	color: #10A8E1;
 }
