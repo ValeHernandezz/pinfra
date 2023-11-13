@@ -1,3 +1,10 @@
+<%@page import="com.cliente.services.ServiceRol"%>
+<%@page import="com.servidor.entidades.Rol"%>
+<%@page import="com.cliente.services.ServiceItr"%>
+<%@page import="com.cliente.services.ServiceUbicacion"%>
+<%@page import="com.servidor.entidades.Itr"%>
+<%@page import="com.servidor.entidades.Departamento"%>
+<%@page import="com.servidor.entidades.Localidad"%>
 <%@page import="com.servidor.entidades.Usuario"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -70,7 +77,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado"
 			<section class="registroContenido">
 				<div class="columnaIzq">
 					<h2 class="tituloRegistro">Registro</h2>
-					<form class="formularioLogin">
+					<form class="formularioLogin" action="/Proyecto-PInfra/SvCrearUsuario" method="post">
 						<div class="formularioContenido">
 							<label>Nombres <input type="text" name="nombres"
 								placeholder="Ingrese sus nombres...">
@@ -86,23 +93,75 @@ Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado"
 								name="mailInstitucional"
 								placeholder="Ingrese su mail institucional...">
 							</label> <label>Contraseña <input type="password"
-								name="contrasenia" placeholder="Ingrese su contraseña...">
+								name="clave" placeholder="Ingrese su contraseña...">
 							</label> <label>Fecha de Nacimiento <input type="text"
-								name="fechaNacimeinto"
+								name="fechaNacimiento"
 								placeholder="Ingrese su fecha de nacimiento...">
 							</label> <label>Género <select name="genero">
 									<option selected>Selecciona un género</option>
+									<option value="Femenino">Femenino</option>
+									<option value="Masculino">Masculino</option>
+									<option value="Otro">Otro</option>
 							</select>
 							</label> <label>ITR <select name="itr">
 									<option selected>Selecciona un ITR</option>
+									<%
+									for(Itr oItr : ServiceItr.listarItrs()){
+										
+									
+									%>
+									
+									<option value="<%=oItr.getNombre()%>"><%=oItr.getNombre()%></option>
+									
+									<%
+									} 
+									%>
 							</select>
 							</label> <label>Departamento <select name="departamento">
 									<option selected>Selecciona un departamento</option>
+									<%
+									for(Departamento oDepartamento : ServiceUbicacion.listarDepartamentos()){
+										
+									
+									%>
+									
+									<option value="<%=oDepartamento.getNombre()%>"><%=oDepartamento.getNombre()%></option>
+									
+									
+									<%
+									} 
+									%>
 							</select>
 							</label> <label>Localidad <select name="localidad">
 									<option selected>Selecciona una localidad</option>
+									<%
+									for(Localidad oLocalidad : ServiceUbicacion.listarLocalidades()){
+										
+									
+									%>
+									
+									<option value="<%=oLocalidad.getNombre()%>"><%=oLocalidad.getNombre()%></option>
+									
+									
+									<%
+									} 
+									%>
 							</select>
-							</label>
+							</label> <label>Rol <select name="rol">
+									<option selected>Seleccione su rol</option>
+									<%
+									for(Rol oRol : ServiceRol.listarRoles()){
+									%>
+									
+									<option value="<%=oRol.getDescripcion()%>"><%=oRol.getDescripcion()%></option>
+									
+									
+									<%
+									} 
+									%>
+							</select>
+							</label>	
+							
 						</div>
 
 						<div class="btnContenido">
