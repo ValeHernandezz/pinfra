@@ -70,7 +70,7 @@ public class UsuarioBean implements UsuarioBeanRemote {
 	public boolean eliminarUsuario(Long idUsuario) throws ServiciosException {
 		try {
 			Usuario oUsuario = entityManager.find(Usuario.class, idUsuario);
-			entityManager.remove(oUsuario);
+			oUsuario.setActivo("N");
 			entityManager.flush();
 			return true;
 		} catch (Exception e) {

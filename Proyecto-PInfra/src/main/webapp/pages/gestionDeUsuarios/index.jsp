@@ -1,3 +1,4 @@
+<%@page import="com.cliente.services.ServiceUsuario"%>
 <%@page import="com.servidor.entidades.Usuario"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -37,7 +38,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 				<ul class="links">
 					<li><a href="#">Cursos</a></li>
 					<li><a href="#">Itrs</a></li>
-					<li><a href="./pages/gestion/index.jsp">Gestión de
+					<li><a href="./pages/gestionDeUsuarios/index.jsp">Gestión de
 							usuarios</a></li>
 				</ul>
 
@@ -70,7 +71,64 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 			<!-- Modificar a gusto -->
 			<section class="gestionContenido">
 				<br>
-				<h2>Gestión de usuarios test</h2>
+				<h2>Gestión de Usuarios</h2>
+				
+				<div>
+					<table>
+						<thead>
+							<tr>
+								<th>Cédula</th>
+								<th>Nombres</th>
+								<th>Apellidos</th>
+								<th>Mail Personal</th>
+								<th>Mail Institucional</th>
+								<th>Género</th>
+								<th>Departamento</th>
+								<th>Localidad</th>
+								<th>ITR</th>
+								<th>Teléfono</th>
+								<th>Fecha de Nacimiento</th>
+								<th>Rol</th>
+								<th>Acciones</th>					
+							</tr>
+						</thead>
+						<tbody>
+							<%
+							for(Usuario oUsuario : ServiceUsuario.listarUsuarios()) {
+							%>
+							<tr>	
+								<td ><%=oUsuario.getDocumento() %></td>	
+								<td><%=oUsuario.getNombres() %></td>
+								<td><%=oUsuario.getApellidos() %></td>
+								<td><%=oUsuario.getMailPersonal() %></td>
+								<td><%=oUsuario.getMailInstitucional() %></td>
+								<td><%=oUsuario.getGenero().getNombre() %></td>
+								<td><%=oUsuario.getDepartamento().getNombre() %></td>
+								<td><%=oUsuario.getLocalidad().getNombre() %></td>
+								<td><%=oUsuario.getItr().getNombre() %></td>
+								<td><%=oUsuario.getTelefono() %></td>
+								<td><%=oUsuario.getFechaNacimiento() %></td>
+								<td><%=oUsuario.getRol().getDescripcion() %></td>
+								<td>
+									<div>
+										<form name="editar" action="/Proyecto-PInfra/SvEditarUsuario" method="GET">
+											<button type="submit">Editar</button>
+											<input type="hidden" name="cedula" value="<%=oUsuario.getDocumento()%>">										
+										</form>
+										<form name="eliminar" action="/Proyecto-PInfra/SvEliminarUsuario" method="POST">
+											<button type="submit">Eliminar</button>
+											<input type="hidden" name="idUsuario" value="<%=oUsuario.getIdUsuario()%>">						
+										</form>
+									</div>
+								</td>		
+							</tr>
+							<%
+							}
+							%>
+						</tbody>
+					</table>
+				
+				</div>
 
 			</section>
 		</main>

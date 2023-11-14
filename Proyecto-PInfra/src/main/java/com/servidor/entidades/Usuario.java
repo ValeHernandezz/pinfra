@@ -3,7 +3,11 @@ package com.servidor.entidades;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -143,6 +147,44 @@ public class Usuario implements Serializable {
 		this.itr = itr;
 		this.localidad = localidad;
 		this.rol = rol;
+	}
+
+	public String getEdad() {
+		Calendar calNacimiento = new GregorianCalendar();
+		calNacimiento.setTime(this.fechaNacimiento);
+		int yearNacimiento = calNacimiento.get(Calendar.YEAR);
+		int monthNacimiento = calNacimiento.get(Calendar.MONTH);
+		int dayNacimiento = calNacimiento.get(Calendar.DAY_OF_MONTH);
+
+		LocalDate fechaNacimientoLocal = LocalDate.of(yearNacimiento, monthNacimiento + 1, dayNacimiento);
+		LocalDate fechaActual = LocalDate.now();
+		Period periodo = Period.between(fechaNacimientoLocal, fechaActual);
+		int edad = periodo.getYears();
+		return edad + " años";
+	}
+
+	public String getNombreCompleto() {
+		return this.primerNombre + " " + this.primerApellido;
+	}
+
+	public String getNombres() {
+		return this.primerNombre + " " + (this.segundoNombre == null ? "" : this.segundoNombre);
+	}
+
+	public String getApellidos() {
+		return this.primerApellido + " " + (this.segundoApellido == null ? "" : this.segundoApellido);
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [idUsuario=" + idUsuario + ", clave=" + clave + ", documento=" + documento
+				+ ", fechaNacimiento=" + fechaNacimiento + ", mailInstitucional=" + mailInstitucional
+				+ ", mailPersonal=" + mailPersonal + ", nombreUsuario=" + nombreUsuario + ", primerApellido="
+				+ primerApellido + ", primerNombre=" + primerNombre + ", segundoApellido=" + segundoApellido
+				+ ", segundoNombre=" + segundoNombre + ", telefono=" + telefono + ", analistas=" + analistas
+				+ ", estudiantes=" + estudiantes + ", tutores=" + tutores + ", departamento=" + departamento
+				+ ", genero=" + genero + ", itr=" + itr + ", localidad=" + localidad + ", rol=" + rol + ", activo="
+				+ activo + ", confirmado=" + confirmado + "]";
 	}
 
 	public long getIdUsuario() {

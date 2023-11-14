@@ -1,8 +1,6 @@
 package com.cliente.contexto.helpers;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-
 import com.cliente.contexto.Fabrica;
 import com.cliente.services.ServiceAnalista;
 import com.cliente.services.ServiceItr;
@@ -113,7 +111,7 @@ public class Buscar {
 	}
 
 	public static ArrayList<Tutor> tutorFiltro(String filtro, String campo) {
-
+		System.out.println("------------- Hola desde tutorFiltro ---------------------------------------------");
 		if (Fabrica.getListaDeTutores().size() == 0) {
 			Fabrica.cargarListas();
 		}

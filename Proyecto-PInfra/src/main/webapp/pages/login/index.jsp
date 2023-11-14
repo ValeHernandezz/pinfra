@@ -38,7 +38,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado"
 				<ul class="links">
 					<li><a href="#">Cursos</a></li>
 					<li><a href="#">Itrs</a></li>
-					<li><a href="./pages/gestion/index.jsp">Gestión de
+					<li><a href="./pages/gestionDeUsuarios/index.jsp">Gestión de
 							usuarios</a></li>
 				</ul>
 

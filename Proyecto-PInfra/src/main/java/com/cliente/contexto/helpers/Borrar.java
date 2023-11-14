@@ -8,11 +8,10 @@ import com.servidor.entidades.Usuario;
 public class Borrar {
 
 	// USUARIO -----------------------------
-	public static boolean darBajaLogica(Usuario oUsuario) {
+	public static boolean darBajaLogica(Long idUsuario) {
 		try {
-			oUsuario.setActivo("N");
-			var oUsuarioActualizado = ServiceUsuario.actualizarUsuario(oUsuario);
-			if (oUsuarioActualizado == null) {
+			var oUsuarioActualizado = ServiceUsuario.eliminarUsuario(idUsuario);
+			if (!oUsuarioActualizado) {
 				return false;
 			}
 			return true;
