@@ -3,7 +3,7 @@
 .loginContenido {
 	min-height: 80%;
 	width: 100%;
-	max-width: 760px;
+	max-width: 600px;
 	margin: 0 auto;
 	margin-top: 40px;
 	display: flex;
@@ -12,7 +12,7 @@
 }
 
 .columnaIzq {
-	width: 30%;
+	width: 90.4px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -28,7 +28,7 @@
 }
 
 .columnaDer {
-	width: 70%;
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
