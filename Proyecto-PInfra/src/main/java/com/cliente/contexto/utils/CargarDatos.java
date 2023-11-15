@@ -1035,20 +1035,20 @@ public class CargarDatos {
 
 		Usuario oUsuarioNuevo2 = new Usuario("12345678a", cedula2, dateRony, "rony.palacios@utec.edu.uy",
 				"rony@adinet.com", "rony.palacios", "Palacios", "Rony", "Guerra", "", "099652242", "S", "S",
-				departamentoCreado8, generoCreado, itrCreada, localidadCreada1, rolCreado3);
+				departamentoCreado8, generoCreado, itrCreada, localidadCreada154, rolCreado3);
 
 		Usuario oUsuarioNuevo3 = new Usuario("12345678a", cedula3, dateMartina, "matias.luzardo@utec.edu.uy",
 				"matias@gmail.com", "matias.luzardo", "Luzardo", "Matias", "Frade", "Gabriel", "092344423", "S", "N",
-				departamentoCreado7, generoCreado, itrCreada, localidadCreada22, rolCreado4);
+				departamentoCreado7, generoCreado, itrCreada, localidadCreada125, rolCreado4);
 
 		Usuario oUsuarioNuevo4 = new Usuario("12345678a", cedula4, dateValentina, "valentina.hernandez@utec.edu.uy",
 				"vale@gmail.com", "valentina.hernandez", "Hernandez", "Valentina", "Modino", "", "094567443", "S", "S",
-				departamentoCreado8, generoCreado2, itrCreada, localidadCreada1, rolCreado);
+				departamentoCreado8, generoCreado2, itrCreada, localidadCreada154, rolCreado);
 
 		Usuario oUsuarioNuevo5 = new Usuario("12345678a", cedula5, dateMartina,
 				"martina.fernandez@estudiantes.utec.edu.uy", "marti@gmail.com", "martina.fernandez", "Fernandez",
 				"Martina", "Baladón", "", "095672344", "S", "S", departamentoCreado2, generoCreado2, itrCreada,
-				localidadCreada8, rolCreado2);
+				localidadCreada16, rolCreado2);
 
 		Usuario oUsuarioNuevo6 = new Usuario("12345678a", cedula6, datePepe, "pepe.lopez@estudiantes.utec.edu.uy",
 				"pepe@gmail.com", "pepe.lopez", "Lopez", "Pepe", "Roman", "", "091342344", "S", "S",

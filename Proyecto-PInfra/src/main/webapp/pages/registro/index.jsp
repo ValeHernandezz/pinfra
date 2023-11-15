@@ -20,12 +20,14 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="style.css">
-<link rel="stylesheet" type="text/css" href="../../style.css">
+<link rel="stylesheet" type="text/css" href="/Proyecto-PInfra/style.css">
+<link rel="stylesheet" type="text/css"
+	href="/Proyecto-PInfra/pages/registro/style.css">
 <meta name="description"
 	content="Página de gestión de constancias de UTEC. Inicia sesión y ponte al día de tus constanciass.">
 <meta name="viewport" content="width=device-width">
-<link rel="icon" type="image/ico" href="../../utils/img/faviconapp.ico">
+<link rel="icon" type="image/ico"
+	href="/Proyecto-PInfra/utils/img/faviconapp.ico">
 <title>Registro</title>
 </head>
 
@@ -33,8 +35,9 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 	<div class="app">
 		<!-- Encabezado de la página -->
 		<header class="encabezado">
-			<a class="btnHome" href="../../index.jsp"> <img
-				class="imagenUtec" src="../../utils/img/utec.png" alt="Logo de UTEC">
+			<a class="btnHome" href="/Proyecto-PInfra/index.jsp"> <img
+				class="imagenUtec" src="/Proyecto-PInfra/utils/img/utec.png"
+				alt="Logo de UTEC">
 			</a>
 			<nav class="menu">
 				<%
@@ -44,8 +47,9 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 				<ul class="links">
 					<li><a href="#">Cursos</a></li>
 					<li><a href="#">Itrs</a></li>
-					<li><a href="./pages/gestionDeUsuarios/index.jsp">Gestión de
-							usuarios</a></li>
+					<li><a
+						href="/Proyecto-PInfra/pages/gestionDeUsuarios/index.jsp">Gestión
+							de usuarios</a></li>
 				</ul>
 
 				<%
@@ -190,7 +194,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 						<div class="btnContenido">
 							<button type="submit">Registrarme</button>
 							<p class="loguearse">
-								¿Ya tienes una cuenta? <a href="../login/index.jsp">Inicia
+								¿Ya tienes una cuenta? <a href="/Proyecto-PInfra/pages/login/index.jsp">Inicia
 									sesión aquí</a>
 							</p>
 						</div>
@@ -203,11 +207,11 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 		<!-- Pie de página -->
 		<footer class="pieDePagina">
 			<p>Creado por</p>
-			<img class="imagenEquipo" src="../../utils/img/error404.png"
-				alt="Logo de Error404">
+			<img class="imagenEquipo"
+				src="/Proyecto-PInfra/utils/img/error404.png" alt="Logo de Error404">
 		</footer>
 	</div>
 </body>
-<script src="../../utils/script/localidades.js"></script>
-<script src="../../utils/script/mostrarCampos.js"></script>
+<script src="/Proyecto-PInfra/utils/script/localidades.js"></script>
+<script src="/Proyecto-PInfra/utils/script/mostrarCampos.js"></script>
 </html>

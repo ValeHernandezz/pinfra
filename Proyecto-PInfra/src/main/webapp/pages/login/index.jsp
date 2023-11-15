@@ -38,7 +38,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado"
 				<ul class="links">
 					<li><a href="#">Cursos</a></li>
 					<li><a href="#">Itrs</a></li>
-					<li><a href="./pages/gestionDeUsuarios/index.jsp">Gestión de
+					<li><a href="/Proyecto-PInfra/pages/gestionDeUsuarios/index.jsp">Gestión de
 							usuarios</a></li>
 				</ul>
 
@@ -100,7 +100,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado"
 						</label>
 						<button type="submit">Ingresar</button>
 						<p class="registrarse">
-							¿No tienes una cuenta? <a href="../registro/index.jsp">Registrate
+							¿No tienes una cuenta? <a href="/Proyecto-PInfra/pages/registro/index.jsp">Registrate
 								aquí</a>
 						</p>
 					</form>

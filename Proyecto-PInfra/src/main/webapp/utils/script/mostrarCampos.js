@@ -7,6 +7,9 @@ function mostrarCampos() {
 	var generacionLabel = document.getElementById("generacionLabel");
 	var generacionSelect = document.querySelector("select[name='generacion']");
 
+	var selectedRol = rolSelect.value;
+
+
 	// Ocultar todos los elementos
 	areaLabel.style.display = "none";
 	areaSelect.style.display = "none";
@@ -15,8 +18,8 @@ function mostrarCampos() {
 	generacionLabel.style.display = "none";
 	generacionSelect.style.display = "none";
 
-	// Mostrar elementos según el rol seleccionado
-	var selectedRol = rolSelect.value;
+
+
 	if (selectedRol === "Tutor" || selectedRol === "Encargado") {
 		areaLabel.style.display = "flex";
 		areaSelect.style.display = "flex";

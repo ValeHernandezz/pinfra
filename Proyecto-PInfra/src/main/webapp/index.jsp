@@ -16,11 +16,11 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="./style.css">
+<link rel="stylesheet" type="text/css" href="/Proyecto-PInfra/style.css">
 <meta name="description"
 	content="Página de gestión de constancias de UTEC. Solicita tus constancias y mantente al día.">
 <meta name="viewport" content="width=device-width">
-<link rel="icon" type="image/ico" href="./utils/img/faviconapp.ico">
+<link rel="icon" type="image/ico" href="/Proyecto-PInfra/utils/img/faviconapp.ico">
 <title>Gestión de constancias UTEC</title>
 </head>
 
@@ -28,8 +28,8 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 	<div class="app">
 		<!-- Encabezado de la página -->
 		<header class="encabezado">
-			<a class="btnHome" href="./index.jsp"><img class="imagenUtec"
-				src="./utils/img/utec.png" alt="Logo de UTEC"> </a>
+			<a class="btnHome" href="/Proyecto-PInfra/index.jsp"><img class="imagenUtec"
+				src="/Proyecto-PInfra/utils/img/utec.png" alt="Logo de UTEC"> </a>
 
 			<nav class="menu">
 				<%
@@ -101,7 +101,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 				</div>
 
 				<div>
-					<img class="imageninicio" src="./utils/img/imagenInicio.png"
+					<img class="imageninicio" src="/Proyecto-PInfra/utils/img/imagenInicio.png"
 						alt="Imagen de estudiantes">
 				</div>
 			</section>
@@ -110,7 +110,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 		<!-- Pie de página -->
 		<footer class="pieDePagina">
 			<p>Creado por</p>
-			<img class="imagenEquipo" src="./utils/img/error404.png"
+			<img class="imagenEquipo" src="/Proyecto-PInfra/utils/img/error404.png"
 				alt="Logo de Error404">
 		</footer>
 	</div>
