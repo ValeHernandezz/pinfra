@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cliente.contexto.Fabrica;
 import com.cliente.contexto.helpers.Crear;
 import com.cliente.services.ServiceArea;
 import com.cliente.services.ServiceGenero;
@@ -70,7 +71,7 @@ public class SvCrearUsuario extends HttpServlet {
 
 		BigDecimal documento = new BigDecimal(cedula);
 
-		String nombreUsuario = primerNombre.toLowerCase() + "." + primerApellido.toLowerCase();
+		String nombreUsuario = Fabrica.generarNombreUsuario(mailInstitucional);
 
 		Departamento departamento = ServiceUbicacion.listarDepartamentosFiltro(departamentoTexto).get(0);
 		Genero genero = ServiceGenero.listarGenerosFiltro(generoTexto).get(0);

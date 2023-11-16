@@ -45,6 +45,14 @@ public class Estudiante implements Serializable {
 		this.semestre = semestre;
 		this.usuario = usuario;
 	}
+	
+	public Estudiante(long idEstudiante, String generacion, BigDecimal semestre, Usuario usuario) {
+		super();
+		this.idEstudiante = idEstudiante;
+		this.generacion = generacion;
+		this.semestre = semestre;
+		this.usuario = usuario;
+	}
 
 	public long getIdEstudiante() {
 		return this.idEstudiante;
