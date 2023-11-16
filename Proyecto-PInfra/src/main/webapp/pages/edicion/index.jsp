@@ -16,10 +16,8 @@
 	pageEncoding="UTF-8"%>
 <%
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
-Usuario usuarioLogueado = (Usuario) sessionActual
-		.getAttribute("usuarioLogueado");
-Usuario oUsuarioAEditar = (Usuario) sessionActual
-		.getAttribute("oUsuarioAEditar");
+Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado");
+Usuario oUsuarioAEditar = (Usuario) sessionActual.getAttribute("oUsuarioAEditar");
 %>
 <!DOCTYPE html>
 <html>
@@ -27,7 +25,8 @@ Usuario oUsuarioAEditar = (Usuario) sessionActual
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/Proyecto-PInfra/style.css">
-<link rel="stylesheet" type="text/css" href="/Proyecto-PInfra/pages/registro/style.css">
+<link rel="stylesheet" type="text/css"
+	href="/Proyecto-PInfra/pages/registro/style.css">
 <meta name="description"
 	content="Página de gestión de constancias de UTEC. Solicita tus constancias y mantente al día.">
 <meta name="viewport" content="width=device-width">
@@ -39,49 +38,7 @@ Usuario oUsuarioAEditar = (Usuario) sessionActual
 <body>
 	<div class="app">
 		<!-- Encabezado de la página -->
-		<header class="encabezado">
-			<a class="btnHome" href="/Proyecto-PInfra/index.jsp"><img class="imagenUtec"
-				src="/Proyecto-PInfra/utils/img/utec.png" alt="Logo de UTEC">
-			</a>
-
-			<nav class="menu">
-				<%
-				if (usuarioLogueado != null) {
-				%>
-
-				<ul class="links">
-					<li><a href="#">Cursos</a></li>
-					<li><a href="#">Itrs</a></li>
-					<li><a
-						href="/Proyecto-PInfra/pages/gestionDeUsuarios/index.jsp">Gestión
-							de usuarios</a></li>
-				</ul>
-
-				<%
-				}
-				%>
-			</nav>
-			<%
-			if (usuarioLogueado != null) {
-			%>
-			<!-- Mostrar nombre de usuario y botón de cerrar sesión -->
-			<div class="btnSesion">
-				<p style="font-size: 12px; font-weight: bold;"><%=usuarioLogueado.getNombreUsuario()%></p>
-				<a href="/Proyecto-PInfra/CerrarSesion">Cerrar sesión</a>
-			</div>
-			<%
-			} else {
-			%>
-			<!-- Mostrar enlaces de inicio de sesión y registro -->
-			<div class="btnSesion">
-				<a href="/Proyecto-PInfra/pages/login/index.jsp">Iniciar sesión</a>
-				<a href="/Proyecto-PInfra/pages/registro/index.jsp">Registrarme</a>
-			</div>
-			<%
-			}
-			%>
-
-		</header>
+		<jsp:include page="/components/layout/nav/index.jsp" />
 
 		<!-- Contenido de la página -->
 		<main class="contenido">
@@ -249,8 +206,9 @@ Usuario oUsuarioAEditar = (Usuario) sessionActual
 						<div class="btnContenido">
 							<button type="submit">Editar</button>
 							<p class="loguearse">
-								¿Ya tienes una cuenta? <a href="/Proyecto-PInfra/pages/login/index.jsp">Inicia
-									sesión aquí</a>
+								¿Ya tienes una cuenta? <a
+									href="/Proyecto-PInfra/pages/login/index.jsp">Inicia sesión
+									aquí</a>
 							</p>
 						</div>
 					</form>
@@ -261,21 +219,19 @@ Usuario oUsuarioAEditar = (Usuario) sessionActual
 		</main>
 
 		<!-- Pie de página -->
-		<footer class="pieDePagina">
-			<p>Creado por</p>
-			<img class="imagenEquipo"
-				src="/Proyecto-PInfra/utils/img/error404.png" alt="Logo de Error404">
-		</footer>
+		<jsp:include page="/components/layout/footer/index.jsp" />
 	</div>
 </body>
 <script src="/Proyecto-PInfra/utils/script/localidades.js"></script>
 <script src="/Proyecto-PInfra/utils/script/mostrarCampos.js"></script>
-<script src="/Proyecto-PInfra/utils/script/cargarLocalidadSeleccionada.js"></script>
+<script
+	src="/Proyecto-PInfra/utils/script/cargarLocalidadSeleccionada.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     mostrarCampos();
     cargarLocalidades();
-    cargarLocalidadSeleccionada('<%= oUsuarioAEditar.getLocalidad().getNombre() %>');
-});
+    cargarLocalidadSeleccionada('<%=oUsuarioAEditar.getLocalidad().getNombre()%>
+	');
+					});
 </script>
 </html>

@@ -87,7 +87,7 @@ public class ServiceUsuario {
 			var usuarioBean = getService();
 			return usuarioBean.listarUsuariosFiltroPersonalizado(filtro, campo);
 		} catch (Exception e) {
-			return null;
+			return new ArrayList<Usuario>();
 		}
 	}
 

@@ -34,47 +34,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 <body>
 	<div class="app">
 		<!-- Encabezado de la página -->
-		<header class="encabezado">
-			<a class="btnHome" href="/Proyecto-PInfra/index.jsp"> <img
-				class="imagenUtec" src="/Proyecto-PInfra/utils/img/utec.png"
-				alt="Logo de UTEC">
-			</a>
-			<nav class="menu">
-				<%
-				if (usuarioLogueado != null) {
-				%>
-
-				<ul class="links">
-					<li><a href="#">Cursos</a></li>
-					<li><a href="#">Itrs</a></li>
-					<li><a
-						href="/Proyecto-PInfra/pages/gestionDeUsuarios/index.jsp">Gestión
-							de usuarios</a></li>
-				</ul>
-
-				<%
-				}
-				%>
-			</nav>
-			<%
-			if (usuarioLogueado != null) {
-			%>
-			<div class="btnSesion">
-				<p style="font-size: 12px; font-weight: bold;"><%=usuarioLogueado.getNombreUsuario()%></p>
-				<a href="/Proyecto-PInfra/CerrarSesion">Cerrar sesión</a>
-			</div>
-			<%
-			} else {
-			%>
-			<div class="btnSesion">
-				<a href="/Proyecto-PInfra/pages/login/index.jsp">Iniciar sesión</a>
-				<a href="/Proyecto-PInfra/pages/registro/index.jsp">Registrarme</a>
-			</div>
-			<%
-			}
-			%>
-
-		</header>
+		<jsp:include page="/components/layout/nav/index.jsp" />
 
 		<!-- Contenido de la página -->
 		<main class="contenido">
@@ -194,8 +154,9 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 						<div class="btnContenido">
 							<button type="submit">Registrarme</button>
 							<p class="loguearse">
-								¿Ya tienes una cuenta? <a href="/Proyecto-PInfra/pages/login/index.jsp">Inicia
-									sesión aquí</a>
+								¿Ya tienes una cuenta? <a
+									href="/Proyecto-PInfra/pages/login/index.jsp">Inicia sesión
+									aquí</a>
 							</p>
 						</div>
 					</form>
@@ -205,11 +166,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 		</main>
 
 		<!-- Pie de página -->
-		<footer class="pieDePagina">
-			<p>Creado por</p>
-			<img class="imagenEquipo"
-				src="/Proyecto-PInfra/utils/img/error404.png" alt="Logo de Error404">
-		</footer>
+		<jsp:include page="/components/layout/footer/index.jsp" />
 	</div>
 </body>
 <script src="/Proyecto-PInfra/utils/script/localidades.js"></script>

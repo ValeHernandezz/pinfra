@@ -20,26 +20,33 @@ public class UsuarioBean implements UsuarioBeanRemote {
 	}
 
 	@Override
-	public Respuesta login(String nombreUsuario, String clave) throws ServiciosException {
+	public Respuesta login(String nombreUsuario, String clave)
+			throws ServiciosException {
 		try {
-			// Realizar la consulta para buscar el usuario por nombre de usuario y
+			// Realizar la consulta para buscar el usuario por nombre de usuario
+			// y
 			// contraseña
-			TypedQuery<Usuario> query = entityManager
-					.createQuery("SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario AND u.clave = :clave",
-							Usuario.class)
-					.setParameter("nombreUsuario", nombreUsuario).setParameter("clave", clave);
+			TypedQuery<Usuario> query = entityManager.createQuery(
+					"SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario AND u.clave = :clave",
+					Usuario.class).setParameter("nombreUsuario", nombreUsuario)
+					.setParameter("clave", clave);
 
-			ArrayList<Usuario> lista = (ArrayList<Usuario>) query.getResultList();
+			ArrayList<Usuario> lista = (ArrayList<Usuario>) query
+					.getResultList();
 			Usuario usuario = lista.get(0);
 
 			if (usuario != null && usuario.getConfirmado().equals("S")) {
-				return new Respuesta("success", "Inicio de sesión exitoso", usuario);
+				return new Respuesta("success", "Inicio de sesión exitoso",
+						usuario);
 			} else {
-				return new Respuesta("error", "Tu cuenta aún no ha sido confirmada.\nVuelva a intentarlo más tarde.",
+				return new Respuesta("error",
+						"Tu cuenta aún no ha sido confirmada.\nVuelva a intentarlo más tarde.",
 						null);
 			}
 		} catch (Exception e) {
-			return new Respuesta("error", "Nombre de usuario o contraseña inválida.\nVuelva a intentarlo.", null);
+			return new Respuesta("error",
+					"Nombre de usuario o contraseña inválida.\nVuelva a intentarlo.",
+					null);
 		}
 
 	}
@@ -56,7 +63,8 @@ public class UsuarioBean implements UsuarioBeanRemote {
 	}
 
 	@Override
-	public Usuario actualizarUsuario(Usuario oUsuario) throws ServiciosException {
+	public Usuario actualizarUsuario(Usuario oUsuario)
+			throws ServiciosException {
 		try {
 			entityManager.merge(oUsuario);
 			entityManager.flush();
@@ -81,8 +89,10 @@ public class UsuarioBean implements UsuarioBeanRemote {
 	@Override
 	public ArrayList<Usuario> listarUsuarios() throws ServiciosException {
 		try {
-			TypedQuery<Usuario> query = entityManager.createQuery("SELECT u FROM Usuario u ", Usuario.class);
-			ArrayList<Usuario> lista = (ArrayList<Usuario>) query.getResultList();
+			TypedQuery<Usuario> query = entityManager
+					.createQuery("SELECT u FROM Usuario u ", Usuario.class);
+			ArrayList<Usuario> lista = (ArrayList<Usuario>) query
+					.getResultList();
 			return lista;
 		} catch (Exception e) {
 			return null;
@@ -90,11 +100,12 @@ public class UsuarioBean implements UsuarioBeanRemote {
 	}
 
 	@Override
-	public ArrayList<Usuario> listarUsuariosFiltro(String filtro) throws ServiciosException {
+	public ArrayList<Usuario> listarUsuariosFiltro(String filtro)
+			throws ServiciosException {
 		try {
-			TypedQuery<Usuario> query = entityManager
-					.createQuery("SELECT u FROM Usuario u WHERE u.nombre LIKE :filtro", Usuario.class)
-					.setParameter("filtro", "%" + filtro + "%");
+			TypedQuery<Usuario> query = entityManager.createQuery(
+					"SELECT u FROM Usuario u WHERE u.nombre LIKE :filtro",
+					Usuario.class).setParameter("filtro", "%" + filtro + "%");
 
 			return (ArrayList<Usuario>) query.getResultList();
 		} catch (Exception e) {
@@ -103,22 +114,32 @@ public class UsuarioBean implements UsuarioBeanRemote {
 	}
 
 	@Override
-	public ArrayList<Usuario> listarUsuariosFiltroPersonalizado(String filtro, String campo) throws ServiciosException {
+	public ArrayList<Usuario> listarUsuariosFiltroPersonalizado(String filtro,
+			String campo) throws ServiciosException {
 		try {
 			TypedQuery<Usuario> query = entityManager
-					.createQuery("SELECT u FROM Usuario u WHERE " + campo + " LIKE :filtro", Usuario.class)
-					.setParameter("filtro", "%" + filtro + "%");
+					.createQuery("SELECT u FROM Usuario u WHERE " + campo
+							+ (campo.equals("u.rol.idRol") ? "=" : "LIKE ")
+							+ " :filtro", Usuario.class)
+					.setParameter("filtro",
+							(campo.equals("u.rol.idRol")
+									? Long.parseLong(filtro)
+									: ("%" + filtro + "%")));
+			System.out.println(query.getResultList().size());
 			return (ArrayList<Usuario>) query.getResultList();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return null;
 		}
 	}
 
 	@Override
-	public ArrayList<Usuario> listarUsuariosFiltroRol(String filtro) throws ServiciosException {
+	public ArrayList<Usuario> listarUsuariosFiltroRol(String filtro)
+			throws ServiciosException {
 		try {
-			TypedQuery<Usuario> query = entityManager
-					.createQuery("SELECT u FROM Usuario u WHERE u.rol.idRol = :filtro", Usuario.class)
+			TypedQuery<Usuario> query = entityManager.createQuery(
+					"SELECT u FROM Usuario u WHERE u.rol.idRol = :filtro",
+					Usuario.class)
 					.setParameter("filtro", Long.parseLong(filtro));
 			return (ArrayList<Usuario>) query.getResultList();
 		} catch (Exception e) {
@@ -127,8 +148,8 @@ public class UsuarioBean implements UsuarioBeanRemote {
 	}
 
 	@Override
-	public ArrayList<Usuario> listarUsuariosPorNombreApellido(String filtro1, String filtro2, String campo)
-			throws ServiciosException {
+	public ArrayList<Usuario> listarUsuariosPorNombreApellido(String filtro1,
+			String filtro2, String campo) throws ServiciosException {
 		try {
 			TypedQuery<Usuario> query = entityManager.createQuery(
 					"SELECT u FROM Usuario u WHERE u.primerNombre LIKE :filtro AND u.primerApellido LIKE :filtro2",
@@ -142,11 +163,14 @@ public class UsuarioBean implements UsuarioBeanRemote {
 	}
 
 	@Override
-	public boolean tienePermiso(Long idRol, Long idFuncionalidad) throws ServiciosException {
+	public boolean tienePermiso(Long idRol, Long idFuncionalidad)
+			throws ServiciosException {
 		try {
 			String query = "SELECT COUNT(r) FROM Rol r JOIN r.funcionalidades f WHERE r.idRol = :idRol AND f.idFuncionalidad = :idFuncionalidad";
-			Long count = entityManager.createQuery(query, Long.class).setParameter("idRol", idRol)
-					.setParameter("idFuncionalidad", idFuncionalidad).getSingleResult();
+			Long count = entityManager.createQuery(query, Long.class)
+					.setParameter("idRol", idRol)
+					.setParameter("idFuncionalidad", idFuncionalidad)
+					.getSingleResult();
 
 			return count > 0;
 		} catch (Exception e) {

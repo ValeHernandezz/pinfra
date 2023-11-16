@@ -1,100 +1,85 @@
 @charset "UTF-8";
 
-.gestionContenido {
-	width: 100%;
+.contenidoDeGestion {
+	display: grid;
+	min-height: 100%;
+	grid-template-areas: "columnaIzquierda" "columnaDerecha";
+	grid-template-columns: 235px 1fr;
+}
+
+.contenidoDeGestion .columnaIzquierda {}
+
+.contenidoDeGestion .columnaIzquierda .informacionGestion {
+	position: relative;
+	top: 170px;
+	width: 300px;
+}
+
+.contenidoDeGestion .columnaIzquierda .informacionGestion .tituloGestion {
+	font-size: 38px;
+	font-family: 'Geist-UltraBlack', sans-serif;
+	font-weight: 800;
+	margin-bottom: 24px;
+}
+
+.contenidoDeGestion .columnaIzquierda .informacionGestion .tituloGestion .textoResaltado {
+		color: #00aeef;
+}
+
+.contenidoDeGestion .columnaDerecha {
 	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	margin-top: 10px;
-	justify-content: center;
+	justify-content: end;
 	align-items: center;
 }
 
-/* Estilos de la tabla */
-.tableContenido {
-	overflow-x: auto;
-	width: 100%;
-}
-
-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-bottom: 50px;
-	border-radius: 15px 15px 0 0;
-}
-
-.comienzo {
-	border-radius: 15px 0 0 0;
-}
-
-.fin {
-	border-radius: 0 15px 0 0;
-}
-
-th,
-td {
-	padding: 10px;
-	text-align: left;
-	border-bottom: 1px solid #ddd;
-	font-size: 12px;
-}
-
-th {
-	background-color: #00aeef;
-	font-family: 'Geist-SemiBold';
-	color: #000;
-
-}
-
-/* Estilos de las filas de la tabla */
-tr:nth-child(even) {
-	background-color: #fff;
-}
-
-tr:nth-child(odd) {
-	background-color: #f8f9fa;
-}
-
-th,
-td {
-	color: #333;
-}
-
-td div {
+.contenidoDeGestion .columnaDerecha .opcionesGestion {
 	display: flex;
-
-	gap: 10px;
-
+	gap: 40px;
+	margin-right: 40px;
 }
 
-.btnEditar {
-	background-color: #00aeef;
+.contenidoDeGestion .columnaDerecha .opcionesGestion .opcionItem {
+	height: 400px;
+	width: 270px;
+	background-color: aliceblue;
+	list-style: none;
+	display: flex;
+	align-items: end;
+	border-radius: 10px;
+	transition: transform 0.5s ease;
+	filter: drop-shadow(-2px 2px 15px rgba(0, 0, 0, 0.273));
 }
 
-.btnEliminar {
-	background-color: red;
+.contenidoDeGestion .columnaDerecha .opcionesGestion .opcionItem:hover {
+	transform: scale(1.04);
 }
 
-td div form button {
-	width: 40px;
-	height: 40px;
-	font-size: 12px;
+.contenidoDeGestion .columnaDerecha .opcionesGestion .opcionItem:first-child {
+	background: url("../../utils/img/imagen-estudiante.avif") no-repeat;
+	background-size: cover;
+}
+
+.contenidoDeGestion .columnaDerecha .opcionesGestion .opcionItem:nth-child(2) {
+	background: url("../../utils/img/imagen-analista.avif") no-repeat;
+	background-size: cover;
+}
+
+.contenidoDeGestion .columnaDerecha .opcionesGestion .opcionItem:nth-child(3) {
+	background: url("../../utils/img/imagen-tutor.avif") no-repeat;
+	background-size: cover;
+}
+
+.contenidoDeGestion .columnaDerecha .opcionesGestion .opcionItem .opcionLink {
+	all: initial;
+	font-size: 25px;
 	color: #fff;
-	font-family: 'Geist-SemiBold';
-	font-weight: 500;
-	border-radius: 9999px;
-	outline: none;
-	border: none;
-	padding: 10px;
+	font-family: 'Geist-Bold';
+	margin-bottom: 30px;
+	margin-left: 30px;
+	filter: drop-shadow(-2px 2px 15px rgba(0, 0, 0, 0.873));
 }
 
-td div form button:hover {
+.contenidoDeGestion .columnaDerecha .opcionesGestion .opcionItem .opcionLink:hover {
+	text-decoration: underline;
 	cursor: pointer;
 }
-
-.btnEditar:hover{
-	background-color: #043eef;
-}
-
-.btnEliminar:hover {
-	background-color: darkred}

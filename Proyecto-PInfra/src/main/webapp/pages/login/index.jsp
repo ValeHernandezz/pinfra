@@ -5,7 +5,8 @@
 
 <%
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
-Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado");
+Usuario usuarioLogueado = (Usuario) sessionActual
+		.getAttribute("usuarioLogueado");
 %>
 <!DOCTYPE html>
 <html>
@@ -25,54 +26,13 @@ Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado"
 <body>
 	<div class="app">
 		<!-- Encabezado de la página -->
-		<header class="encabezado">
-			<a class="btnHome" href="/Proyecto-PInfra/index.jsp"> <img
-				class="imagenUtec" src="/Proyecto-PInfra/utils/img/utec.png"
-				alt="Logo de UTEC">
-			</a>
-			<nav class="menu">
-				<%
-				if (usuarioLogueado != null) {
-				%>
-
-				<ul class="links">
-					<li><a href="#">Cursos</a></li>
-					<li><a href="#">Itrs</a></li>
-					<li><a href="/Proyecto-PInfra/pages/gestionDeUsuarios/index.jsp">Gestión de
-							usuarios</a></li>
-				</ul>
-
-				<%
-				}
-				%>
-			</nav>
-			<%
-			if (usuarioLogueado != null) {
-			%>
-			<div class="btnSesion">
-				<p style="font-size: 12px; font-weight: bold;"><%=usuarioLogueado.getNombreUsuario()%></p>
-				<a href="/Proyecto-PInfra/CerrarSesion">Cerrar sesión</a>
-			</div>
-			<%
-			} else {
-			%>
-			<div class="btnSesion">
-				<a href="/Proyecto-PInfra/pages/login/index.jsp">Iniciar sesión</a>
-				<a href="/Proyecto-PInfra/pages/registro/index.jsp">Registrarme</a>
-			</div>
-			<%
-			}
-			%>
-
-		</header>
+		<jsp:include page="/components/layout/nav/index.jsp" />
 
 		<!-- Contenido de la página -->
 		<main class="contenido">
 			<!-- Modificar a gusto -->
 			<section class="loginContenido">
-				<div class="columnaIzq">
-					
-				</div>
+				<div class="columnaIzq"></div>
 
 				<div class="columnaDer">
 					<form action="/Proyecto-PInfra/Login" method="POST"
@@ -100,7 +60,8 @@ Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado"
 						</label>
 						<button type="submit">Ingresar</button>
 						<p class="registrarse">
-							¿No tienes una cuenta? <a href="/Proyecto-PInfra/pages/registro/index.jsp">Registrate
+							¿No tienes una cuenta? <a
+								href="/Proyecto-PInfra/pages/registro/index.jsp">Registrate
 								aquí</a>
 						</p>
 					</form>
@@ -109,11 +70,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado"
 		</main>
 
 		<!-- Pie de página -->
-		<footer class="pieDePagina">
-			<p>Creado por</p>
-			<img class="imagenEquipo"
-				src="/Proyecto-PInfra/utils/img/error404.png" alt="Logo de Error404">
-		</footer>
+		<jsp:include page="/components/layout/footer/index.jsp" />
 	</div>
 </body>
 

@@ -20,54 +20,15 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 <meta name="description"
 	content="Página de gestión de constancias de UTEC. Solicita tus constancias y mantente al día.">
 <meta name="viewport" content="width=device-width">
-<link rel="icon" type="image/ico" href="/Proyecto-PInfra/utils/img/faviconapp.ico">
+<link rel="icon" type="image/ico"
+	href="/Proyecto-PInfra/utils/img/faviconapp.ico">
 <title>Gestión de constancias UTEC</title>
 </head>
 
 <body>
 	<div class="app">
 		<!-- Encabezado de la página -->
-		<header class="encabezado">
-			<a class="btnHome" href="/Proyecto-PInfra/index.jsp"><img class="imagenUtec"
-				src="/Proyecto-PInfra/utils/img/utec.png" alt="Logo de UTEC"> </a>
-
-			<nav class="menu">
-				<%
-				if (usuarioLogueado != null) {
-				%>
-
-				<ul class="links">
-					<li><a href="#">Cursos</a></li>
-					<li><a href="#">Itrs</a></li>
-					<li><a href="/Proyecto-PInfra/pages/gestionDeUsuarios/index.jsp">Gestión
-							de usuarios</a></li>
-				</ul>
-
-				<%
-				}
-				%>
-			</nav>
-			<%
-			if (usuarioLogueado != null) {
-			%>
-			<!-- Mostrar nombre de usuario y botón de cerrar sesión -->
-			<div class="btnSesion">
-				<p style="font-size: 12px; font-weight: bold;"><%=usuarioLogueado.getNombreUsuario()%></p>
-				<a href="/Proyecto-PInfra/CerrarSesion">Cerrar sesión</a>
-			</div>
-			<%
-			} else {
-			%>
-			<!-- Mostrar enlaces de inicio de sesión y registro -->
-			<div class="btnSesion">
-				<a href="/Proyecto-PInfra/pages/login/index.jsp">Iniciar sesión</a>
-				<a href="/Proyecto-PInfra/pages/registro/index.jsp">Registrarme</a>
-			</div>
-			<%
-			}
-			%>
-
-		</header>
+		<jsp:include page="/components/layout/nav/index.jsp" />
 
 		<!-- Contenido de la página -->
 		<main class="contenido">
@@ -101,7 +62,8 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 				</div>
 
 				<div>
-					<img class="imageninicio" src="/Proyecto-PInfra/utils/img/imagenInicio.png"
+					<img class="imageninicio"
+						src="/Proyecto-PInfra/utils/img/imagenInicio.png"
 						alt="Imagen de estudiantes">
 				</div>
 			</section>
@@ -110,8 +72,8 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 		<!-- Pie de página -->
 		<footer class="pieDePagina">
 			<p>Creado por</p>
-			<img class="imagenEquipo" src="/Proyecto-PInfra/utils/img/error404.png"
-				alt="Logo de Error404">
+			<img class="imagenEquipo"
+				src="/Proyecto-PInfra/utils/img/error404.png" alt="Logo de Error404">
 		</footer>
 	</div>
 </body>
