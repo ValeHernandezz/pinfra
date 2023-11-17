@@ -55,17 +55,17 @@
 }
 
 .contenidoDeGestion .columnaDerecha .opcionesGestion .opcionItem:first-child {
-	background: url("/Proyecto-PInfra/utils/img/imagen-estudiante.avif") no-repeat;
+	background: url("/Proyecto-PInfra/utils/img/imagen-estudiante.png") no-repeat;
 	background-size: cover;
 }
 
 .contenidoDeGestion .columnaDerecha .opcionesGestion .opcionItem:nth-child(2) {
-	background: url("/Proyecto-PInfra/utils/img/imagen-analista.avif") no-repeat;
+	background: url("/Proyecto-PInfra/utils/img/imagen-analista.png") no-repeat;
 	background-size: cover;
 }
 
 .contenidoDeGestion .columnaDerecha .opcionesGestion .opcionItem:nth-child(3) {
-	background: url("/Proyecto-PInfra/utils/img/imagen-tutor.avif") no-repeat;
+	background: url("/Proyecto-PInfra/utils/img/imagen-tutor.png") no-repeat;
 	background-size: cover;
 }
 
