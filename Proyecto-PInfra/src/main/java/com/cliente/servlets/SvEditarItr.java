@@ -17,40 +17,41 @@ import com.servidor.entidades.Itr;
 public class SvEditarItr extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
+		request.getSession().removeAttribute("mostrarForm");
 		Long idItr = Long.parseLong(request.getParameter("idItr"));
-		
+
 		Itr oItrEditar = Buscar.itrPorId(idItr);
-		
+
 		request.getSession().setAttribute("itrEditar", oItrEditar);
 		response.sendRedirect("/Proyecto-PInfra/pages/itrs/index.jsp");
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
 		request.setCharacterEncoding("UTF-8");
-		
+
 		String nombreItr = request.getParameter("nombreItrEditar");
 		String departamentoTexto = request.getParameter("departamentoEditar");
-		
-		Departamento departamento = ServiceUbicacion.listarDepartamentosFiltro(departamentoTexto).get(0);
+
+		Departamento departamento = ServiceUbicacion
+				.listarDepartamentosFiltro(departamentoTexto).get(0);
 
 		Itr oItrAntiguo = (Itr) request.getSession().getAttribute("itrEditar");
-		
+
 		Itr oItrEditado = new Itr(nombreItr, departamento, "S");
 		oItrEditado.setIdItr(oItrAntiguo.getIdItr());
-		
+
 		Actualizar.itr(oItrEditado);
-		
+
 		request.getSession().removeAttribute("itrEditar");
 		response.sendRedirect("/Proyecto-PInfra/pages/itrs/index.jsp");
-		
+
 	}
 
 }

@@ -30,34 +30,36 @@
 		<!-- Contenido de la página -->
 		<main class="contenido">
 
-			<section class="">
+			<section class="itrContenido">
 
 				<div>
-					<h2>ITRs</h2>
+					<h2>Gestión de ITRs</h2>
 				</div>
 
-				<div>
+				<div class="crearUnItr">
 					<%
-					Itr oItrEditarExiste = request.getSession().getAttribute("itrEditar") == null ? null
+					Itr oItrEditarExiste = request.getSession().getAttribute("itrEditar") == null
+							? null
 							: (Itr) request.getSession().getAttribute("itrEditar");
-					
-					boolean mostrarForm = request.getSession().getAttribute("mostrarForm") == null ? false
+
+					boolean mostrarForm = request.getSession().getAttribute("mostrarForm") == null
+							? false
 							: (boolean) request.getSession().getAttribute("mostrarForm");
 
 					if (!mostrarForm && oItrEditarExiste == null) {
 					%>
 
 					<form action="/Proyecto-PInfra/SvCrearItr" method="GET">
-						<button type="submit">Crear</button>
+						<button class="btnCrear" type="submit">Crear</button>
 					</form>
 
 					<%
-					} else if (mostrarForm){
+					} else if (mostrarForm) {
 					%>
 
 					<form action="/Proyecto-PInfra/SvCrearItr" method="POST">
-						<input type="text" name="nombreItr" /> 
-						<select name="departamento">
+						<label> Nombre <input type="text" name="nombreItr" />
+						</label> <select name="departamento">
 							<option selected>Seleccione un departamento</option>
 							<%
 							for (Departamento oDepartamento : ServiceUbicacion.listarDepartamentos()) {
@@ -69,39 +71,55 @@
 							}
 							%>
 						</select>
-						<button type="submit">Crear</button>
+						<button class="btnCrear" type="submit">Crear</button>
 					</form>
-
+					<div class="cancelarForm">
+						<form name="eliminar" action="/Proyecto-PInfra/SvEliminarItr"
+							method="GET">
+							<button class="btnEliminar" type="submit">Cancelar</button>
+						</form>
+					</div>
 					<%
 					}
 					%>
 				</div>
-				
-				<div>
+
+				<div class="crearUnItr">
 					<%
-					Itr oItrEditar = request.getSession().getAttribute("itrEditar") == null ? null
+					Itr oItrEditar = request.getSession().getAttribute("itrEditar") == null
+							? null
 							: (Itr) request.getSession().getAttribute("itrEditar");
-					
+
 					if (oItrEditar != null) {
 					%>
 
 					<form action="/Proyecto-PInfra/SvEditarItr" method="POST">
-						<input type="text" name="nombreItrEditar" value="<%=oItrEditar.getNombre()%>"/> 
-						<select name="departamentoEditar">
+
+						<label> Nombre <input type="text" name="nombreItrEditar"
+							value="<%=oItrEditar.getNombre()%>" />
+						</label> <select name="departamentoEditar">
 							<option>Seleccione un departamento</option>
 							<%
 							for (Departamento oDepartamento : ServiceUbicacion.listarDepartamentos()) {
 							%>
-							
-							<option value="<%=oDepartamento.getNombre()%>" <%=oDepartamento.getNombre().equals(oItrEditar.getDepartamento().getNombre()) ? "selected" : ""%>><%=oDepartamento.getNombre()%></option>
+
+							<option value="<%=oDepartamento.getNombre()%>"
+								<%=oDepartamento.getNombre()
+		.equals(oItrEditar.getDepartamento().getNombre()) ? "selected" : ""%>><%=oDepartamento.getNombre()%></option>
 
 							<%
 							}
 							%>
 						</select>
-						<button type="submit">Editar</button>
+						<button class="btnCrear" type="submit">Editar</button>
 					</form>
 
+					<div class="cancelarForm">
+						<form name="eliminar" action="/Proyecto-PInfra/SvEliminarItr"
+							method="GET">
+							<button class="btnEliminar" type="submit">Cancelar</button>
+						</form>
+					</div>
 					<%
 					}
 					%>
@@ -111,7 +129,7 @@
 					<table>
 						<thead>
 							<tr>
-								<th>Nombre</th>
+								<th class="comienzo">Nombre</th>
 								<th>Departamento</th>
 								<th class="fin">Acciones</th>
 							</tr>
@@ -128,7 +146,7 @@
 							<tr>
 								<td><%=oItr.getNombre()%></td>
 								<td><%=oItr.getDepartamento().getNombre()%></td>
-								<td>
+								<td class="btnAcciones">
 									<div>
 										<form name="editar" action="/Proyecto-PInfra/SvEditarItr"
 											method="GET">

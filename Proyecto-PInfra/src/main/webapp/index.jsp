@@ -42,7 +42,8 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 							Aquí, te ofrecemos la manera más fácil y rápida de obtener tus
 							constancias de prueba, transporte, créditos, exámenes y más.</p>
 						<div>
-							<a class="btnSaberMas" href="#">Saber más</a>
+							<a class="btnSaberMas" href="https://utec.edu.uy/es/"
+								target="_blank">Saber más</a>
 						</div>
 					</div>
 					<div class="estadistica">
