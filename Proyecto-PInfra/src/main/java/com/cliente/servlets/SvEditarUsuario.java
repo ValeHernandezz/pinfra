@@ -3,18 +3,15 @@ package com.cliente.servlets;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import com.cliente.contexto.Fabrica;
 import com.cliente.contexto.helpers.Actualizar;
 import com.cliente.contexto.helpers.Buscar;
-import com.cliente.contexto.helpers.Crear;
 import com.cliente.services.ServiceArea;
 import com.cliente.services.ServiceGenero;
 import com.cliente.services.ServiceItr;
@@ -92,17 +89,17 @@ public class SvEditarUsuario extends HttpServlet {
 		Itr itr = ServiceItr.listarItrsFiltro(itrTexto).get(0);
 		Localidad localidad = ServiceUbicacion.listarLocalidadesFiltro(localidadTexto).get(0);
 		Rol rol = ServiceRol.listarRolesFiltro(rolTexto).get(0);
-		
-		Usuario oUsuarioNuevo = new Usuario(oUsuarioEditado.getClave(), oUsuarioEditado.getDocumento(), new Date(), oUsuarioEditado.getMailInstitucional(), mailPersonal,
-				nombreUsuario, primerApellido, primerNombre, segundoApellido, segundoNombre, telefono, "S", "N",
-				departamento, genero, itr, localidad, rol);
 
+		Usuario oUsuarioNuevo = new Usuario(oUsuarioEditado.getClave(), oUsuarioEditado.getDocumento(), new Date(),
+				oUsuarioEditado.getMailInstitucional(), mailPersonal, nombreUsuario, primerApellido, primerNombre,
+				segundoApellido, segundoNombre, telefono, "S", "N", departamento, genero, itr, localidad, rol);
 
 		oUsuarioNuevo.setIdUsuario(oUsuarioEditado.getIdUsuario());
 
 		if (rolTexto.equals("Analista")) {
-			Analista oAnalistaAntiguo = Buscar.analistaFiltro(oUsuarioEditado.getDocumento().toString(), "Documento").get(0);
-			
+			Analista oAnalistaAntiguo = Buscar.analistaFiltro(oUsuarioEditado.getDocumento().toString(), "Documento")
+					.get(0);
+
 			boolean oAnalistaEditado = Actualizar.usuario(oUsuarioNuevo, oAnalistaAntiguo);
 
 			response.sendRedirect("/Proyecto-PInfra/pages/gestion/analistas/index.jsp");
@@ -111,9 +108,10 @@ public class SvEditarUsuario extends HttpServlet {
 
 		if (rolTexto.equals("Tutor") || rolTexto.equals("Encargado")) {
 			String areaTexto = request.getParameter("area");
-			
-			boolean oTutorEditado = Actualizar.usuario(oUsuarioNuevo,
-					new Tutor(Buscar.tutorFiltro(oUsuarioEditado.getDocumento().toString(), "Documento").get(0).getIdTutor(),ServiceArea.listarAreasFiltro(areaTexto).get(0), oUsuarioNuevo));
+
+			boolean oTutorEditado = Actualizar.usuario(oUsuarioNuevo, new Tutor(
+					Buscar.tutorFiltro(oUsuarioEditado.getDocumento().toString(), "Documento").get(0).getIdTutor(),
+					ServiceArea.listarAreasFiltro(areaTexto).get(0), oUsuarioNuevo));
 
 			response.sendRedirect("/Proyecto-PInfra/pages/gestion/tutores/index.jsp");
 			return;
@@ -122,8 +120,12 @@ public class SvEditarUsuario extends HttpServlet {
 		if (rolTexto.equals("Estudiante")) {
 			String semestreTexto = request.getParameter("semestre");
 			String generacionTexto = request.getParameter("generacion");
-			boolean oEstudianteEditado = Actualizar.usuario(oUsuarioNuevo,
-					new Estudiante(Buscar.estudianteFiltro(oUsuarioEditado.getDocumento().toString(), "Documento").get(0).getIdEstudiante(),generacionTexto, new BigDecimal(semestreTexto), oUsuarioNuevo));
+			boolean oEstudianteEditado = Actualizar
+					.usuario(oUsuarioNuevo,
+							new Estudiante(
+									Buscar.estudianteFiltro(oUsuarioEditado.getDocumento().toString(), "Documento")
+											.get(0).getIdEstudiante(),
+									generacionTexto, new BigDecimal(semestreTexto), oUsuarioNuevo));
 
 			response.sendRedirect("/Proyecto-PInfra/pages/gestion/estudiantes/index.jsp");
 			return;

@@ -2,13 +2,11 @@ package com.cliente.contexto.helpers;
 
 import com.cliente.services.ServiceItr;
 import com.cliente.services.ServiceUsuario;
-import com.servidor.entidades.Itr;
-import com.servidor.entidades.Usuario;
 
 public class Borrar {
 
 	// USUARIO -----------------------------
-	public static boolean darBajaLogica(Long idUsuario) {
+	public static boolean darBajaLogicaUsuario(Long idUsuario) {
 		try {
 			var oUsuarioActualizado = ServiceUsuario.eliminarUsuario(idUsuario);
 			if (!oUsuarioActualizado) {
@@ -21,11 +19,10 @@ public class Borrar {
 	}
 
 	// ITR -----------------------------
-	public static boolean darBajaLogica(Itr oItr) {
+	public static boolean darBajaLogicaItr(Long idItr) {
 		try {
-			oItr.setActivo("N");
-			var oItrActualizado = ServiceItr.actualizarItr(oItr);
-			if (oItrActualizado == null) {
+			var oItrActualizado = ServiceItr.eliminarItr(idItr);
+			if (oItrActualizado) {
 				return false;
 			}
 			return true;

@@ -4,7 +4,9 @@ function cargarLocalidadSeleccionada(nombre) {
 
 	var selectedDepartamento = departamentoSelect.value;
 	var selectedLocalidad = nombre;
-
+	
+	console.log(selectedLocalidad)
+	
 	localidadSelect.disabled = (selectedDepartamento === "Selecciona un departamento");
 
 	if (!localidadSelect.disabled) {

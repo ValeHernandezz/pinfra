@@ -9,12 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cliente.contexto.helpers.Borrar;
 
-@WebServlet(name = "ServletEliminarUsuario", urlPatterns = "/SvEliminarUsuario")
-public class SvEliminarUsuario extends HttpServlet {
+@WebServlet(name = "ServletEliminarItr", urlPatterns = "/SvEliminarItr")
+public class SvEliminarItr extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -22,11 +23,11 @@ public class SvEliminarUsuario extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 
-		Long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+		Long idItr = Long.parseLong(request.getParameter("idItr"));
 
-		Borrar.darBajaLogicaUsuario(idUsuario);
+		Borrar.darBajaLogicaItr(idItr);
 
-		response.sendRedirect("/Proyecto-PInfra/pages/gestion/index.jsp");
+		response.sendRedirect("/Proyecto-PInfra/pages/itrs/index.jsp");
 
 	}
 

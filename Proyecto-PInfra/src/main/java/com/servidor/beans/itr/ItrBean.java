@@ -44,7 +44,7 @@ public class ItrBean implements ItrBeanRemote {
 	public boolean eliminarITR(Long idITR) throws ServiciosException {
 		try {
 			Itr oITR = entityManager.find(Itr.class, idITR);
-			entityManager.remove(oITR);
+			oITR.setActivo("N");
 			entityManager.flush();
 			return true;
 		} catch (Exception e) {

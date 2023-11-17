@@ -16,10 +16,9 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 		%>
 
 		<ul class="links">
-			<li><a href="/Proyecto-PInfra/pages/gestion/index.jsp">Gestión
-					de usuarios</a></li>
+			<li><a href="/Proyecto-PInfra/pages/gestion/index.jsp">Gestión de usuarios</a></li>
 			<li><a href="#">Confirmación de usuarios (2)</a></li>
-			<li><a href="#">Itrs</a></li>
+			<li><a href="/Proyecto-PInfra/pages/itrs/index.jsp">ITRs</a></li>
 		</ul>
 
 		<%

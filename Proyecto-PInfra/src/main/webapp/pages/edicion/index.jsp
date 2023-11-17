@@ -205,11 +205,6 @@ Usuario oUsuarioAEditar = (Usuario) sessionActual.getAttribute("oUsuarioAEditar"
 
 						<div class="btnContenido">
 							<button type="submit">Editar</button>
-							<p class="loguearse">
-								¿Ya tienes una cuenta? <a
-									href="/Proyecto-PInfra/pages/login/index.jsp">Inicia sesión
-									aquí</a>
-							</p>
 						</div>
 					</form>
 
@@ -227,11 +222,12 @@ Usuario oUsuarioAEditar = (Usuario) sessionActual.getAttribute("oUsuarioAEditar"
 <script
 	src="/Proyecto-PInfra/utils/script/cargarLocalidadSeleccionada.js"></script>
 <script>
+
 document.addEventListener("DOMContentLoaded", function() {
     mostrarCampos();
     cargarLocalidades();
-    cargarLocalidadSeleccionada('<%=oUsuarioAEditar.getLocalidad().getNombre()%>
-	');
-					});
+    cargarLocalidadSeleccionada('<%=oUsuarioAEditar.getLocalidad().getNombre()%>'); 
+ });
+    		
 </script>
 </html>
