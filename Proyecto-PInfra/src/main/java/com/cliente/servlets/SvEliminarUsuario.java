@@ -26,7 +26,7 @@ public class SvEliminarUsuario extends HttpServlet {
 		
 		Borrar.darBajaLogica(idUsuario);
 		
-		response.sendRedirect("/Proyecto-PInfra/pages/gestionDeUsuarios/index.jsp");
+		response.sendRedirect("/Proyecto-PInfra/pages/gestion/index.jsp");
 		
 		
 	}

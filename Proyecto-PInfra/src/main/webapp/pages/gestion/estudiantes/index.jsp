@@ -1,5 +1,5 @@
-<%@page import="com.cliente.services.ServiceTutor"%>
-<%@page import="com.servidor.entidades.Tutor"%>
+<%@page import="com.cliente.services.ServiceEstudiante"%>
+<%@page import="com.servidor.entidades.Estudiante"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.servidor.entidades.Usuario"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
@@ -16,13 +16,13 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/Proyecto-PInfra/style.css">
 <link rel="stylesheet" type="text/css"
-	href="/Proyecto-PInfra/pages/gestionDeUsuarios/gestionTutores/style.css">
+	href="/Proyecto-PInfra/pages/gestion/estudiantes/style.css">
 <meta name="description"
 	content="Página de gestión de constancias de UTEC. Crea tus usuarios y gestionalos de una manera sencilla.">
 <meta name="viewport" content="width=device-width">
 <link rel="icon" type="image/ico"
 	href="/Proyecto-PInfra/utils/img/faviconapp.ico">
-<title>Gestión de tutores</title>
+<title>Gestión de estudiantes</title>
 </head>
 
 <body>
@@ -35,7 +35,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 		<main class="contenido">
 			<!-- Modificar a gusto -->
 			<section class="gestionContenido">
-				<h2>Lista de Tutores</h2>
+				<h2>Lista de Estudiantes</h2>
 
 				<div class="tableContenido">
 					<table>
@@ -52,31 +52,30 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 								<th>ITR</th>
 								<th>Teléfono</th>
 								<th>Fecha de Nacimiento</th>
-								<th>Rol</th>
 								<th class="fin">Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
 							<%
-							ArrayList<Tutor> listaDeTutores = ServiceTutor.listarTutores();
-							if (listaDeTutores == null) {
+							ArrayList<Estudiante> listaDeEstudiantes = ServiceEstudiante
+									.listarEstudiantes();
+							if (listaDeEstudiantes == null) {
 								return;
 							}
-							for (Tutor oTutor : listaDeTutores) {
+							for (Estudiante oEstudiante : listaDeEstudiantes) {
 							%>
 							<tr>
-								<td><%=oTutor.getUsuario().getDocumento()%></td>
-								<td><%=oTutor.getUsuario().getNombres()%></td>
-								<td><%=oTutor.getUsuario().getApellidos()%></td>
-								<td><%=oTutor.getUsuario().getMailPersonal()%></td>
-								<td><%=oTutor.getUsuario().getMailInstitucional()%></td>
-								<td><%=oTutor.getUsuario().getGenero().getNombre()%></td>
-								<td><%=oTutor.getUsuario().getDepartamento().getNombre()%></td>
-								<td><%=oTutor.getUsuario().getLocalidad().getNombre()%></td>
-								<td><%=oTutor.getUsuario().getItr().getNombre()%></td>
-								<td><%=oTutor.getUsuario().getTelefono()%></td>
-								<td><%=oTutor.getUsuario().getFechaNacimiento()%></td>
-								<td><%=oTutor.getUsuario().getRol().getDescripcion()%></td>
+								<td><%=oEstudiante.getUsuario().getDocumento()%></td>
+								<td><%=oEstudiante.getUsuario().getNombres()%></td>
+								<td><%=oEstudiante.getUsuario().getApellidos()%></td>
+								<td><%=oEstudiante.getUsuario().getMailPersonal()%></td>
+								<td><%=oEstudiante.getUsuario().getMailInstitucional()%></td>
+								<td><%=oEstudiante.getUsuario().getGenero().getNombre()%></td>
+								<td><%=oEstudiante.getUsuario().getDepartamento().getNombre()%></td>
+								<td><%=oEstudiante.getUsuario().getLocalidad().getNombre()%></td>
+								<td><%=oEstudiante.getUsuario().getItr().getNombre()%></td>
+								<td><%=oEstudiante.getUsuario().getTelefono()%></td>
+								<td><%=oEstudiante.getUsuario().getFechaNacimiento()%></td>
 								<td>
 									<div>
 										<form name="editar" action="/Proyecto-PInfra/SvEditarUsuario"
@@ -95,7 +94,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 													<path d="M16 5l3 3" /></svg>
 											</button>
 											<input type="hidden" name="cedula"
-												value="<%=oTutor.getUsuario().getDocumento()%>">
+												value="<%=oEstudiante.getUsuario().getDocumento()%>">
 										</form>
 										<form name="eliminar"
 											action="/Proyecto-PInfra/SvEliminarUsuario" method="POST">
@@ -114,7 +113,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 														stroke-width="0" fill="currentColor" /></svg>
 											</button>
 											<input type="hidden" name="idUsuario"
-												value="<%=oTutor.getUsuario().getIdUsuario()%>">
+												value="<%=oEstudiante.getUsuario().getIdUsuario()%>">
 										</form>
 									</div>
 								</td>

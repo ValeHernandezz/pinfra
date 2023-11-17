@@ -14,7 +14,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/Proyecto-PInfra/style.css">
 <link rel="stylesheet" type="text/css"
-	href="/Proyecto-PInfra/pages/gestionDeUsuarios/style.css">
+	href="/Proyecto-PInfra/pages/gestion/style.css">
 <meta name="description"
 	content="Página de gestión de constancias de UTEC. Crea tus usuarios y gestionalos de una manera sencilla.">
 <meta name="viewport" content="width=device-width">
@@ -47,13 +47,13 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 
 					<ul class="opcionesGestion">
 						<li class="opcionItem"><a class="opcionLink"
-							href="/Proyecto-PInfra/pages/gestionDeUsuarios/gestionEstudiantes/index.jsp">Estudiantes</a>
+							href="/Proyecto-PInfra/pages/gestion/estudiantes/index.jsp">Estudiantes</a>
 						</li>
 						<li class="opcionItem"><a class="opcionLink"
-							href="/Proyecto-PInfra/pages/gestionDeUsuarios/gestionAnalistas/index.jsp">Analistas</a>
+							href="/Proyecto-PInfra/pages/gestion/analistas/index.jsp">Analistas</a>
 						</li>
 						<li class="opcionItem"><a class="opcionLink"
-							href="/Proyecto-PInfra/pages/gestionDeUsuarios/gestionTutores/index.jsp">Tutores</a>
+							href="/Proyecto-PInfra/pages/gestion/tutores/index.jsp">Tutores</a>
 						</li>
 					</ul>
 				</div>

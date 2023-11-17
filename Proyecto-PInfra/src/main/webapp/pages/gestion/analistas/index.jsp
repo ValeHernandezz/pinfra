@@ -17,7 +17,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/Proyecto-PInfra/style.css">
 <link rel="stylesheet" type="text/css"
-	href="/Proyecto-PInfra/pages/gestionDeUsuarios/gestionEstudiantes/style.css">
+	href="/Proyecto-PInfra/pages/gestion/estudiantes/style.css">
 <meta name="description"
 	content="Página de gestión de constancias de UTEC. Crea tus usuarios y gestionalos de una manera sencilla.">
 <meta name="viewport" content="width=device-width">

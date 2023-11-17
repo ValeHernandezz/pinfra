@@ -105,7 +105,7 @@ public class SvEditarUsuario extends HttpServlet {
 			
 			boolean oAnalistaEditado = Actualizar.usuario(oUsuarioNuevo, oAnalistaAntiguo);
 
-			response.sendRedirect("/Proyecto-PInfra/pages/gestionDeUsuarios/gestionAnalistas/index.jsp");
+			response.sendRedirect("/Proyecto-PInfra/pages/gestion/analistas/index.jsp");
 			return;
 		}
 
@@ -115,7 +115,7 @@ public class SvEditarUsuario extends HttpServlet {
 			boolean oTutorEditado = Actualizar.usuario(oUsuarioNuevo,
 					new Tutor(Buscar.tutorFiltro(oUsuarioEditado.getDocumento().toString(), "Documento").get(0).getIdTutor(),ServiceArea.listarAreasFiltro(areaTexto).get(0), oUsuarioNuevo));
 
-			response.sendRedirect("/Proyecto-PInfra/pages/gestionDeUsuarios/gestionTutores/index.jsp");
+			response.sendRedirect("/Proyecto-PInfra/pages/gestion/tutores/index.jsp");
 			return;
 		}
 
@@ -125,7 +125,7 @@ public class SvEditarUsuario extends HttpServlet {
 			boolean oEstudianteEditado = Actualizar.usuario(oUsuarioNuevo,
 					new Estudiante(Buscar.estudianteFiltro(oUsuarioEditado.getDocumento().toString(), "Documento").get(0).getIdEstudiante(),generacionTexto, new BigDecimal(semestreTexto), oUsuarioNuevo));
 
-			response.sendRedirect("/Proyecto-PInfra/pages/gestionDeUsuarios/gestionEstudiantes/index.jsp");
+			response.sendRedirect("/Proyecto-PInfra/pages/gestion/estudiantes/index.jsp");
 			return;
 		}
 
