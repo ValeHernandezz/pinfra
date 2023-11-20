@@ -1,15 +1,10 @@
-<%@page import="com.servidor.entidades.Usuario"%>
-<%@ page import="javax.servlet.http.HttpSession"%>
+<%@page import="com.cliente.contexto.Fabrica"%>
+<%@ page import="com.cliente.contexto.utils.CargarDatos"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.cliente.contexto.utils.CargarDatos"%>
 <%
 CargarDatos.empezar();
-%>
-<%
-HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
-Usuario usuarioLogueado = (Usuario) sessionActual
-		.getAttribute("usuarioLogueado");
+Fabrica.limpiarMensajesDeError(request.getSession());
 %>
 <!DOCTYPE html>
 <html>

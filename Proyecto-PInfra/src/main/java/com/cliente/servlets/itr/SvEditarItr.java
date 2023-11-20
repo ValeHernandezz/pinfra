@@ -1,4 +1,4 @@
-package com.cliente.servlets;
+package com.cliente.servlets.itr;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cliente.contexto.Fabrica;
 import com.cliente.contexto.helpers.Actualizar;
 import com.cliente.contexto.helpers.Buscar;
+import com.cliente.contexto.validaciones.ValidacionItr;
 import com.cliente.services.ServiceUbicacion;
 import com.servidor.entidades.Departamento;
 import com.servidor.entidades.Itr;
@@ -17,11 +19,12 @@ import com.servidor.entidades.Itr;
 public class SvEditarItr extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
 		request.getSession().removeAttribute("mostrarForm");
+		Fabrica.limpiarMensajesDeError(request.getSession());
 		Long idItr = Long.parseLong(request.getParameter("idItr"));
 
 		Itr oItrEditar = Buscar.itrPorId(idItr);
@@ -31,16 +34,20 @@ public class SvEditarItr extends HttpServlet {
 
 	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-
+		Fabrica.limpiarMensajesDeError(request.getSession());
 		String nombreItr = request.getParameter("nombreItrEditar");
 		String departamentoTexto = request.getParameter("departamentoEditar");
 
-		Departamento departamento = ServiceUbicacion
-				.listarDepartamentosFiltro(departamentoTexto).get(0);
+		if (!ValidacionItr.validar(nombreItr, departamentoTexto, request.getSession())) {
+			response.sendRedirect("/Proyecto-PInfra/pages/itrs/index.jsp");
+			return;
+		}
+
+		Departamento departamento = ServiceUbicacion.listarDepartamentosFiltro(departamentoTexto).get(0);
 
 		Itr oItrAntiguo = (Itr) request.getSession().getAttribute("itrEditar");
 

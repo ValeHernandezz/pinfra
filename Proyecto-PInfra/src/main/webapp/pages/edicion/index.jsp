@@ -68,10 +68,10 @@ Usuario oUsuarioAEditar = (Usuario) sessionActual.getAttribute("oUsuarioAEditar"
 								name="mailInstitucional"
 								placeholder="Ingrese su mail institucional..."
 								value="<%=oUsuarioAEditar.getMailInstitucional()%>" disabled>
-							</label> <label>Fecha de Nacimiento <input type="text"
+							</label> <label>Fecha de Nacimiento <input type="date" id="fecha"
 								name="fechaNacimiento"
-								placeholder="Ingrese su fecha de nacimiento..."
 								value="<%=oUsuarioAEditar.getFechaNacimiento()%>">
+
 							</label> <label>Género <select name="genero">
 									<option selected>Selecciona un género</option>
 									<%
@@ -123,7 +123,7 @@ Usuario oUsuarioAEditar = (Usuario) sessionActual.getAttribute("oUsuarioAEditar"
 									<option selected>Selecciona una localidad</option>
 							</select>
 							</label> <label>Rol <select name="rol" id="rolSelect"
-								onchange="mostrarCampos()">
+								onchange="mostrarCampos()" disabled>
 									<option selected>Seleccione su rol</option>
 									<%
 									for (Rol oRol : ServiceRol.listarRoles()) {
@@ -226,8 +226,7 @@ Usuario oUsuarioAEditar = (Usuario) sessionActual.getAttribute("oUsuarioAEditar"
 document.addEventListener("DOMContentLoaded", function() {
     mostrarCampos();
     cargarLocalidades();
-    cargarLocalidadSeleccionada('<%=oUsuarioAEditar.getLocalidad().getNombre()%>'); 
- });
-    		
+    cargarLocalidadSeleccionada('<%=oUsuarioAEditar.getLocalidad().getNombre()%>');
+});
 </script>
 </html>

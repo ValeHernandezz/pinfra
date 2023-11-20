@@ -2,7 +2,7 @@
 
 .registroSeccion {
 	width: 100%;
-	max-width: 840px;
+	max-width: 860px;
 	margin: 0 auto;
 	display: flex;
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
@@ -54,7 +54,8 @@
 	border: solid 1px lightgrey;
 	padding: 10px 12px;
 	color: #332f2c;
-	font: 12px;
+	font-size: 12px;
+	min-width: 210px;
 }
 
 .registroContenido .formularioLogin label select:hover {

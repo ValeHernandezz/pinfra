@@ -7,15 +7,8 @@
 <%@page import="com.servidor.entidades.Itr"%>
 <%@page import="com.servidor.entidades.Departamento"%>
 <%@page import="com.servidor.entidades.Localidad"%>
-<%@page import="com.servidor.entidades.Usuario"%>
-<%@ page import="javax.servlet.http.HttpSession"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
-Usuario usuarioLogueado = (Usuario) sessionActual
-		.getAttribute("usuarioLogueado");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,29 +39,75 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 						action="/Proyecto-PInfra/SvCrearUsuario" method="post">
 						<div class="formularioContenido">
 							<label>Nombres <input type="text" name="nombres"
-								placeholder="Ingrese sus nombres...">
+								placeholder="Ingrese sus nombres..."> <%
+ if (request.getSession().getAttribute("errorNombre") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorNombre")%></span>
+								<%
+								}
+								%>
 							</label> <label>Apellidos <input type="text" name="apellidos"
-								placeholder="Ingrese sus apellidos...">
+								placeholder="Ingrese sus apellidos..."> <%
+ if (request.getSession().getAttribute("errorApellido") != null) {
+ %> <span
+								style="max-width: 300px; font-size: 10px; color: red;"> <%=request.getSession().getAttribute("errorApellido")%>
+							</span> <%
+ }
+ %>
 							</label> <label>Cédula <input type="number" name="cedula"
-								placeholder="Ingrese su cédula...">
+								placeholder="Ingrese su cédula..."> <%
+ if (request.getSession().getAttribute("errorCedula") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorCedula")%></span>
+								<%
+								}
+								%>
 							</label> <label>Teléfono <input type="number" name="telefono"
-								placeholder="Ingrese su teléfono...">
+								placeholder="Ingrese su teléfono..."> <%
+ if (request.getSession().getAttribute("errorTelefono") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorTelefono")%></span>
+								<%
+								}
+								%>
 							</label> <label>Mail Personal <input type="text"
 								name="mailPersonal" placeholder="Ingrese su mail personal...">
+								<%
+								if (request.getSession().getAttribute("errorMailPersonal") != null) {
+								%> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorMailPersonal")%></span>
+								<%
+								}
+								%>
 							</label> <label>Mail Institucional <input type="text"
 								name="mailInstitucional"
-								placeholder="Ingrese su mail institucional...">
+								placeholder="Ingrese su mail institucional..."> <%
+ if (request.getSession().getAttribute("errorMailInstitucional") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorMailInstitucional")%></span>
+								<%
+								}
+								%>
 							</label> <label>Contraseña <input type="password" name="clave"
-								placeholder="Ingrese su contraseña...">
-							</label> <label>Fecha de Nacimiento <input type="text"
-								name="fechaNacimiento"
-								placeholder="Ingrese su fecha de nacimiento...">
+								placeholder="Ingrese su contraseña..."> <%
+ if (request.getSession().getAttribute("errorClave") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorClave")%></span>
+								<%
+								}
+								%>
+							</label> <label>Fecha de Nacimiento <input type="date" id="fecha"
+								name="fechaNacimiento"> <%
+ if (request.getSession().getAttribute("errorFechaNacimiento") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorFechaNacimiento")%></span>
+								<%
+								}
+								%>
 							</label> <label>Género <select name="genero">
 									<option selected>Selecciona un género</option>
 									<option value="Femenino">Femenino</option>
 									<option value="Masculino">Masculino</option>
 									<option value="Otro">Otro</option>
-							</select>
+							</select> <%
+ if (request.getSession().getAttribute("errorGenero") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorGenero")%></span>
+								<%
+								}
+								%>
 							</label> <label>ITR <select name="itr">
 									<option selected>Selecciona un ITR</option>
 									<%
@@ -80,7 +119,12 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 									<%
 									}
 									%>
-							</select>
+							</select> <%
+ if (request.getSession().getAttribute("errorItr") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorItr")%></span>
+								<%
+								}
+								%>
 							</label> <label>Departamento <select name="departamento"
 								id="departamentoSelect" onchange="cargarLocalidades()">
 									<option selected>Selecciona un departamento</option>
@@ -91,11 +135,21 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 									<%
 									}
 									%>
-							</select>
+							</select> <%
+ if (request.getSession().getAttribute("errorDepartamento") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorDepartamento")%></span>
+								<%
+								}
+								%>
 							</label> <label>Localidad <select name="localidad"
 								id="localidadSelect" disabled>
 									<option selected>Selecciona una localidad</option>
-							</select>
+							</select> <%
+ if (request.getSession().getAttribute("errorLocalidad") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorLocalidad")%></span>
+								<%
+								}
+								%>
 							</label> <label>Rol <select name="rol" id="rolSelect"
 								onchange="mostrarCampos()">
 									<option selected>Seleccione su rol</option>
@@ -109,7 +163,12 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 									<%
 									}
 									%>
-							</select>
+							</select> <%
+ if (request.getSession().getAttribute("errorRol") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorRol")%></span>
+								<%
+								}
+								%>
 							</label> <label id="areaLabel" style="display: none;">Área <select
 								name="area">
 									<option selected>Seleccione su área</option>
@@ -123,32 +182,46 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 									<%
 									}
 									%>
-							</select>
+							</select> <%
+ if (request.getSession().getAttribute("errorArea") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorArea")%></span>
+								<%
+								}
+								%>
 							</label> <label id="semestreLabel" style="display: none;">Semestre
 								<select name="semestre">
 									<option selected>Seleccione su semestre</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-									<option value="7">7</option>
-									<option value="8">8</option>
-							</select>
+									<%
+									for (int i = 1; i <= 8; i++) {
+									%>
+									<option value=<%=i%>><%=i%></option>
+									<%
+									}
+									%>
+							</select> <%
+ if (request.getSession().getAttribute("errorSemestre") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorSemestre")%></span>
+								<%
+								}
+								%>
 							</label> <label id="generacionLabel" style="display: none;">Generación
 								<select name="generacion">
 									<option selected>Seleccione su generación</option>
-									<option value="2016">2016</option>
-									<option value="2017">2017</option>
-									<option value="2018">2018</option>
-									<option value="2019">2019</option>
-									<option value="2020">2020</option>
-									<option value="2021">2021</option>
-									<option value="2022">2022</option>
-									<option value="2023">2023</option>
-							</select>
+									<%
+									for (int i = 2016; i <= 2023; i++) {
+									%>
+									<option value=<%=i%>><%=i%></option>
+									<%
+									}
+									%>
+							</select> <%
+ if (request.getSession().getAttribute("errorGeneracion") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorGeneracion")%></span>
+								<%
+								}
+								%>
 							</label>
+
 						</div>
 
 						<div class="btnContenido">

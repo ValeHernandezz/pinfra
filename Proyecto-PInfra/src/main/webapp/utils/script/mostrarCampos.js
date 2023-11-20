@@ -8,7 +8,7 @@ function mostrarCampos() {
 	var generacionSelect = document.querySelector("select[name='generacion']");
 
 	var selectedRol = rolSelect.value;
-
+	console.log(selectedRol)
 
 	// Ocultar todos los elementos
 	areaLabel.style.display = "none";

@@ -1,8 +1,14 @@
 package com.cliente.contexto;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import com.cliente.services.ServiceAnalista;
 import com.cliente.services.ServiceEstudiante;
@@ -38,8 +44,7 @@ public class Fabrica {
 
 	}
 
-	public static void setListaDeAnalistas(
-			ArrayList<Analista> listaDeAnalistas) {
+	public static void setListaDeAnalistas(ArrayList<Analista> listaDeAnalistas) {
 		Fabrica.listaDeAnalistas = listaDeAnalistas;
 	}
 
@@ -47,8 +52,7 @@ public class Fabrica {
 		return listaDeEstudiantes;
 	}
 
-	public static void setListaDeEstudiantes(
-			ArrayList<Estudiante> listaDeEstudiantes) {
+	public static void setListaDeEstudiantes(ArrayList<Estudiante> listaDeEstudiantes) {
 		Fabrica.listaDeEstudiantes = listaDeEstudiantes;
 	}
 
@@ -64,8 +68,7 @@ public class Fabrica {
 		return diccionarioCampo;
 	}
 
-	public static void setDiccionarioCampo(
-			Map<String, String> diccionarioCampo) {
+	public static void setDiccionarioCampo(Map<String, String> diccionarioCampo) {
 		Fabrica.diccionarioCampo = diccionarioCampo;
 	}
 
@@ -79,8 +82,7 @@ public class Fabrica {
 
 	// Métodos de apoyo
 	public static void cargarDiccionario() {
-		diccionarioCampo.put("Nombre Completo",
-				"primerNombre" + " " + "primerApellido");
+		diccionarioCampo.put("Nombre Completo", "primerNombre" + " " + "primerApellido");
 		diccionarioCampo.put("Nombres", "u.primerNombre");
 		diccionarioCampo.put("Apellidos", "u.primerApellido");
 		diccionarioCampo.put("Documento", "CAST(u.documento AS string)");
@@ -105,8 +107,7 @@ public class Fabrica {
 	}
 
 	// Metodos para unir servicios o centralizar acciones que pueden escalar
-	public static ArrayList<Usuario> buscarUsuarioPorCampoYFiltro(String filtro,
-			String campo) {
+	public static ArrayList<Usuario> buscarUsuarioPorCampoYFiltro(String filtro, String campo) {
 		if (diccionarioCampo.size() == 0) {
 			cargarDiccionario();
 		}
@@ -116,8 +117,7 @@ public class Fabrica {
 			}
 			String valor = diccionarioCampo.get(campo);
 			if (campo.equals("Rol")) {
-				filtro = String.valueOf(
-						ServiceRol.listarRolesFiltro(filtro).get(0).getIdRol());
+				filtro = String.valueOf(ServiceRol.listarRolesFiltro(filtro).get(0).getIdRol());
 			}
 			return ServiceUsuario.buscarUsuarioPorCampoYFiltro(filtro, valor);
 		} catch (Exception e) {
@@ -125,8 +125,7 @@ public class Fabrica {
 		}
 	}
 
-	public static ArrayList<Usuario> buscarUsuarioPorNombreApellido(
-			String filtro, String campo) {
+	public static ArrayList<Usuario> buscarUsuarioPorNombreApellido(String filtro, String campo) {
 		if (diccionarioCampo.size() == 0) {
 			cargarDiccionario();
 		}
@@ -140,8 +139,7 @@ public class Fabrica {
 			String[] partes = filtro.split(" ");
 			filtro1 = partes[0]; // Nombre
 			filtro2 = partes[1]; // Apellido
-			return ServiceUsuario.listarUsuariosPorNombreApellido(filtro1,
-					filtro2, valor);
+			return ServiceUsuario.listarUsuariosPorNombreApellido(filtro1, filtro2, valor);
 		} catch (Exception e) {
 			return null;
 		}
@@ -156,4 +154,38 @@ public class Fabrica {
 
 	}
 
+	public static Date getFechaDesdeString(String fechaString) {
+
+		if (fechaString.equals("") || fechaString == null) {
+			return null;
+		}
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+		LocalDate localDate = LocalDate.parse(fechaString, formatter);
+
+		Date fechaNacimiento = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		return fechaNacimiento;
+	}
+
+	public static void limpiarMensajesDeError(HttpSession sesion) {
+		sesion.removeAttribute("errorNombre");
+		sesion.removeAttribute("errorApellido");
+		sesion.removeAttribute("errorCedula");
+		sesion.removeAttribute("errorMailPersonal");
+		sesion.removeAttribute("errorMailInstitucional");
+		sesion.removeAttribute("errorTelefono");
+		sesion.removeAttribute("errorClave");
+		sesion.removeAttribute("errorFechaNacimiento");
+		sesion.removeAttribute("errorRol");
+		sesion.removeAttribute("errorArea");
+		sesion.removeAttribute("errorGeneracion");
+		sesion.removeAttribute("errorSemestre");
+		sesion.removeAttribute("errorDepartamento");
+		sesion.removeAttribute("errorGenero");
+		sesion.removeAttribute("errorLocalidad");
+		sesion.removeAttribute("errorItr");
+		sesion.removeAttribute("errorNombreItr");
+		sesion.removeAttribute("errorDepartamentoItr");
+	}
 }

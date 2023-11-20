@@ -27,7 +27,6 @@ public class SvLocalidades extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String departamento = request.getParameter("departamento");
-		System.out.println(departamento);
 		ArrayList<Localidad> localidades = Buscar.localidadPorDepartamento(departamento);
 
 		JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();

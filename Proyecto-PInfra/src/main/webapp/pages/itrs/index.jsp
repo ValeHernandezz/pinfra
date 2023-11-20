@@ -38,12 +38,10 @@
 
 				<div class="crearUnItr">
 					<%
-					Itr oItrEditarExiste = request.getSession().getAttribute("itrEditar") == null
-							? null
+					Itr oItrEditarExiste = request.getSession().getAttribute("itrEditar") == null ? null
 							: (Itr) request.getSession().getAttribute("itrEditar");
 
-					boolean mostrarForm = request.getSession().getAttribute("mostrarForm") == null
-							? false
+					boolean mostrarForm = request.getSession().getAttribute("mostrarForm") == null ? false
 							: (boolean) request.getSession().getAttribute("mostrarForm");
 
 					if (!mostrarForm && oItrEditarExiste == null) {
@@ -58,23 +56,34 @@
 					%>
 
 					<form action="/Proyecto-PInfra/SvCrearItr" method="POST">
-						<label> Nombre <input type="text" name="nombreItr" />
-						</label> <select name="departamento">
-							<option selected>Seleccione un departamento</option>
-							<%
-							for (Departamento oDepartamento : ServiceUbicacion.listarDepartamentos()) {
-							%>
-
-							<option value="<%=oDepartamento.getNombre()%>"><%=oDepartamento.getNombre()%></option>
-
+						<label> Nombre <input type="text" name="nombreItr" /> <%
+ if (request.getSession().getAttribute("errorNombreItr") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorNombreItr")%></span>
 							<%
 							}
 							%>
-						</select>
+						</label> <label> Departamento <select name="departamento">
+								<option selected>Seleccione un departamento</option>
+								<%
+								for (Departamento oDepartamento : ServiceUbicacion.listarDepartamentos()) {
+								%>
+
+								<option value="<%=oDepartamento.getNombre()%>"><%=oDepartamento.getNombre()%></option>
+
+								<%
+								}
+								%>
+						</select> <%
+ if (request.getSession().getAttribute("errorDepartamentoItr") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorDepartamentoItr")%></span>
+							<%
+							}
+							%>
+						</label>
 						<button class="btnCrear" type="submit">Crear</button>
 					</form>
 					<div class="cancelarForm">
-						<form name="eliminar" action="/Proyecto-PInfra/SvEliminarItr"
+						<form action="/Proyecto-PInfra/SvEliminarItr"
 							method="GET">
 							<button class="btnEliminar" type="submit">Cancelar</button>
 						</form>
@@ -86,8 +95,7 @@
 
 				<div class="crearUnItr">
 					<%
-					Itr oItrEditar = request.getSession().getAttribute("itrEditar") == null
-							? null
+					Itr oItrEditar = request.getSession().getAttribute("itrEditar") == null ? null
 							: (Itr) request.getSession().getAttribute("itrEditar");
 
 					if (oItrEditar != null) {
@@ -96,26 +104,36 @@
 					<form action="/Proyecto-PInfra/SvEditarItr" method="POST">
 
 						<label> Nombre <input type="text" name="nombreItrEditar"
-							value="<%=oItrEditar.getNombre()%>" />
-						</label> <select name="departamentoEditar">
-							<option>Seleccione un departamento</option>
-							<%
-							for (Departamento oDepartamento : ServiceUbicacion.listarDepartamentos()) {
-							%>
-
-							<option value="<%=oDepartamento.getNombre()%>"
-								<%=oDepartamento.getNombre()
-		.equals(oItrEditar.getDepartamento().getNombre()) ? "selected" : ""%>><%=oDepartamento.getNombre()%></option>
-
+							value="<%=oItrEditar.getNombre()%>" /> <%
+ if (request.getSession().getAttribute("errorNombreItr") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorNombreItr")%></span>
 							<%
 							}
 							%>
-						</select>
+						</label> <label> Departamento <select name="departamentoEditar">
+								<option>Seleccione un departamento</option>
+								<%
+								for (Departamento oDepartamento : ServiceUbicacion.listarDepartamentos()) {
+								%>
+
+								<option value="<%=oDepartamento.getNombre()%>"
+									<%=oDepartamento.getNombre().equals(oItrEditar.getDepartamento().getNombre()) ? "selected" : ""%>><%=oDepartamento.getNombre()%></option>
+
+								<%
+								}
+								%>
+						</select> <%
+ if (request.getSession().getAttribute("errorDepartamentoItr") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorDepartamentoItr")%></span>
+							<%
+							}
+							%>
+						</label>
 						<button class="btnCrear" type="submit">Editar</button>
 					</form>
 
 					<div class="cancelarForm">
-						<form name="eliminar" action="/Proyecto-PInfra/SvEliminarItr"
+						<form action="/Proyecto-PInfra/SvEliminarItr"
 							method="GET">
 							<button class="btnEliminar" type="submit">Cancelar</button>
 						</form>
