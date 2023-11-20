@@ -111,11 +111,11 @@ body {
 	width: 290px;
 	display: flex;
 	justify-content: end;
-	gap: 30px;
+	gap: 15px;
 	align-items: center;
 }
 
-.encabezado .btnSesion .btnCerrarSesion {
+.encabezado .btnSesion .btnPerfil {
 	all: initial;
 	display: flex;
 	justify-content: center;
@@ -130,8 +130,27 @@ body {
 	border-radius: 9999px;
 }
 
-.encabezado .btnSesion .btnCerrarSesion:hover {
+.encabezado .btnSesion .btnCerrarSesion {
+	all: initial;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 12px;
+	background-color: red;
+	width: 40px;
+	height: 40px;
+	color: #fff;
+	font-family: 'Geist-SemiBold';
+	font-weight: 500;
+	border-radius: 9999px;
+}
+
+.encabezado .btnSesion .btnPerfil:hover {
 	background-color: #0098D1;
+}
+
+.encabezado .btnSesion .btnCerrarSesion:hover {
+	background-color: darkred;
 }
 
 .encabezado .btnSesion a {
