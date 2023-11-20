@@ -108,4 +108,14 @@ public class ServiceUsuario {
 			return null;
 		}
 	}
+	
+	public static ArrayList<Usuario> listarUsuariosSinConfirmar(String filtro){
+		try {
+			var usuarioBean = getService();
+			return usuarioBean.listarUsuariosSinConfirmar(filtro);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
 }

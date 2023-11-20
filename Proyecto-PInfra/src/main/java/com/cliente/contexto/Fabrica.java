@@ -116,6 +116,8 @@ public class Fabrica {
 				return buscarUsuarioPorNombreApellido(filtro, campo);
 			}
 			String valor = diccionarioCampo.get(campo);
+			System.out.println("Valor: " + valor + "----------------");
+			System.out.println("Filtro: " + filtro + "----------------");
 			if (campo.equals("Rol")) {
 				filtro = String.valueOf(ServiceRol.listarRolesFiltro(filtro).get(0).getIdRol());
 			}
@@ -187,5 +189,13 @@ public class Fabrica {
 		sesion.removeAttribute("errorItr");
 		sesion.removeAttribute("errorNombreItr");
 		sesion.removeAttribute("errorDepartamentoItr");
+	}
+
+	public static String getCantidadSinConfirmar() {
+		if (ServiceUsuario.listarUsuariosSinConfirmar("N").size() == 0
+				|| ServiceUsuario.listarUsuariosSinConfirmar("N") == null) {
+			return "";
+		}
+		return "(" + String.valueOf(ServiceUsuario.listarUsuariosSinConfirmar("N").size()) + ")";
 	}
 }

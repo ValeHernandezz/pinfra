@@ -1,3 +1,4 @@
+<%@page import="com.cliente.contexto.Fabrica"%>
 <%@page import="com.servidor.entidades.Usuario"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
 <%
@@ -17,7 +18,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 
 		<ul class="links">
 			<li><a href="/Proyecto-PInfra/pages/gestion/index.jsp">Gestión de usuarios</a></li>
-			<li><a href="#">Confirmación de usuarios (2)</a></li>
+			<li><a href="/Proyecto-PInfra/pages/confirmacion/index.jsp">Confirmación de usuarios <%=Fabrica.getCantidadSinConfirmar()%></a></li>
 			<li><a href="/Proyecto-PInfra/pages/itrs/index.jsp">ITRs</a></li>
 		</ul>
 
