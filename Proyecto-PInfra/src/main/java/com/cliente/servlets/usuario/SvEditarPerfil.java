@@ -40,7 +40,7 @@ public class SvEditarPerfil extends HttpServlet {
 			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
 			return;
 		}
-		
+
 		request.setCharacterEncoding("UTF-8");
 
 		String nombres = request.getParameter("nombres");
@@ -72,7 +72,7 @@ public class SvEditarPerfil extends HttpServlet {
 		Itr itr = ServiceItr.listarItrsFiltro(itrTexto).get(0);
 		Localidad localidad = ServiceUbicacion.listarLocalidadesFiltro(localidadTexto).get(0);
 
-		Usuario oUsuarioNuevo = new Usuario(oUsuarioEditado.getClave(), oUsuarioEditado.getDocumento(),
+		Usuario oUsuarioNuevo = new Usuario(clave, oUsuarioEditado.getDocumento(),
 				Fabrica.getFechaDesdeString(fechaNacimiento), oUsuarioEditado.getMailInstitucional(), mailPersonal,
 				nombreUsuario, primerApellido, primerNombre, segundoApellido, segundoNombre, telefono, "S", "S",
 				departamento, genero, itr, localidad, oUsuarioEditado.getRol());
@@ -102,7 +102,7 @@ public class SvEditarPerfil extends HttpServlet {
 					Buscar.tutorFiltro(oUsuarioEditado.getDocumento().toString(), "Documento").get(0).getIdTutor(),
 					ServiceArea.listarAreasFiltro(areaTexto).get(0), oUsuarioNuevo));
 			request.getSession().removeAttribute("usuarioLogueado");
-			
+
 			var oUsuarioActualizado = Fabrica
 					.buscarUsuarioPorCampoYFiltro(oUsuarioEditado.getDocumento().toString(), "Documento").get(0);
 
@@ -121,7 +121,7 @@ public class SvEditarPerfil extends HttpServlet {
 											.get(0).getIdEstudiante(),
 									generacionTexto, new BigDecimal(semestreTexto), oUsuarioNuevo));
 			request.getSession().removeAttribute("usuarioLogueado");
-			
+
 			var oUsuarioActualizado = Fabrica
 					.buscarUsuarioPorCampoYFiltro(oUsuarioEditado.getDocumento().toString(), "Documento").get(0);
 

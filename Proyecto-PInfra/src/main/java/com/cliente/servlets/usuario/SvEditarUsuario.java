@@ -39,7 +39,7 @@ public class SvEditarUsuario extends HttpServlet {
 			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
 			return;
 		}
-		
+
 		String cedula = request.getParameter("cedula");
 		BigDecimal documento = new BigDecimal(cedula);
 
@@ -59,28 +59,18 @@ public class SvEditarUsuario extends HttpServlet {
 			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
 			return;
 		}
-		
+
 		request.setCharacterEncoding("UTF-8");
 
 		String nombres = request.getParameter("nombres");
 		String apellidos = request.getParameter("apellidos");
-		String cedula = request.getParameter("cedula");
 		String telefono = request.getParameter("telefono");
 		String mailPersonal = request.getParameter("mailPersonal");
-		String mailInstitucional = request.getParameter("mailInstitucional");
-		String clave = request.getParameter("clave");
 		String fechaNacimiento = request.getParameter("fechaNacimiento");
 		String generoTexto = request.getParameter("genero");
 		String itrTexto = request.getParameter("itr");
 		String departamentoTexto = request.getParameter("departamento");
 		String localidadTexto = request.getParameter("localidad");
-		String rolTexto = request.getParameter("rol");
-
-		if (nombres.isEmpty() || rolTexto.equals("Seleccione su rol")
-				|| departamentoTexto.equals("Selecciona un departamento")) {
-			response.sendRedirect("/Proyecto-PInfra/pages/edicion/index.jsp");
-			return;
-		}
 
 		String nombres2[] = nombres.split(" ");
 		String apellidos2[] = apellidos.split(" ");
@@ -99,16 +89,15 @@ public class SvEditarUsuario extends HttpServlet {
 		Genero genero = ServiceGenero.listarGenerosFiltro(generoTexto).get(0);
 		Itr itr = ServiceItr.listarItrsFiltro(itrTexto).get(0);
 		Localidad localidad = ServiceUbicacion.listarLocalidadesFiltro(localidadTexto).get(0);
-		Rol rol = ServiceRol.listarRolesFiltro(rolTexto).get(0);
 
 		Usuario oUsuarioNuevo = new Usuario(oUsuarioEditado.getClave(), oUsuarioEditado.getDocumento(),
 				Fabrica.getFechaDesdeString(fechaNacimiento), oUsuarioEditado.getMailInstitucional(), mailPersonal,
 				nombreUsuario, primerApellido, primerNombre, segundoApellido, segundoNombre, telefono, "S", "N",
-				departamento, genero, itr, localidad, rol);
+				departamento, genero, itr, localidad, oUsuarioEditado.getRol());
 
 		oUsuarioNuevo.setIdUsuario(oUsuarioEditado.getIdUsuario());
 
-		if (rolTexto.equals("Analista")) {
+		if (oUsuarioEditado.getRol().getDescripcion().equals("Analista")) {
 			Analista oAnalistaAntiguo = Buscar.analistaFiltro(oUsuarioEditado.getDocumento().toString(), "Documento")
 					.get(0);
 
@@ -118,7 +107,7 @@ public class SvEditarUsuario extends HttpServlet {
 			return;
 		}
 
-		if (rolTexto.equals("Tutor") || rolTexto.equals("Encargado")) {
+		if (oUsuarioEditado.getRol().getDescripcion().equals("Tutor") || oUsuarioEditado.getRol().getDescripcion().equals("Encargado")) {
 			String areaTexto = request.getParameter("area");
 
 			boolean oTutorEditado = Actualizar.usuario(oUsuarioNuevo, new Tutor(
@@ -129,7 +118,7 @@ public class SvEditarUsuario extends HttpServlet {
 			return;
 		}
 
-		if (rolTexto.equals("Estudiante")) {
+		if (oUsuarioEditado.getRol().getDescripcion().equals("Estudiante")) {
 			String semestreTexto = request.getParameter("semestre");
 			String generacionTexto = request.getParameter("generacion");
 			boolean oEstudianteEditado = Actualizar

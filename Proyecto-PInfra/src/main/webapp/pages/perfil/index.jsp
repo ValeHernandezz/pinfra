@@ -65,10 +65,13 @@ ServiceJWT.comprobarSesion(request, response, "Perfil");
 								name="mailInstitucional"
 								placeholder="Ingrese su mail institucional..."
 								value="<%=usuarioLogueado.getMailInstitucional()%>" disabled>
-							</label> <label>Fecha de Nacimiento <input type="date"
-								name="fechaNacimiento"
-								value="<%=usuarioLogueado.getFechaNacimiento()%>">
-								<%System.out.println(usuarioLogueado.getFechaNacimiento()); %>
+							</label> <label>Contraseña <input type="password" name="clave"
+								placeholder="Ingrese su contraseña..."
+								value="<%=usuarioLogueado.getClave()%>" /></label> <label>Fecha
+								de Nacimiento <input type="date" name="fechaNacimiento"
+								value="<%=usuarioLogueado.getFechaNacimiento()%>"> <%
+ System.out.println(usuarioLogueado.getFechaNacimiento());
+ %>
 							</label> <label>Género <select name="genero">
 									<option selected>Selecciona un género</option>
 									<%
@@ -227,6 +230,6 @@ document.addEventListener("DOMContentLoaded", function() {
     mostrarCampos();
     cargarLocalidades();
     cargarLocalidadSeleccionada('<%=usuarioLogueado.getLocalidad().getNombre()%>');
-});
+	});
 </script>
 </html>
