@@ -1,3 +1,4 @@
+<%@page import="com.cliente.services.ServiceJWT"%>
 <%@page import="com.servidor.entidades.Analista"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.cliente.services.ServiceAnalista"%>
@@ -10,6 +11,7 @@
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
 Usuario usuarioLogueado = (Usuario) sessionActual
 		.getAttribute("usuarioLogueado");
+ServiceJWT.comprobarSesion(request, response, "GestionAnalistas");
 %>
 <!DOCTYPE html>
 <html>

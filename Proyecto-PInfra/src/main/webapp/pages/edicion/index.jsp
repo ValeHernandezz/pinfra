@@ -1,3 +1,4 @@
+<%@page import="com.cliente.services.ServiceJWT"%>
 <%@page import="com.cliente.services.ServiceGenero"%>
 <%@page import="com.servidor.entidades.Genero"%>
 <%@page import="org.hibernate.internal.build.AllowSysOut"%>
@@ -18,6 +19,11 @@
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
 Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado");
 Usuario oUsuarioAEditar = (Usuario) sessionActual.getAttribute("oUsuarioAEditar");
+if(oUsuarioAEditar == null){
+	response.sendRedirect("/Proyecto-PInfra/pages/gestion/index.jsp");
+	return;
+}
+ServiceJWT.comprobarSesion(request, response, "Edicion");
 %>
 <!DOCTYPE html>
 <html>

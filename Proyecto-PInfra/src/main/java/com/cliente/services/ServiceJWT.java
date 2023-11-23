@@ -1,5 +1,6 @@
 package com.cliente.services;
 
+import java.io.IOException;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,7 @@ public class ServiceJWT {
 			if (expirationDate != null && now.after(expirationDate)) {
 				return false;
 			}
-			
+
 			String nombreUsuario = claims.getSubject();
 			boolean existeUsuario = ServiceUsuario.comprobarNombreUsuario(nombreUsuario);
 			if (existeUsuario) {
@@ -40,6 +41,34 @@ public class ServiceJWT {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	public static void comprobarSesion(HttpServletRequest request, HttpServletResponse response, String pagina) throws IOException {
+		boolean tienePermiso = false;
+
+		if (request.getSession().getAttribute("token") == null) {
+			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
+			return;
+		}
+
+		tienePermiso = ServiceJWT.validarToken(request, response);
+
+		if (!tienePermiso) {
+			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
+			return;
+		}
+
+		String rol = getRol(request);
+		if ((rol.equals("Estudiante") || rol.equals("Tutor") || rol.equals("Encargado")) && !pagina.equals("Perfil")) {
+			response.sendRedirect("/Proyecto-PInfra/index.jsp");
+			return;
+		}
+	}
+
+	public static String getRol(HttpServletRequest request) {
+		String token = (String) request.getSession().getAttribute("token");
+		Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+		return (String) claims.get("rol");
 	}
 
 }

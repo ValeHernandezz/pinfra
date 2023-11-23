@@ -1,3 +1,4 @@
+<%@page import="com.cliente.services.ServiceJWT"%>
 <%@page import="com.servidor.entidades.Departamento"%>
 <%@page import="com.cliente.services.ServiceUbicacion"%>
 <%@page import="com.cliente.services.ServiceItr"%>
@@ -5,6 +6,11 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%
+ServiceJWT.comprobarSesion(request, response, "ITRS");
+%>	
+
 <!DOCTYPE html>
 <html>
 

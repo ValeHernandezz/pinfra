@@ -1,3 +1,4 @@
+<%@page import="com.cliente.services.ServiceJWT"%>
 <%@page import="com.cliente.services.ServiceUsuario"%>
 <%@page import="com.cliente.services.ServiceUbicacion"%>
 <%@page import="com.servidor.entidades.Usuario"%>
@@ -9,6 +10,7 @@
 	pageEncoding="UTF-8"%>
 <%
 Fabrica.limpiarMensajesDeError(request.getSession());
+ServiceJWT.comprobarSesion(request, response, "Confirmacion");
 %>
 <!DOCTYPE html>
 <html>

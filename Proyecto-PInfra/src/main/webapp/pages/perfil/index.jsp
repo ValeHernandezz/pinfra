@@ -1,3 +1,4 @@
+<%@page import="com.cliente.services.ServiceJWT"%>
 <%@page import="com.cliente.services.ServiceArea"%>
 <%@page import="com.servidor.entidades.Area"%>
 <%@page import="com.cliente.contexto.helpers.Buscar"%>
@@ -14,6 +15,7 @@
 	pageEncoding="UTF-8"%>
 <%
 Usuario usuarioLogueado = (Usuario) request.getSession().getAttribute("usuarioLogueado");
+ServiceJWT.comprobarSesion(request, response, "Perfil");
 %>
 <!DOCTYPE html>
 <html>

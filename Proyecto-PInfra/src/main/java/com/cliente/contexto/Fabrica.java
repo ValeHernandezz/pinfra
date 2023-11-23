@@ -25,7 +25,7 @@ public class Fabrica {
 	// Atributos de apoyo para uso global de la app
 	private static Usuario oUsuarioLogueado = new Usuario();
 	private static Map<String, String> diccionarioCampo = new HashMap<>();
-
+	
 	private static ArrayList<Analista> listaDeAnalistas = new ArrayList<Analista>();
 	private static ArrayList<Estudiante> listaDeEstudiantes = new ArrayList<Estudiante>();
 	private static ArrayList<Tutor> listaDeTutores = new ArrayList<Tutor>();

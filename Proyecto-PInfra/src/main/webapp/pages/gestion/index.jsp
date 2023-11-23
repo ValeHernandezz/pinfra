@@ -1,3 +1,4 @@
+<%@page import="com.cliente.services.ServiceJWT"%>
 <%@page import="com.cliente.services.ServiceUsuario"%>
 <%@page import="com.servidor.entidades.Usuario"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
@@ -7,6 +8,8 @@
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
 Usuario usuarioLogueado = (Usuario) sessionActual
 		.getAttribute("usuarioLogueado");
+
+ServiceJWT.comprobarSesion(request, response, "Gestion");
 %>
 <!DOCTYPE html>
 <html>
@@ -24,6 +27,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual
 </head>
 
 <body>
+
 	<div class="app">
 
 		<!-- Encabezado de la página -->

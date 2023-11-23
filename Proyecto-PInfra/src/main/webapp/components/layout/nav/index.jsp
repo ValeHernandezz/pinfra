@@ -12,7 +12,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado"
 	</a>
 	<nav class="menu">
 		<%
-		if (usuarioLogueado != null) {
+		if (usuarioLogueado != null && usuarioLogueado.getRol().getDescripcion().equals("Analista")) {
 		%>
 
 		<ul class="links">

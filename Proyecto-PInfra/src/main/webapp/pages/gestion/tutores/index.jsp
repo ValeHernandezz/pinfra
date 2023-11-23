@@ -1,3 +1,4 @@
+<%@page import="com.cliente.services.ServiceJWT"%>
 <%@page import="com.cliente.services.ServiceTutor"%>
 <%@page import="com.servidor.entidades.Tutor"%>
 <%@page import="java.util.ArrayList"%>
@@ -9,6 +10,7 @@
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
 Usuario usuarioLogueado = (Usuario) sessionActual
 		.getAttribute("usuarioLogueado");
+ServiceJWT.comprobarSesion(request, response, "GestionTutores");
 %>
 <!DOCTYPE html>
 <html>
