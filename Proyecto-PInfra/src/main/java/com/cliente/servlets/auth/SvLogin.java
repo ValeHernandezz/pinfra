@@ -1,6 +1,8 @@
 package com.cliente.servlets.auth;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.cliente.services.ServiceJWT;
 import com.cliente.services.ServiceUsuario;
 import com.servidor.entidades.Usuario;
 import com.servidor.utils.Respuesta;
@@ -61,9 +64,15 @@ public class SvLogin extends HttpServlet {
 
 		if (oRespuesta.getStatus().equals("success")) {
 			Usuario oUsuario = (Usuario) oRespuesta.getData();
-
+			Date fechaInicio = new Date();
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(fechaInicio);
+			calendar.add(Calendar.HOUR_OF_DAY, 24);
+			Date fechaFin = calendar.getTime();
+			String token = ServiceJWT.generarToken(oUsuario, fechaFin);
+			
 			HttpSession session = request.getSession(true);
-
+			session.setAttribute("token", token);
 			session.setAttribute("usuarioLogueado", oUsuario);
 		}
 

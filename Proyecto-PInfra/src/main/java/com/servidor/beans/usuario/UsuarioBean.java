@@ -163,11 +163,29 @@ public class UsuarioBean implements UsuarioBeanRemote {
 	public ArrayList<Usuario> listarUsuariosSinConfirmar(String filtro) throws ServiciosException {
 		try {
 			TypedQuery<Usuario> query = entityManager
-					.createQuery("SELECT u FROM Usuario u WHERE u.confirmado = :filtro AND u.activo = :activo", Usuario.class)
+					.createQuery("SELECT u FROM Usuario u WHERE u.confirmado = :filtro AND u.activo = :activo",
+							Usuario.class)
 					.setParameter("filtro", filtro).setParameter("activo", "S");
 			return (ArrayList<Usuario>) query.getResultList();
 		} catch (Exception e) {
 			return null;
+		}
+	}
+
+	@Override
+	public boolean comprobarNombreUsuario(String nombreUsuario) throws ServiciosException {
+		try {
+			TypedQuery<Usuario> query = entityManager
+					.createQuery("SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario", Usuario.class)
+					.setParameter("nombreUsuario", nombreUsuario);
+
+			if (query.getResultList().size() > 0) {
+				return true;
+			}
+			return false;
+
+		} catch (Exception e) {
+			return false;
 		}
 	}
 

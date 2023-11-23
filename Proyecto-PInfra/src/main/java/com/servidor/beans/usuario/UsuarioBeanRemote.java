@@ -31,4 +31,6 @@ public interface UsuarioBeanRemote {
 	boolean tienePermiso(Long idRol, Long idFuncionalidad) throws ServiciosException;
 
 	ArrayList<Usuario> listarUsuariosSinConfirmar(String filtro) throws ServiciosException;
+	
+	boolean comprobarNombreUsuario (String nombreUsuario) throws ServiciosException;
 }

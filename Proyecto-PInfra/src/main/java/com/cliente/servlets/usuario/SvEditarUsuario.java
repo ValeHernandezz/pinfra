@@ -15,6 +15,7 @@ import com.cliente.contexto.helpers.Buscar;
 import com.cliente.services.ServiceArea;
 import com.cliente.services.ServiceGenero;
 import com.cliente.services.ServiceItr;
+import com.cliente.services.ServiceJWT;
 import com.cliente.services.ServiceRol;
 import com.cliente.services.ServiceUbicacion;
 import com.servidor.entidades.Analista;
@@ -34,6 +35,11 @@ public class SvEditarUsuario extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		if (!ServiceJWT.validarToken(request, response)) {
+			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
+			return;
+		}
+		
 		String cedula = request.getParameter("cedula");
 		BigDecimal documento = new BigDecimal(cedula);
 
@@ -49,6 +55,11 @@ public class SvEditarUsuario extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		if (!ServiceJWT.validarToken(request, response)) {
+			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
+			return;
+		}
+		
 		request.setCharacterEncoding("UTF-8");
 
 		String nombres = request.getParameter("nombres");

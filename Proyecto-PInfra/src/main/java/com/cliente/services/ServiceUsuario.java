@@ -108,14 +108,23 @@ public class ServiceUsuario {
 			return null;
 		}
 	}
-	
-	public static ArrayList<Usuario> listarUsuariosSinConfirmar(String filtro){
+
+	public static ArrayList<Usuario> listarUsuariosSinConfirmar(String filtro) {
 		try {
 			var usuarioBean = getService();
 			return usuarioBean.listarUsuariosSinConfirmar(filtro);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			return null;
 		}
 	}
+
+	public static boolean comprobarNombreUsuario(String nombreUsuario) {
+		try {
+			var usuarioBean = getService();
+			return usuarioBean.comprobarNombreUsuario(nombreUsuario);
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 }

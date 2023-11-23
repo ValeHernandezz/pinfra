@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cliente.contexto.helpers.Borrar;
+import com.cliente.services.ServiceJWT;
 
 @WebServlet(name = "ServletEliminarItr", urlPatterns = "/SvEliminarItr")
 public class SvEliminarItr extends HttpServlet {
@@ -23,7 +24,12 @@ public class SvEliminarItr extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		
+		if (!ServiceJWT.validarToken(request, response)) {
+			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
+			return;
+		}
+		
 		request.setCharacterEncoding("UTF-8");
 
 		Long idItr = Long.parseLong(request.getParameter("idItr"));

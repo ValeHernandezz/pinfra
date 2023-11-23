@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cliente.contexto.helpers.Borrar;
+import com.cliente.services.ServiceJWT;
 
 @WebServlet(name = "ServletEliminarUsuario", urlPatterns = "/SvEliminarUsuario")
 public class SvEliminarUsuario extends HttpServlet {
@@ -20,6 +21,11 @@ public class SvEliminarUsuario extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		if (!ServiceJWT.validarToken(request, response)) {
+			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
+			return;
+		}
+		
 		request.setCharacterEncoding("UTF-8");
 
 		Long idUsuario = Long.parseLong(request.getParameter("idUsuario"));

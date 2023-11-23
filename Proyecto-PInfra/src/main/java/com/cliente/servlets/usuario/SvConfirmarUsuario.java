@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cliente.contexto.Fabrica;
+import com.cliente.services.ServiceJWT;
 import com.cliente.services.ServiceUsuario;
 import com.servidor.entidades.Usuario;
 
@@ -18,6 +19,11 @@ public class SvConfirmarUsuario extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		if (!ServiceJWT.validarToken(request, response)) {
+			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
+			return;
+		}
+		
 		String documento = request.getParameter("cedula");
 
 		Usuario oUsuarioAConfirmar = Fabrica.buscarUsuarioPorCampoYFiltro(documento, "Documento").get(0);
@@ -32,6 +38,11 @@ public class SvConfirmarUsuario extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		if (!ServiceJWT.validarToken(request, response)) {
+			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
+			return;
+		}
+		
 		String documento = request.getParameter("cedula");
 
 		Usuario oUsuarioAConfirmar = Fabrica.buscarUsuarioPorCampoYFiltro(documento, "Documento").get(0);

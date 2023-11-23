@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.cliente.contexto.Fabrica;
 import com.cliente.contexto.validaciones.ValidacionItr;
 import com.cliente.services.ServiceItr;
+import com.cliente.services.ServiceJWT;
 import com.cliente.services.ServiceUbicacion;
 import com.servidor.entidades.Departamento;
 import com.servidor.entidades.Itr;
@@ -29,7 +30,10 @@ public class SvCrearItr extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		if (!ServiceJWT.validarToken(request, response)) {
+			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
+			return;
+		}
 		request.setCharacterEncoding("UTF-8");
 		Fabrica.limpiarMensajesDeError(request.getSession());
 		String nombreItr = request.getParameter("nombreItr");
