@@ -33,7 +33,7 @@ public class SvEliminarUsuario extends HttpServlet {
 			idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 
 			Fabrica.generarModal(request, "/Proyecto-PInfra/SvEliminarUsuario",
-					"¿Está seguro de que desea eliminar el usuario?", "Se dara de baja logica el usuario.", "POST");
+					"¿Está seguro de que desea eliminar el usuario?", "Se dará de baja lógica el usuario.", "POST");
 			String urlAnterior = (String) request.getHeader("referer");
 			response.sendRedirect(urlAnterior);
 			return;

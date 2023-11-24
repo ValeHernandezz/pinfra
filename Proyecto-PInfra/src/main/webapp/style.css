@@ -368,3 +368,7 @@ body {
 	padding: 2px 5px;
 	border-radius: 100%;
 }
+
+.btnReactivar{
+	background-color: lightgreen;
+}

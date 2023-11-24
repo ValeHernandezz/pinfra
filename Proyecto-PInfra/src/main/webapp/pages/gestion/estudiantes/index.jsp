@@ -11,7 +11,8 @@
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
 Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado");
 ServiceJWT.comprobarSesion(request, response, "GestionEstudiantes");
-String filtro = request.getSession().getAttribute("filtroActivo") == null || request.getSession().getAttribute("filtroActivo").equals("S") ? "S" : "N";
+String filtro = request.getSession().getAttribute("filtroActivo") == null
+		|| request.getSession().getAttribute("filtroActivo").equals("S") ? "S" : "N";
 %>
 <!DOCTYPE html>
 <html>
@@ -42,7 +43,7 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null || req
 			<!-- Modificar a gusto -->
 			<section class="gestionContenido">
 				<h2>Lista de Estudiantes</h2>
-				
+
 				<jsp:include page="/components/filtro/index.jsp" />
 
 				<div class="tableContenido">
@@ -84,6 +85,9 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null || req
 								<td><%=oEstudiante.getUsuario().getTelefono()%></td>
 								<td><%=oEstudiante.getUsuario().getFechaNacimiento()%></td>
 								<td>
+									<%
+									if (filtro.equals("S")) {
+									%>
 									<div>
 										<form name="editar" action="/Proyecto-PInfra/SvEditarUsuario"
 											method="GET">
@@ -122,7 +126,29 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null || req
 											<input type="hidden" name="idUsuario"
 												value="<%=oEstudiante.getUsuario().getIdUsuario()%>">
 										</form>
-									</div>
+									</div> <%
+ } else {
+ %>
+									<div>
+										<form action="/Proyecto-PInfra/SvReactivarUsuario"
+											method="POST">
+											<button type="submit" class="btnReactivar">
+												<svg xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-user-check" width="20"
+													height="20" viewBox="0 0 24 24" stroke-width="2"
+													stroke="currentColor" fill="none" stroke-linecap="round"
+													stroke-linejoin="round">
+													<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+													<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+													<path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+													<path d="M15 19l2 2l4 -4" /></svg>
+											</button>
+											<input type="hidden" name="documento"
+												value="<%=oEstudiante.getUsuario().getDocumento()%>">
+										</form>
+									</div> <%
+ }
+ %>
 								</td>
 							</tr>
 							<%

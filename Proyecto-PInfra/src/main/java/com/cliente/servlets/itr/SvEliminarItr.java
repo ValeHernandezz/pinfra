@@ -36,7 +36,7 @@ public class SvEliminarItr extends HttpServlet {
 		if (request.getSession().getAttribute("mostrarModal") == null) {
 			idItr = Long.parseLong(request.getParameter("idItr"));
 			Fabrica.generarModal(request, "/Proyecto-PInfra/SvEliminarItr", "¿Está seguro que desea eliminar el ITR?",
-					"El ITR se dara de baja logica.", "POST");
+					"El ITR se dará de baja lógica.", "POST");
 			response.sendRedirect("/Proyecto-PInfra/pages/itrs/index.jsp");
 			return;
 		}
