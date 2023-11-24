@@ -37,6 +37,9 @@ public class SvEditarPerfil extends HttpServlet {
 	private String itrTexto = null;
 	private String departamentoTexto = null;
 	private String localidadTexto = null;
+	private String semestreTexto = null;
+	private String generacionTexto = null;
+	private String areaTexto = null;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -63,6 +66,9 @@ public class SvEditarPerfil extends HttpServlet {
 			itrTexto = request.getParameter("itr");
 			departamentoTexto = request.getParameter("departamento");
 			localidadTexto = request.getParameter("localidad");
+			semestreTexto = request.getParameter("semestre");
+			generacionTexto = request.getParameter("generacion");
+			areaTexto = request.getParameter("area");
 
 			Fabrica.generarModal(request, "/Proyecto-PInfra/SvEditarPerfil",
 					"¿Está seguro de que desea modificar su perfil?", "Sus datos serán modificados", "POST");
@@ -113,8 +119,6 @@ public class SvEditarPerfil extends HttpServlet {
 
 		if (oUsuarioEditado.getRol().getDescripcion().equals("Tutor")
 				|| oUsuarioEditado.getRol().getDescripcion().equals("Encargado")) {
-			String areaTexto = request.getParameter("area");
-
 			boolean oTutorEditado = Actualizar.usuario(oUsuarioNuevo, new Tutor(
 					Buscar.tutorFiltro(oUsuarioEditado.getDocumento().toString(), "Documento").get(0).getIdTutor(),
 					ServiceArea.listarAreasFiltro(areaTexto).get(0), oUsuarioNuevo));
@@ -130,8 +134,6 @@ public class SvEditarPerfil extends HttpServlet {
 		}
 
 		if (oUsuarioEditado.getRol().getDescripcion().equals("Estudiante")) {
-			String semestreTexto = request.getParameter("semestre");
-			String generacionTexto = request.getParameter("generacion");
 			boolean oEstudianteEditado = Actualizar
 					.usuario(oUsuarioNuevo,
 							new Estudiante(
@@ -162,6 +164,9 @@ public class SvEditarPerfil extends HttpServlet {
 		itrTexto = null;
 		departamentoTexto = null;
 		localidadTexto = null;
+		semestreTexto = null;
+		generacionTexto = null;
+		areaTexto = null;
 	}
 
 }
