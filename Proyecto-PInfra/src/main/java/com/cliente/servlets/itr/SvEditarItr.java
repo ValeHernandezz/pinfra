@@ -51,7 +51,7 @@ public class SvEditarItr extends HttpServlet {
 			departamentoTexto = request.getParameter("departamentoEditar");
 
 			Fabrica.generarModal(request, "/Proyecto-PInfra/SvEditarItr",
-					"¿Está seguro de desea editar los datos del ITR?", "Modificara los datos anteriores del ITR.",
+					"¿Está seguro que desea editar los datos del ITR?", "Modificará los datos anteriores del ITR.",
 					"POST");
 			response.sendRedirect("/Proyecto-PInfra/pages/itrs/index.jsp");
 			return;

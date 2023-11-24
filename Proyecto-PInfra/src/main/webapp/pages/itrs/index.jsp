@@ -10,7 +10,8 @@
 
 <%
 ServiceJWT.comprobarSesion(request, response, "ITRS");
-String filtro = request.getSession().getAttribute("filtroActivo") == null || request.getSession().getAttribute("filtroActivo").equals("S") ? "S" : "N";
+String filtro = request.getSession().getAttribute("filtroActivo") == null
+		|| request.getSession().getAttribute("filtroActivo").equals("S") ? "S" : "N";
 %>
 
 <!DOCTYPE html>
@@ -32,7 +33,7 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null || req
 <body>
 	<!-- Modal de confirmación de acción -->
 	<jsp:include page="/components/modal/index.jsp" />
-	
+
 	<div class="app">
 		<!-- Encabezado de la página -->
 		<jsp:include page="/components/layout/nav/index.jsp" />
@@ -45,9 +46,9 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null || req
 				<div>
 					<h2>Gestión de ITRs</h2>
 				</div>
-				
+
 				<jsp:include page="/components/filtro/index.jsp" />
-				
+
 				<div class="crearUnItr">
 					<%
 					Itr oItrEditarExiste = request.getSession().getAttribute("itrEditar") == null ? null
@@ -175,6 +176,9 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null || req
 								<td><%=oItr.getNombre()%></td>
 								<td><%=oItr.getDepartamento().getNombre()%></td>
 								<td class="btnAcciones">
+									<%
+									if (filtro.equals("S")) {
+									%>
 									<div>
 										<form name="editar" action="/Proyecto-PInfra/SvEditarItr"
 											method="GET">
@@ -213,7 +217,29 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null || req
 											<input type="hidden" name="idItr"
 												value="<%=oItr.getIdItr()%>">
 										</form>
-									</div>
+									</div> <%
+ } else {
+ %>
+									<div>
+										<form name="reactivar"
+											action="/Proyecto-PInfra/SvReactivarItr" method="POST">
+											<button class="btnReactivar" type="submit">
+												<svg xmlns="http://www.w3.org/2000/svg"
+													class="icon icon-tabler icon-tabler-user-check" width="20"
+													height="20" viewBox="0 0 24 24" stroke-width="2"
+													stroke="currentColor" fill="none" stroke-linecap="round"
+													stroke-linejoin="round">
+													<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+													<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+													<path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+													<path d="M15 19l2 2l4 -4" /></svg>
+											</button>
+											<input type="hidden" name="idItr"
+												value="<%=oItr.getIdItr()%>">
+										</form>
+									</div> <%
+ }
+ %>
 								</td>
 							</tr>
 							<%
