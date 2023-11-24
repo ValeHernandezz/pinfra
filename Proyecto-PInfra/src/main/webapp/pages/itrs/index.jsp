@@ -1,3 +1,4 @@
+<%@page import="com.cliente.contexto.helpers.Buscar"%>
 <%@page import="com.cliente.services.ServiceJWT"%>
 <%@page import="com.servidor.entidades.Departamento"%>
 <%@page import="com.cliente.services.ServiceUbicacion"%>
@@ -9,6 +10,7 @@
 
 <%
 ServiceJWT.comprobarSesion(request, response, "ITRS");
+String filtro = request.getSession().getAttribute("filtroActivo") == null || request.getSession().getAttribute("filtroActivo").equals("S") ? "S" : "N";
 %>
 
 <!DOCTYPE html>
@@ -43,7 +45,9 @@ ServiceJWT.comprobarSesion(request, response, "ITRS");
 				<div>
 					<h2>Gestión de ITRs</h2>
 				</div>
-
+				
+				<jsp:include page="/components/filtro/index.jsp" />
+				
 				<div class="crearUnItr">
 					<%
 					Itr oItrEditarExiste = request.getSession().getAttribute("itrEditar") == null ? null
@@ -160,7 +164,7 @@ ServiceJWT.comprobarSesion(request, response, "ITRS");
 						</thead>
 						<tbody>
 							<%
-							ArrayList<Itr> listaDeItrs = ServiceItr.listarItrs();
+							ArrayList<Itr> listaDeItrs = Buscar.itrsActivos(filtro);
 
 							if (listaDeItrs == null) {
 								return;
