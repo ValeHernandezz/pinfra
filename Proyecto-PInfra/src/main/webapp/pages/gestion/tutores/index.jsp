@@ -1,3 +1,4 @@
+<%@page import="com.cliente.contexto.helpers.Buscar"%>
 <%@page import="com.cliente.services.ServiceJWT"%>
 <%@page import="com.cliente.services.ServiceTutor"%>
 <%@page import="com.servidor.entidades.Tutor"%>
@@ -10,6 +11,7 @@
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
 Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado");
 ServiceJWT.comprobarSesion(request, response, "GestionTutores");
+String filtro = request.getSession().getAttribute("filtroActivo") == null || request.getSession().getAttribute("filtroActivo").equals("S") ? "S" : "N";
 %>
 <!DOCTYPE html>
 <html>
@@ -40,7 +42,9 @@ ServiceJWT.comprobarSesion(request, response, "GestionTutores");
 			<!-- Modificar a gusto -->
 			<section class="gestionContenido">
 				<h2>Lista de Tutores</h2>
-
+				
+				<jsp:include page="/components/filtro/index.jsp" />
+				
 				<div class="tableContenido">
 					<table>
 						<thead>
@@ -62,7 +66,7 @@ ServiceJWT.comprobarSesion(request, response, "GestionTutores");
 						</thead>
 						<tbody>
 							<%
-							ArrayList<Tutor> listaDeTutores = ServiceTutor.listarTutores();
+							ArrayList<Tutor> listaDeTutores = Buscar.listarTutoresActivos(filtro);
 							if (listaDeTutores == null) {
 								return;
 							}

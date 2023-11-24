@@ -1,3 +1,4 @@
+<%@page import="com.cliente.contexto.helpers.Buscar"%>
 <%@page import="com.cliente.services.ServiceJWT"%>
 <%@page import="com.cliente.services.ServiceEstudiante"%>
 <%@page import="com.servidor.entidades.Estudiante"%>
@@ -10,6 +11,7 @@
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
 Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado");
 ServiceJWT.comprobarSesion(request, response, "GestionEstudiantes");
+String filtro = request.getSession().getAttribute("filtroActivo") == null || request.getSession().getAttribute("filtroActivo").equals("S") ? "S" : "N";
 %>
 <!DOCTYPE html>
 <html>
@@ -40,6 +42,8 @@ ServiceJWT.comprobarSesion(request, response, "GestionEstudiantes");
 			<!-- Modificar a gusto -->
 			<section class="gestionContenido">
 				<h2>Lista de Estudiantes</h2>
+				
+				<jsp:include page="/components/filtro/index.jsp" />
 
 				<div class="tableContenido">
 					<table>
@@ -61,7 +65,7 @@ ServiceJWT.comprobarSesion(request, response, "GestionEstudiantes");
 						</thead>
 						<tbody>
 							<%
-							ArrayList<Estudiante> listaDeEstudiantes = ServiceEstudiante.listarEstudiantes();
+							ArrayList<Estudiante> listaDeEstudiantes = Buscar.estudiantesActivos(filtro);
 							if (listaDeEstudiantes == null) {
 								return;
 							}

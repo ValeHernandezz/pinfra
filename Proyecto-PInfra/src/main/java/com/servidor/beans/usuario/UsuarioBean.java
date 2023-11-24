@@ -103,21 +103,43 @@ public class UsuarioBean implements UsuarioBeanRemote {
 		}
 	}
 
-	@Override
+//	@Override
+//	public ArrayList<Usuario> listarUsuariosFiltroPersonalizado(String filtro, String campo) throws ServiciosException {
+//		try {
+//			TypedQuery<Usuario> query = entityManager
+//					.createQuery("SELECT u FROM Usuario u WHERE " + campo
+//							+ (campo.equals("u.rol.idRol") ? "=" : "LIKE ") + " :filtro", Usuario.class)
+//					.setParameter("filtro",
+//							(campo.equals("u.rol.idRol") ? Long.parseLong(filtro) : ("%" + filtro + "%")));
+//			System.out.println(query.getResultList().size());
+//			return (ArrayList<Usuario>) query.getResultList();
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//			return null;
+//		}
+//	}
+	
 	public ArrayList<Usuario> listarUsuariosFiltroPersonalizado(String filtro, String campo) throws ServiciosException {
-		try {
-			TypedQuery<Usuario> query = entityManager
-					.createQuery("SELECT u FROM Usuario u WHERE " + campo
-							+ (campo.equals("u.rol.idRol") ? "=" : "LIKE ") + " :filtro", Usuario.class)
-					.setParameter("filtro",
-							(campo.equals("u.rol.idRol") ? Long.parseLong(filtro) : ("%" + filtro + "%")));
-			System.out.println(query.getResultList().size());
-			return (ArrayList<Usuario>) query.getResultList();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return null;
-		}
+	    try {
+	        String queryString = "SELECT u FROM Usuario u WHERE ";
+	        
+	        if (campo.equals("u.rol.idRol")) {
+	            queryString += "u.rol.idRol = :filtro";
+	        } else {
+	            queryString += campo + " LIKE :filtro";
+	        }
+	        
+	        TypedQuery<Usuario> query = entityManager.createQuery(queryString, Usuario.class)
+	            .setParameter("filtro", campo.equals("u.rol.idRol") ? Long.parseLong(filtro) : ("%" + filtro + "%"));
+
+	        System.out.println(query.getResultList().size());
+	        return new ArrayList<>(query.getResultList());
+	    } catch (Exception e) {
+	        System.out.println(e.getMessage());
+	        return null;
+	    }
 	}
+
 
 	@Override
 	public ArrayList<Usuario> listarUsuariosFiltroRol(String filtro) throws ServiciosException {

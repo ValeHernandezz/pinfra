@@ -91,7 +91,8 @@ ServiceJWT.comprobarSesion(request, response, "Perfil");
 									}
 									%>
 							</select>
-							</label> <label>ITR <select name="itr">
+							</label> <label>ITR 
+							<select name="itr">
 									<option selected>Selecciona un ITR</option>
 									<%
 									for (Itr oItr : ServiceItr.listarItrs()) {

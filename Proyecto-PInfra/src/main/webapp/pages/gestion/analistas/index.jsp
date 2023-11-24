@@ -1,3 +1,4 @@
+<%@page import="com.cliente.contexto.helpers.Buscar"%>
 <%@page import="com.cliente.services.ServiceJWT"%>
 <%@page import="com.servidor.entidades.Analista"%>
 <%@page import="java.util.ArrayList"%>
@@ -11,6 +12,7 @@
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
 Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado");
 ServiceJWT.comprobarSesion(request, response, "GestionAnalistas");
+String filtro = request.getSession().getAttribute("filtroActivo") == null || request.getSession().getAttribute("filtroActivo").equals("S") ? "S" : "N";
 %>
 <!DOCTYPE html>
 <html>
@@ -41,6 +43,8 @@ ServiceJWT.comprobarSesion(request, response, "GestionAnalistas");
 			<!-- Modificar a gusto -->
 			<section class="gestionContenido">
 				<h2>Lista de Analistas</h2>
+				
+				<jsp:include page="/components/filtro/index.jsp" />
 
 				<div class="tableContenido">
 					<table>
@@ -62,7 +66,7 @@ ServiceJWT.comprobarSesion(request, response, "GestionAnalistas");
 						</thead>
 						<tbody>
 							<%
-							ArrayList<Analista> listaDeAnalistas = ServiceAnalista.listarAnalistas();
+							ArrayList<Analista> listaDeAnalistas = Buscar.analistasActivos(filtro);
 
 							if (listaDeAnalistas == null) {
 								return;

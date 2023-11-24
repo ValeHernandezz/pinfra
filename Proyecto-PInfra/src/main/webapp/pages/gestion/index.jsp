@@ -42,8 +42,7 @@ ServiceJWT.comprobarSesion(request, response, "Gestion");
 						<h2 class="tituloGestion">
 							Seleccione el <span class="textoResaltado">tipo de usuario</span>
 						</h2>
-						<p class="descripcionGestion">Un texto generico, para probar
-							el parrafo.</p>
+						<p class="descripcionGestion">Ahorre tiempo con una herramienta de gestión eficaz.</p>
 					</div>
 				</div>
 
