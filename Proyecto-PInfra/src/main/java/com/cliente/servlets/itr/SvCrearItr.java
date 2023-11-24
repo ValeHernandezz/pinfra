@@ -34,8 +34,11 @@ public class SvCrearItr extends HttpServlet {
 			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
 			return;
 		}
+		
 		request.setCharacterEncoding("UTF-8");
+		
 		Fabrica.limpiarMensajesDeError(request.getSession());
+		
 		String nombreItr = request.getParameter("nombreItr");
 		String departamento = request.getParameter("departamento");
 

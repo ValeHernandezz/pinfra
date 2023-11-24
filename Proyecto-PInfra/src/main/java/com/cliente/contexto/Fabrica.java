@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.cliente.services.ServiceAnalista;
@@ -25,7 +26,7 @@ public class Fabrica {
 	// Atributos de apoyo para uso global de la app
 	private static Usuario oUsuarioLogueado = new Usuario();
 	private static Map<String, String> diccionarioCampo = new HashMap<>();
-	
+
 	private static ArrayList<Analista> listaDeAnalistas = new ArrayList<Analista>();
 	private static ArrayList<Estudiante> listaDeEstudiantes = new ArrayList<Estudiante>();
 	private static ArrayList<Tutor> listaDeTutores = new ArrayList<Tutor>();
@@ -197,5 +198,14 @@ public class Fabrica {
 			return "";
 		}
 		return "(" + String.valueOf(ServiceUsuario.listarUsuariosSinConfirmar("N").size()) + ")";
+	}
+
+	public static void generarModal(HttpServletRequest request, String urlBtnSi, String tituloModal,
+			String descripcionModal, String metodoModal) {
+		request.getSession().setAttribute("mostrarModal", true);
+		request.getSession().setAttribute("urlBtnSiModal", urlBtnSi);
+		request.getSession().setAttribute("tituloModal", tituloModal);
+		request.getSession().setAttribute("descripcionModal", descripcionModal);
+		request.getSession().setAttribute("metodoModal", metodoModal);
 	}
 }

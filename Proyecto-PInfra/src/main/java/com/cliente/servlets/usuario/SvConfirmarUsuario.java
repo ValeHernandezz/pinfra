@@ -15,6 +15,7 @@ import com.servidor.entidades.Usuario;
 @WebServlet(name = "ServletConfirmarUsuario", urlPatterns = "/SvConfirmarUsuario")
 public class SvConfirmarUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private String documentoDeUsuario = null;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -23,13 +24,22 @@ public class SvConfirmarUsuario extends HttpServlet {
 			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
 			return;
 		}
-		
-		String documento = request.getParameter("cedula");
 
-		Usuario oUsuarioAConfirmar = Fabrica.buscarUsuarioPorCampoYFiltro(documento, "Documento").get(0);
+		if (request.getSession().getAttribute("mostrarModal") == null) {
+			documentoDeUsuario = request.getParameter("cedula");
+			Fabrica.generarModal(request, "/Proyecto-PInfra/SvConfirmarUsuario",
+					"¿Está seguro de que no desea confirmar el usuario?", "Esta acción no se puede revertir", "GET");
+			response.sendRedirect("/Proyecto-PInfra/pages/confirmacion/index.jsp");
+			return;
+		}
+
+		Usuario oUsuarioAConfirmar = Fabrica.buscarUsuarioPorCampoYFiltro(documentoDeUsuario, "Documento").get(0);
 		oUsuarioAConfirmar.setActivo("N");
 
 		var oUsuarioConfirmado = ServiceUsuario.actualizarUsuario(oUsuarioAConfirmar);
+
+		request.getSession().removeAttribute("mostrarModal");
+		documentoDeUsuario = null;
 
 		response.sendRedirect("/Proyecto-PInfra/pages/confirmacion/index.jsp");
 
@@ -37,19 +47,25 @@ public class SvConfirmarUsuario extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		if (!ServiceJWT.validarToken(request, response)) {
 			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
 			return;
 		}
-		
-		String documento = request.getParameter("cedula");
 
-		Usuario oUsuarioAConfirmar = Fabrica.buscarUsuarioPorCampoYFiltro(documento, "Documento").get(0);
+		if (request.getSession().getAttribute("mostrarModal") == null) {
+			documentoDeUsuario = request.getParameter("cedula");
+			Fabrica.generarModal(request, "/Proyecto-PInfra/SvConfirmarUsuario",
+					"¿Está seguro de que desea confirmar el usuario?", "Esta acción no se puede revertir", "POST");
+			response.sendRedirect("/Proyecto-PInfra/pages/confirmacion/index.jsp");
+			return;
+		}
+
+		Usuario oUsuarioAConfirmar = Fabrica.buscarUsuarioPorCampoYFiltro(documentoDeUsuario, "Documento").get(0);
 		oUsuarioAConfirmar.setConfirmado("S");
 
 		var oUsuarioConfirmado = ServiceUsuario.actualizarUsuario(oUsuarioAConfirmar);
-
+		request.getSession().removeAttribute("mostrarModal");
+		documentoDeUsuario = null;
 		response.sendRedirect("/Proyecto-PInfra/pages/confirmacion/index.jsp");
 	}
 

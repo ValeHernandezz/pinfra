@@ -27,6 +27,16 @@ import com.servidor.entidades.Usuario;
 @WebServlet(name = "ServletEditarPerfil", urlPatterns = "/SvEditarPerfil")
 public class SvEditarPerfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private String nombres = null;
+	private String apellidos = null;
+	private String telefono = null;
+	private String mailPersonal = null;
+	private String clave = null;
+	private String fechaNacimiento = null;
+	private String generoTexto = null;
+	private String itrTexto = null;
+	private String departamentoTexto = null;
+	private String localidadTexto = null;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -40,19 +50,25 @@ public class SvEditarPerfil extends HttpServlet {
 			response.sendRedirect("/Proyecto-PInfra/pages/login/index.jsp");
 			return;
 		}
-
 		request.setCharacterEncoding("UTF-8");
 
-		String nombres = request.getParameter("nombres");
-		String apellidos = request.getParameter("apellidos");
-		String telefono = request.getParameter("telefono");
-		String mailPersonal = request.getParameter("mailPersonal");
-		String clave = request.getParameter("clave");
-		String fechaNacimiento = request.getParameter("fechaNacimiento");
-		String generoTexto = request.getParameter("genero");
-		String itrTexto = request.getParameter("itr");
-		String departamentoTexto = request.getParameter("departamento");
-		String localidadTexto = request.getParameter("localidad");
+		if (request.getSession().getAttribute("mostrarModal") == null) {
+			nombres = request.getParameter("nombres");
+			apellidos = request.getParameter("apellidos");
+			telefono = request.getParameter("telefono");
+			mailPersonal = request.getParameter("mailPersonal");
+			clave = request.getParameter("clave");
+			fechaNacimiento = request.getParameter("fechaNacimiento");
+			generoTexto = request.getParameter("genero");
+			itrTexto = request.getParameter("itr");
+			departamentoTexto = request.getParameter("departamento");
+			localidadTexto = request.getParameter("localidad");
+
+			Fabrica.generarModal(request, "/Proyecto-PInfra/SvEditarPerfil",
+					"¿Está seguro de que desea modificar su perfil?", "Sus datos serán modificados", "POST");
+			response.sendRedirect("/Proyecto-PInfra/pages/perfil/index.jsp");
+			return;
+		}
 
 		String nombres2[] = nombres.split(" ");
 		String apellidos2[] = apellidos.split(" ");
@@ -90,6 +106,7 @@ public class SvEditarPerfil extends HttpServlet {
 					.buscarUsuarioPorCampoYFiltro(oUsuarioEditado.getDocumento().toString(), "Documento").get(0);
 
 			request.getSession().setAttribute("usuarioLogueado", oUsuarioActualizado);
+			limpiarCamposDelSevlet(request);
 			response.sendRedirect("/Proyecto-PInfra/pages/perfil/index.jsp");
 			return;
 		}
@@ -107,6 +124,7 @@ public class SvEditarPerfil extends HttpServlet {
 					.buscarUsuarioPorCampoYFiltro(oUsuarioEditado.getDocumento().toString(), "Documento").get(0);
 
 			request.getSession().setAttribute("usuarioLogueado", oUsuarioActualizado);
+			limpiarCamposDelSevlet(request);
 			response.sendRedirect("/Proyecto-PInfra/pages/perfil/index.jsp");
 			return;
 		}
@@ -126,10 +144,24 @@ public class SvEditarPerfil extends HttpServlet {
 					.buscarUsuarioPorCampoYFiltro(oUsuarioEditado.getDocumento().toString(), "Documento").get(0);
 
 			request.getSession().setAttribute("usuarioLogueado", oUsuarioActualizado);
+			limpiarCamposDelSevlet(request);
 			response.sendRedirect("/Proyecto-PInfra/pages/perfil/index.jsp");
 			return;
 		}
+	}
 
+	private void limpiarCamposDelSevlet(HttpServletRequest request) {
+		request.getSession().removeAttribute("mostrarModal");
+		nombres = null;
+		apellidos = null;
+		telefono = null;
+		mailPersonal = null;
+		clave = null;
+		fechaNacimiento = null;
+		generoTexto = null;
+		itrTexto = null;
+		departamentoTexto = null;
+		localidadTexto = null;
 	}
 
 }

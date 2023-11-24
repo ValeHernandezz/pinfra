@@ -8,8 +8,7 @@
 	pageEncoding="UTF-8"%>
 <%
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
-Usuario usuarioLogueado = (Usuario) sessionActual
-		.getAttribute("usuarioLogueado");
+Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado");
 ServiceJWT.comprobarSesion(request, response, "GestionEstudiantes");
 %>
 <!DOCTYPE html>
@@ -28,8 +27,11 @@ ServiceJWT.comprobarSesion(request, response, "GestionEstudiantes");
 </head>
 
 <body>
-	<div class="app">
 
+	<!-- Modal de confirmación de acción -->
+	<jsp:include page="/components/modal/index.jsp" />
+
+	<div class="app">
 		<!-- Encabezado de la página -->
 		<jsp:include page="/components/layout/nav/index.jsp" />
 
@@ -59,8 +61,7 @@ ServiceJWT.comprobarSesion(request, response, "GestionEstudiantes");
 						</thead>
 						<tbody>
 							<%
-							ArrayList<Estudiante> listaDeEstudiantes = ServiceEstudiante
-									.listarEstudiantes();
+							ArrayList<Estudiante> listaDeEstudiantes = ServiceEstudiante.listarEstudiantes();
 							if (listaDeEstudiantes == null) {
 								return;
 							}

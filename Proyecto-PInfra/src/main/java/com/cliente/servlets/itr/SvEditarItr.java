@@ -19,6 +19,9 @@ import com.servidor.entidades.Itr;
 @WebServlet(name = "ServletEditarItr", urlPatterns = "/SvEditarItr")
 public class SvEditarItr extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Long idItr = null;
+	private String nombreItr = null;
+	private String departamentoTexto = null;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -26,7 +29,7 @@ public class SvEditarItr extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		request.getSession().removeAttribute("mostrarForm");
 		Fabrica.limpiarMensajesDeError(request.getSession());
-		Long idItr = Long.parseLong(request.getParameter("idItr"));
+		idItr = Long.parseLong(request.getParameter("idItr"));
 
 		Itr oItrEditar = Buscar.itrPorId(idItr);
 
@@ -43,9 +46,16 @@ public class SvEditarItr extends HttpServlet {
 		}
 		request.setCharacterEncoding("UTF-8");
 		Fabrica.limpiarMensajesDeError(request.getSession());
-		String nombreItr = request.getParameter("nombreItrEditar");
-		String departamentoTexto = request.getParameter("departamentoEditar");
+		if (request.getSession().getAttribute("mostrarModal") == null) {
+			nombreItr = request.getParameter("nombreItrEditar");
+			departamentoTexto = request.getParameter("departamentoEditar");
 
+			Fabrica.generarModal(request, "/Proyecto-PInfra/SvEditarItr",
+					"¿Está seguro de desea editar los datos del ITR?", "Modificara los datos anteriores del ITR.",
+					"POST");
+			response.sendRedirect("/Proyecto-PInfra/pages/itrs/index.jsp");
+			return;
+		}
 		if (!ValidacionItr.validar(nombreItr, departamentoTexto, request.getSession())) {
 			response.sendRedirect("/Proyecto-PInfra/pages/itrs/index.jsp");
 			return;
@@ -61,6 +71,10 @@ public class SvEditarItr extends HttpServlet {
 		Actualizar.itr(oItrEditado);
 
 		request.getSession().removeAttribute("itrEditar");
+		nombreItr = null;
+		departamentoTexto = null;
+		idItr = null;
+		request.getSession().removeAttribute("mostrarModal");
 		response.sendRedirect("/Proyecto-PInfra/pages/itrs/index.jsp");
 
 	}

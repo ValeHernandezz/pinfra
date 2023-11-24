@@ -33,6 +33,9 @@ ServiceJWT.comprobarSesion(request, response, "Perfil");
 </head>
 
 <body>
+	<!-- Modal de confirmación de acción -->
+	<jsp:include page="/components/modal/index.jsp" />
+	
 	<div class="app">
 		<!-- Encabezado de la página -->
 		<jsp:include page="/components/layout/nav/index.jsp" />

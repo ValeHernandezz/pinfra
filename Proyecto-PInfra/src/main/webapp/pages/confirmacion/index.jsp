@@ -18,7 +18,8 @@ ServiceJWT.comprobarSesion(request, response, "Confirmacion");
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/Proyecto-PInfra/style.css">
-<link rel="stylesheet" type="text/css" href="/Proyecto-PInfra/pages/confirmacion/style.css">
+<link rel="stylesheet" type="text/css"
+	href="/Proyecto-PInfra/pages/confirmacion/style.css">
 <meta name="description"
 	content="Página de gestión de constancias de UTEC. Confirma tus usuarios.">
 <meta name="viewport" content="width=device-width">
@@ -28,6 +29,9 @@ ServiceJWT.comprobarSesion(request, response, "Confirmacion");
 </head>
 
 <body>
+	<!-- Modal de confirmación de acción -->
+	<jsp:include page="/components/modal/index.jsp" />
+	
 	<div class="app">
 		<!-- Encabezado de la página -->
 		<jsp:include page="/components/layout/nav/index.jsp" />

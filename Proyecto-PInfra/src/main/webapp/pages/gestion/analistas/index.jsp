@@ -9,8 +9,7 @@
 	pageEncoding="UTF-8"%>
 <%
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
-Usuario usuarioLogueado = (Usuario) sessionActual
-		.getAttribute("usuarioLogueado");
+Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado");
 ServiceJWT.comprobarSesion(request, response, "GestionAnalistas");
 %>
 <!DOCTYPE html>
@@ -29,6 +28,9 @@ ServiceJWT.comprobarSesion(request, response, "GestionAnalistas");
 </head>
 
 <body>
+	<!-- Modal de confirmación de acción -->
+	<jsp:include page="/components/modal/index.jsp" />
+
 	<div class="app">
 
 		<!-- Encabezado de la página -->

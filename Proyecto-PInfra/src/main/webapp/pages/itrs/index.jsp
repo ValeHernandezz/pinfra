@@ -9,7 +9,7 @@
 
 <%
 ServiceJWT.comprobarSesion(request, response, "ITRS");
-%>	
+%>
 
 <!DOCTYPE html>
 <html>
@@ -28,7 +28,9 @@ ServiceJWT.comprobarSesion(request, response, "ITRS");
 </head>
 
 <body>
-
+	<!-- Modal de confirmación de acción -->
+	<jsp:include page="/components/modal/index.jsp" />
+	
 	<div class="app">
 		<!-- Encabezado de la página -->
 		<jsp:include page="/components/layout/nav/index.jsp" />
@@ -89,8 +91,7 @@ ServiceJWT.comprobarSesion(request, response, "ITRS");
 						<button class="btnCrear" type="submit">Crear</button>
 					</form>
 					<div class="cancelarForm">
-						<form action="/Proyecto-PInfra/SvEliminarItr"
-							method="GET">
+						<form action="/Proyecto-PInfra/SvEliminarItr" method="GET">
 							<button class="btnEliminar" type="submit">Cancelar</button>
 						</form>
 					</div>
@@ -139,8 +140,7 @@ ServiceJWT.comprobarSesion(request, response, "ITRS");
 					</form>
 
 					<div class="cancelarForm">
-						<form action="/Proyecto-PInfra/SvEliminarItr"
-							method="GET">
+						<form action="/Proyecto-PInfra/SvEliminarItr" method="GET">
 							<button class="btnEliminar" type="submit">Cancelar</button>
 						</form>
 					</div>
