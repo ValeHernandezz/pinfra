@@ -360,3 +360,11 @@ body {
 .modal .modalContenido .btnNo:hover {
 	background-color: lightcoral;
 }
+
+.superindice {
+	background-color: #00aeef;
+	color: #ffffff;
+	font-size: 10px;
+	padding: 2px 5px;
+	border-radius: 100%;
+}

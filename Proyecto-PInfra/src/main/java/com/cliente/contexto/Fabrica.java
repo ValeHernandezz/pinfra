@@ -197,7 +197,7 @@ public class Fabrica {
 				|| ServiceUsuario.listarUsuariosSinConfirmar("N") == null) {
 			return "";
 		}
-		return "(" + String.valueOf(ServiceUsuario.listarUsuariosSinConfirmar("N").size()) + ")";
+		return String.valueOf(ServiceUsuario.listarUsuariosSinConfirmar("N").size());
 	}
 
 	public static void generarModal(HttpServletRequest request, String urlBtnSi, String tituloModal,
