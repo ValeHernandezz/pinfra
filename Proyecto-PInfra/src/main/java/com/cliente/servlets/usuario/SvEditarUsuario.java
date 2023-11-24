@@ -115,7 +115,7 @@ public class SvEditarUsuario extends HttpServlet {
 
 		Usuario oUsuarioNuevo = new Usuario(oUsuarioEditado.getClave(), oUsuarioEditado.getDocumento(),
 				Fabrica.getFechaDesdeString(fechaNacimiento), oUsuarioEditado.getMailInstitucional(), mailPersonal,
-				nombreUsuario, primerApellido, primerNombre, segundoApellido, segundoNombre, telefono, "S", "N",
+				nombreUsuario, primerApellido, primerNombre, segundoApellido, segundoNombre, telefono, "S", "S",
 				departamento, genero, itr, localidad, oUsuarioEditado.getRol());
 
 		oUsuarioNuevo.setIdUsuario(oUsuarioEditado.getIdUsuario());
