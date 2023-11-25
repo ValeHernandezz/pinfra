@@ -71,6 +71,10 @@ public class SvLogin extends HttpServlet {
 			Date fechaFin = calendar.getTime();
 			String token = ServiceJWT.generarToken(oUsuario, fechaFin);
 			
+			System.out.println("-------------------------------------------------------------------");
+			System.out.println("TOKEN: " + token);
+			System.out.println("-------------------------------------------------------------------");
+			
 			HttpSession session = request.getSession(true);
 			session.setAttribute("token", token);
 			session.setAttribute("usuarioLogueado", oUsuario);

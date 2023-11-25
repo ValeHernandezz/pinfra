@@ -14,7 +14,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class ServiceJWT {
 
-	private static final String SECRET_KEY = "clavesupersecreta";
+	private static final String SECRET_KEY = "fda57524b818c4015ae923dede9a390c5a6711c1a4c6e803fd3e85e269c1edbe";
 
 	public static String generarToken(Usuario oUsuario, Date fechaExpiracion) {
 		return Jwts.builder().setSubject(oUsuario.getNombreUsuario()).claim("rol", oUsuario.getRol().getDescripcion())
