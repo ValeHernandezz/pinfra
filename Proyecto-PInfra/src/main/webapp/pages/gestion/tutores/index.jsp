@@ -1,3 +1,4 @@
+<%@page import="com.cliente.contexto.Fabrica"%>
 <%@page import="com.cliente.contexto.helpers.Buscar"%>
 <%@page import="com.cliente.services.ServiceJWT"%>
 <%@page import="com.cliente.services.ServiceTutor"%>
@@ -13,6 +14,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado"
 ServiceJWT.comprobarSesion(request, response, "GestionTutores");
 String filtro = request.getSession().getAttribute("filtroActivo") == null
 		|| request.getSession().getAttribute("filtroActivo").equals("S") ? "S" : "N";
+Fabrica.limpiarMensajesDeError(request.getSession());
 %>
 <!DOCTYPE html>
 <html>
@@ -45,7 +47,16 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null
 				<h2>Lista de Tutores</h2>
 
 				<jsp:include page="/components/filtro/index.jsp" />
-
+				<%
+				ArrayList<Tutor> listaDeTutores = Buscar.listarTutoresActivos(filtro);
+				if (listaDeTutores.size() == 0 || listaDeTutores == null) {
+				%>
+				<div class="mensajeDeTablaVacia">
+					<h4>No hay ningún tutor</h4>
+				</div>
+				<%
+				} else {
+				%>
 				<div class="tableContenido">
 					<table>
 						<thead>
@@ -67,10 +78,6 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null
 						</thead>
 						<tbody>
 							<%
-							ArrayList<Tutor> listaDeTutores = Buscar.listarTutoresActivos(filtro);
-							if (listaDeTutores == null) {
-								return;
-							}
 							for (Tutor oTutor : listaDeTutores) {
 							%>
 							<tr>
@@ -159,7 +166,9 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null
 						</tbody>
 					</table>
 				</div>
-
+				<%
+				}
+				%>
 			</section>
 		</main>
 

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import com.cliente.contexto.Fabrica;
 import com.cliente.contexto.helpers.Actualizar;
 import com.cliente.contexto.helpers.Buscar;
+import com.cliente.contexto.validaciones.ValidacionComboBoxes;
+import com.cliente.contexto.validaciones.ValidacionUsuario;
 import com.cliente.services.ServiceArea;
 import com.cliente.services.ServiceGenero;
 import com.cliente.services.ServiceItr;
@@ -87,7 +89,7 @@ public class SvEditarUsuario extends HttpServlet {
 			semestreTexto = request.getParameter("semestre");
 			generacionTexto = request.getParameter("generacion");
 			areaTexto = request.getParameter("area");
-			
+
 			Fabrica.generarModal(request, "/Proyecto-PInfra/SvEditarUsuario",
 					"¿Está seguro de que desea modificar los datos del usuario?", "Sus datos serán modificados",
 					"POST");
@@ -108,11 +110,29 @@ public class SvEditarUsuario extends HttpServlet {
 
 		String nombreUsuario = Fabrica.generarNombreUsuario(oUsuarioEditado.getMailInstitucional());
 
+		// Le ponemos un rol por defecto para que en la validación no se rompa
+		String rolValidacion = oUsuarioEditado.getRol().getDescripcion().equals("Estudiante") ? "estudiante"
+				: "funcionario";
+
+		boolean validacionInputs = ValidacionUsuario.validarUnUsuario(oUsuarioEditado.getClave(), cedula,
+				Fabrica.getFechaDesdeString(fechaNacimiento), oUsuarioEditado.getMailInstitucional(), mailPersonal,
+				primerApellido, primerNombre, segundoApellido, segundoNombre, telefono, rolValidacion,
+				request.getSession());
+
+		boolean validacionComboBoxes = ValidacionComboBoxes.validar(departamentoTexto, generoTexto, localidadTexto,
+				itrTexto, generacionTexto, semestreTexto, areaTexto, oUsuarioEditado.getRol().getDescripcion(),
+				request.getSession());
+
+		if (!validacionInputs || !validacionComboBoxes) {
+			limpiarCamposDelSevlet(request);
+			response.sendRedirect("/Proyecto-PInfra/pages/edicion/index.jsp");
+			return;
+		}
+
 		Departamento departamento = ServiceUbicacion.listarDepartamentosFiltro(departamentoTexto).get(0);
 		Genero genero = ServiceGenero.listarGenerosFiltro(generoTexto).get(0);
 		Itr itr = ServiceItr.listarItrsFiltro(itrTexto).get(0);
 		Localidad localidad = ServiceUbicacion.listarLocalidadesFiltro(localidadTexto).get(0);
-
 		Usuario oUsuarioNuevo = new Usuario(oUsuarioEditado.getClave(), oUsuarioEditado.getDocumento(),
 				Fabrica.getFechaDesdeString(fechaNacimiento), oUsuarioEditado.getMailInstitucional(), mailPersonal,
 				nombreUsuario, primerApellido, primerNombre, segundoApellido, segundoNombre, telefono, "S", "S",
@@ -126,6 +146,7 @@ public class SvEditarUsuario extends HttpServlet {
 
 			boolean oAnalistaEditado = Actualizar.usuario(oUsuarioNuevo, oAnalistaAntiguo);
 			limpiarCamposDelSevlet(request);
+			Fabrica.limpiarMensajesDeError(request.getSession());
 			response.sendRedirect("/Proyecto-PInfra/pages/gestion/analistas/index.jsp");
 			return;
 		}
@@ -137,6 +158,7 @@ public class SvEditarUsuario extends HttpServlet {
 					Buscar.tutorFiltro(oUsuarioEditado.getDocumento().toString(), "Documento").get(0).getIdTutor(),
 					ServiceArea.listarAreasFiltro(areaTexto).get(0), oUsuarioNuevo));
 			limpiarCamposDelSevlet(request);
+			Fabrica.limpiarMensajesDeError(request.getSession());
 			response.sendRedirect("/Proyecto-PInfra/pages/gestion/tutores/index.jsp");
 			return;
 		}
@@ -150,6 +172,7 @@ public class SvEditarUsuario extends HttpServlet {
 											.get(0).getIdEstudiante(),
 									generacionTexto, new BigDecimal(semestreTexto), oUsuarioNuevo));
 			limpiarCamposDelSevlet(request);
+			Fabrica.limpiarMensajesDeError(request.getSession());
 			response.sendRedirect("/Proyecto-PInfra/pages/gestion/estudiantes/index.jsp");
 			return;
 		}

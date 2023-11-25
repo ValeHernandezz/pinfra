@@ -1,3 +1,4 @@
+<%@page import="com.cliente.contexto.Fabrica"%>
 <%@page import="com.cliente.contexto.helpers.Buscar"%>
 <%@page import="com.cliente.services.ServiceJWT"%>
 <%@page import="com.servidor.entidades.Analista"%>
@@ -12,7 +13,9 @@
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
 Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado");
 ServiceJWT.comprobarSesion(request, response, "GestionAnalistas");
-String filtro = request.getSession().getAttribute("filtroActivo") == null || request.getSession().getAttribute("filtroActivo").equals("S") ? "S" : "N";
+String filtro = request.getSession().getAttribute("filtroActivo") == null
+		|| request.getSession().getAttribute("filtroActivo").equals("S") ? "S" : "N";
+Fabrica.limpiarMensajesDeError(request.getSession());
 %>
 <!DOCTYPE html>
 <html>
@@ -43,9 +46,19 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null || req
 			<!-- Modificar a gusto -->
 			<section class="gestionContenido">
 				<h2>Lista de Analistas</h2>
-				
-				<jsp:include page="/components/filtro/index.jsp" />
 
+				<jsp:include page="/components/filtro/index.jsp" />
+				<%
+				ArrayList<Analista> listaDeAnalistas = Buscar.analistasActivos(filtro);
+
+				if (listaDeAnalistas.size() == 0 || listaDeAnalistas == null) {
+				%>
+				<div class="mensajeDeTablaVacia">
+					<h4>No hay ningún analista</h4>
+				</div>
+				<%
+				} else {
+				%>
 				<div class="tableContenido">
 					<table>
 						<thead>
@@ -66,11 +79,6 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null || req
 						</thead>
 						<tbody>
 							<%
-							ArrayList<Analista> listaDeAnalistas = Buscar.analistasActivos(filtro);
-
-							if (listaDeAnalistas == null) {
-								return;
-							}
 							for (Analista oAnalista : listaDeAnalistas) {
 							%>
 							<tr>
@@ -86,7 +94,9 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null || req
 								<td><%=oAnalista.getUsuario().getTelefono()%></td>
 								<td><%=oAnalista.getUsuario().getFechaNacimiento()%></td>
 								<td>
-								<% if (filtro.equals("S")) { %>
+									<%
+									if (filtro.equals("S")) {
+									%>
 									<div>
 										<form name="editar" action="/Proyecto-PInfra/SvEditarUsuario"
 											method="GET">
@@ -125,8 +135,9 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null || req
 											<input type="hidden" name="idUsuario"
 												value="<%=oAnalista.getUsuario().getIdUsuario()%>">
 										</form>
-									</div>
-									<% } else { %>
+									</div> <%
+ } else {
+ %>
 									<div>
 										<form action="/Proyecto-PInfra/SvReactivarUsuario"
 											method="POST">
@@ -144,8 +155,9 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null || req
 											<input type="hidden" name="documento"
 												value="<%=oAnalista.getUsuario().getDocumento()%>">
 										</form>
-									</div>
-									<% } %>
+									</div> <%
+ }
+ %>
 								</td>
 							</tr>
 							<%
@@ -154,7 +166,9 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null || req
 						</tbody>
 					</table>
 				</div>
-
+				<%
+				}
+				%>
 			</section>
 		</main>
 

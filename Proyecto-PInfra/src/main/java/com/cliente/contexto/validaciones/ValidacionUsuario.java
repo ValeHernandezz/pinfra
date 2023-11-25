@@ -41,14 +41,15 @@ public class ValidacionUsuario {
 
 		if (segundoNombre.equals("")) {
 
-			if (primerNombre.length() > 20 || primerNombre.length() < 3) {
+			if (primerNombre.length() > 20 || primerNombre.length() < 3 || primerNombre == null) {
 				sesion.setAttribute("errorNombre", "El nombre debe ser entre 3 y 20 caracteres.");
 				resultado = false;
 			}
 
 		} else {
 			if ((primerNombre.length() > 20 || primerNombre.length() < 3)
-					&& (segundoNombre.length() > 20 || segundoNombre.length() < 3)) {
+					&& (segundoNombre.length() > 20 || segundoNombre.length() < 3) || primerNombre == null
+					|| segundoNombre == null) {
 				sesion.setAttribute("errorNombre", "Los nombres deben ser entre 3 y 20 caracteres.");
 				resultado = false;
 			}

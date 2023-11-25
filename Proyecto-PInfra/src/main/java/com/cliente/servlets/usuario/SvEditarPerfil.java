@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.cliente.contexto.Fabrica;
 import com.cliente.contexto.helpers.Actualizar;
 import com.cliente.contexto.helpers.Buscar;
+import com.cliente.contexto.validaciones.ValidacionComboBoxes;
+import com.cliente.contexto.validaciones.ValidacionUsuario;
 import com.cliente.services.ServiceArea;
 import com.cliente.services.ServiceGenero;
 import com.cliente.services.ServiceItr;
@@ -66,9 +68,9 @@ public class SvEditarPerfil extends HttpServlet {
 			itrTexto = request.getParameter("itr");
 			departamentoTexto = request.getParameter("departamento");
 			localidadTexto = request.getParameter("localidad");
-			semestreTexto = request.getParameter("semestre");
-			generacionTexto = request.getParameter("generacion");
-			areaTexto = request.getParameter("area");
+			semestreTexto = request.getParameter("semestreOculto");
+			generacionTexto = request.getParameter("generacionOculto");
+			areaTexto = request.getParameter("areaOculto");
 
 			Fabrica.generarModal(request, "/Proyecto-PInfra/SvEditarPerfil",
 					"¿Está seguro de que desea modificar su perfil?", "Sus datos serán modificados", "POST");
@@ -88,6 +90,23 @@ public class SvEditarPerfil extends HttpServlet {
 		Usuario oUsuarioEditado = (Usuario) request.getSession().getAttribute("usuarioLogueado");
 
 		String nombreUsuario = Fabrica.generarNombreUsuario(oUsuarioEditado.getMailInstitucional());
+		// Le ponemos un rol por defecto para que en la validación no se rompa
+		String rolValidacion = oUsuarioEditado.getRol().getDescripcion().equals("Estudiante") ? "estudiante"
+				: "funcionario";
+		boolean validacionInputs = ValidacionUsuario.validarUnUsuario(clave, oUsuarioEditado.getDocumento().toString(),
+				Fabrica.getFechaDesdeString(fechaNacimiento), oUsuarioEditado.getMailInstitucional(), mailPersonal,
+				primerApellido, primerNombre, segundoApellido, segundoNombre, telefono, rolValidacion,
+				request.getSession());
+
+		boolean validacionComboBoxes = ValidacionComboBoxes.validar(departamentoTexto, generoTexto, localidadTexto,
+				itrTexto, generacionTexto, semestreTexto, areaTexto, oUsuarioEditado.getRol().getDescripcion(),
+				request.getSession());
+
+		if (!validacionInputs || !validacionComboBoxes) {
+			limpiarCamposDelSevlet(request);
+			response.sendRedirect("/Proyecto-PInfra/pages/perfil/index.jsp");
+			return;
+		}
 
 		Departamento departamento = ServiceUbicacion.listarDepartamentosFiltro(departamentoTexto).get(0);
 		Genero genero = ServiceGenero.listarGenerosFiltro(generoTexto).get(0);
@@ -113,6 +132,7 @@ public class SvEditarPerfil extends HttpServlet {
 
 			request.getSession().setAttribute("usuarioLogueado", oUsuarioActualizado);
 			limpiarCamposDelSevlet(request);
+			Fabrica.limpiarMensajesDeError(request.getSession());
 			response.sendRedirect("/Proyecto-PInfra/pages/perfil/index.jsp");
 			return;
 		}
@@ -129,6 +149,7 @@ public class SvEditarPerfil extends HttpServlet {
 
 			request.getSession().setAttribute("usuarioLogueado", oUsuarioActualizado);
 			limpiarCamposDelSevlet(request);
+			Fabrica.limpiarMensajesDeError(request.getSession());
 			response.sendRedirect("/Proyecto-PInfra/pages/perfil/index.jsp");
 			return;
 		}
@@ -147,6 +168,7 @@ public class SvEditarPerfil extends HttpServlet {
 
 			request.getSession().setAttribute("usuarioLogueado", oUsuarioActualizado);
 			limpiarCamposDelSevlet(request);
+			Fabrica.limpiarMensajesDeError(request.getSession());
 			response.sendRedirect("/Proyecto-PInfra/pages/perfil/index.jsp");
 			return;
 		}

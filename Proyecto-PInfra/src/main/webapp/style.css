@@ -365,10 +365,53 @@ body {
 	background-color: #00aeef;
 	color: #ffffff;
 	font-size: 10px;
-	padding: 2px 5px;
+	padding: 3px 5.1px;
 	border-radius: 100%;
 }
 
-.btnReactivar{
+.btnReactivar {
 	background-color: lightgreen;
+}
+
+.btnReactivar:hover {
+	cursor: pointer;
+}
+
+.formReactivar {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+}
+
+.formReactivar select {
+	border-style: none;
+	border-radius: 5px;
+	border: solid 1px lightgrey;
+	padding: 12px 14px;
+	color: #332f2c;
+	font-size: 12px;
+	min-width: 170px;
+}
+
+.formReactivar button {
+	padding: 12px 14px;
+	background-color: #00aeef;
+	color: #ffffff;
+	border: none;
+	outline: none;
+	border-radius: 12px;
+	font-family: 'Geist-SemiBold';
+
+}
+
+.formReactivar button:hover {
+	cursor: pointer;
+}
+
+.formReactivar select:hover {
+	cursor: pointer;
+}
+
+.mensajeDeTablaVacia {
+	margin-top: 20px;
 }

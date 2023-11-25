@@ -31,7 +31,7 @@ ServiceJWT.comprobarSesion(request, response, "Confirmacion");
 <body>
 	<!-- Modal de confirmación de acción -->
 	<jsp:include page="/components/modal/index.jsp" />
-	
+
 	<div class="app">
 		<!-- Encabezado de la página -->
 		<jsp:include page="/components/layout/nav/index.jsp" />
@@ -41,7 +41,16 @@ ServiceJWT.comprobarSesion(request, response, "Confirmacion");
 
 			<section class="confirmacionContenido">
 				<h2>Usuarios por confirmar</h2>
-
+				<%
+				ArrayList<Usuario> listaDeUsuarios = ServiceUsuario.listarUsuariosSinConfirmar("N");
+				if (listaDeUsuarios.size() == 0 || listaDeUsuarios == null) {
+				%>
+				<div class="mensajeDeTablaVacia">
+					<h4>No hay ningún usuario para confirmar</h4>
+				</div>
+				<%
+				} else {
+				%>
 				<div class="tableContenido">
 					<table>
 						<thead>
@@ -63,10 +72,6 @@ ServiceJWT.comprobarSesion(request, response, "Confirmacion");
 						</thead>
 						<tbody>
 							<%
-							ArrayList<Usuario> listaDeUsuarios = ServiceUsuario.listarUsuariosSinConfirmar("N");
-							if (listaDeUsuarios == null) {
-								return;
-							}
 							for (Usuario oUsuario : listaDeUsuarios) {
 							%>
 							<tr>
@@ -125,6 +130,9 @@ ServiceJWT.comprobarSesion(request, response, "Confirmacion");
 						</tbody>
 					</table>
 				</div>
+				<%
+				}
+				%>
 			</section>
 
 		</main>

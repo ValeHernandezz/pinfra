@@ -61,27 +61,58 @@ ServiceJWT.comprobarSesion(request, response, "Edicion");
 						<div class="formularioContenido">
 							<label>Nombres <input type="text" name="nombres"
 								placeholder="Ingrese sus nombres..."
-								value="<%=oUsuarioAEditar.getNombres()%>">
+								value="<%=oUsuarioAEditar.getNombres()%>"> <%
+ if (request.getSession().getAttribute("errorNombre") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorNombre")%></span>
+								<%
+								}
+								%>
 							</label> <label>Apellidos <input type="text" name="apellidos"
 								placeholder="Ingrese sus apellidos..."
-								value="<%=oUsuarioAEditar.getApellidos()%>">
+								value="<%=oUsuarioAEditar.getApellidos()%>"> <%
+ if (request.getSession().getAttribute("errorApellido") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;">
+									<%=request.getSession().getAttribute("errorApellido")%>
+							</span> <%
+ }
+ %>
 							</label> <label>Cédula <input type="number" name="cedula"
 								placeholder="Ingrese su cédula..."
-								value="<%=oUsuarioAEditar.getDocumento()%>" disabled>
+								value="<%=oUsuarioAEditar.getDocumento()%>" disabled> <%
+ if (request.getSession().getAttribute("errorCedula") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorCedula")%></span>
+								<%
+								}
+								%>
 							</label> <label>Teléfono <input type="number" name="telefono"
 								placeholder="Ingrese su teléfono..."
-								value="<%=oUsuarioAEditar.getTelefono()%>">
+								value="<%=oUsuarioAEditar.getTelefono()%>"> <%
+ if (request.getSession().getAttribute("errorTelefono") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorTelefono")%></span>
+								<%
+								}
+								%>
 							</label> <label>Mail Personal <input type="text"
 								name="mailPersonal" placeholder="Ingrese su mail personal..."
-								value="<%=oUsuarioAEditar.getMailPersonal()%>">
+								value="<%=oUsuarioAEditar.getMailPersonal()%>"> <%
+ if (request.getSession().getAttribute("errorMailPersonal") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorMailPersonal")%></span>
+								<%
+								}
+								%>
 							</label> <label>Mail Institucional <input type="text"
 								name="mailInstitucional"
 								placeholder="Ingrese su mail institucional..."
 								value="<%=oUsuarioAEditar.getMailInstitucional()%>" disabled>
+
 							</label> <label>Fecha de Nacimiento <input type="date" id="fecha"
 								name="fechaNacimiento"
-								value="<%=oUsuarioAEditar.getFechaNacimiento()%>">
-
+								value="<%=oUsuarioAEditar.getFechaNacimiento()%>"> <%
+ if (request.getSession().getAttribute("errorFechaNacimiento") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorFechaNacimiento")%></span>
+								<%
+								}
+								%>
 							</label> <label>Género <select name="genero">
 									<option selected>Selecciona un género</option>
 									<%
@@ -97,7 +128,12 @@ ServiceJWT.comprobarSesion(request, response, "Edicion");
 									<%
 									}
 									%>
-							</select>
+							</select> <%
+ if (request.getSession().getAttribute("errorGenero") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorGenero")%></span>
+								<%
+								}
+								%>
 							</label> <label>ITR <select name="itr">
 									<option selected>Selecciona un ITR</option>
 									<%
@@ -112,7 +148,12 @@ ServiceJWT.comprobarSesion(request, response, "Edicion");
 									<%
 									}
 									%>
-							</select>
+							</select> <%
+ if (request.getSession().getAttribute("errorItr") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorItr")%></span>
+								<%
+								}
+								%>
 							</label> <label>Departamento <select name="departamento"
 								id="departamentoSelect" onchange="cargarLocalidades()">
 									<option selected>Selecciona un departamento</option>
@@ -127,11 +168,21 @@ ServiceJWT.comprobarSesion(request, response, "Edicion");
 									<%
 									}
 									%>
-							</select>
+							</select> <%
+ if (request.getSession().getAttribute("errorDepartamento") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorDepartamento")%></span>
+								<%
+								}
+								%>
 							</label> <label>Localidad <select name="localidad"
 								id="localidadSelect" disabled>
 									<option selected>Selecciona una localidad</option>
-							</select>
+							</select> <%
+ if (request.getSession().getAttribute("errorLocalidad") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorLocalidad")%></span>
+								<%
+								}
+								%>
 							</label> <label>Rol <select name="rol" id="rolSelect"
 								onchange="mostrarCampos()" disabled>
 									<option selected>Seleccione su rol</option>
@@ -172,7 +223,12 @@ ServiceJWT.comprobarSesion(request, response, "Edicion");
 									}
 									}
 									%>
-							</select>
+							</select> <%
+ if (request.getSession().getAttribute("errorArea") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorArea")%></span>
+								<%
+								}
+								%>
 							</label> <label id="semestreLabel" style="display: none;">Semestre
 								<select name="semestre">
 									<option selected>Seleccione su semestre</option>
@@ -190,7 +246,12 @@ ServiceJWT.comprobarSesion(request, response, "Edicion");
 									}
 									%>
 
-							</select>
+							</select> <%
+ if (request.getSession().getAttribute("errorSemestre") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorSemestre")%></span>
+								<%
+								}
+								%>
 							</label> <label id="generacionLabel" style="display: none;">Generación
 								<select name="generacion">
 									<option selected>Seleccione su generación</option>
@@ -208,7 +269,12 @@ ServiceJWT.comprobarSesion(request, response, "Edicion");
 									}
 									%>
 
-							</select>
+							</select> <%
+ if (request.getSession().getAttribute("errorGeneracion") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorGeneracion")%></span>
+								<%
+								}
+								%>
 							</label>
 
 						</div>
@@ -237,6 +303,6 @@ document.addEventListener("DOMContentLoaded", function() {
     mostrarCampos();
     cargarLocalidades();
     cargarLocalidadSeleccionada('<%=oUsuarioAEditar.getLocalidad().getNombre()%>');
-});
+					});
 </script>
 </html>

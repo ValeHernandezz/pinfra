@@ -1,3 +1,4 @@
+<%@page import="com.cliente.contexto.Fabrica"%>
 <%@page import="com.cliente.contexto.helpers.Buscar"%>
 <%@page import="com.cliente.services.ServiceJWT"%>
 <%@page import="com.cliente.services.ServiceEstudiante"%>
@@ -13,6 +14,7 @@ Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado"
 ServiceJWT.comprobarSesion(request, response, "GestionEstudiantes");
 String filtro = request.getSession().getAttribute("filtroActivo") == null
 		|| request.getSession().getAttribute("filtroActivo").equals("S") ? "S" : "N";
+Fabrica.limpiarMensajesDeError(request.getSession());
 %>
 <!DOCTYPE html>
 <html>
@@ -45,7 +47,16 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null
 				<h2>Lista de Estudiantes</h2>
 
 				<jsp:include page="/components/filtro/index.jsp" />
-
+				<%
+				ArrayList<Estudiante> listaDeEstudiantes = Buscar.estudiantesActivos(filtro);
+				if (listaDeEstudiantes.size() == 0 || listaDeEstudiantes == null) {
+				%>
+				<div class="mensajeDeTablaVacia">
+					<h4>No hay ningún estudiante</h4>
+				</div>
+				<%
+				} else {
+				%>
 				<div class="tableContenido">
 					<table>
 						<thead>
@@ -66,10 +77,6 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null
 						</thead>
 						<tbody>
 							<%
-							ArrayList<Estudiante> listaDeEstudiantes = Buscar.estudiantesActivos(filtro);
-							if (listaDeEstudiantes == null) {
-								return;
-							}
 							for (Estudiante oEstudiante : listaDeEstudiantes) {
 							%>
 							<tr>
@@ -157,7 +164,9 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null
 						</tbody>
 					</table>
 				</div>
-
+				<%
+				}
+				%>
 			</section>
 		</main>
 

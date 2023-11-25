@@ -35,7 +35,7 @@ ServiceJWT.comprobarSesion(request, response, "Perfil");
 <body>
 	<!-- Modal de confirmación de acción -->
 	<jsp:include page="/components/modal/index.jsp" />
-	
+
 	<div class="app">
 		<!-- Encabezado de la página -->
 		<jsp:include page="/components/layout/nav/index.jsp" />
@@ -49,21 +49,53 @@ ServiceJWT.comprobarSesion(request, response, "Perfil");
 					<form class="formularioLogin"
 						action="/Proyecto-PInfra/SvEditarPerfil" method="POST">
 						<div class="formularioContenido">
+
 							<label>Nombres <input type="text" name="nombres"
 								placeholder="Ingrese sus nombres..."
 								value="<%=usuarioLogueado.getNombres()%>">
+								<%
+ if (request.getSession().getAttribute("errorNombre") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorNombre")%></span>
+								<%
+								}
+								%>
 							</label> <label>Apellidos <input type="text" name="apellidos"
 								placeholder="Ingrese sus apellidos..."
 								value="<%=usuarioLogueado.getApellidos()%>">
+								<%
+ if (request.getSession().getAttribute("errorApellido") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;">
+									<%=request.getSession().getAttribute("errorApellido")%>
+							</span> <%
+ }
+ %>
 							</label> <label>Cédula <input type="number" name="cedula"
 								placeholder="Ingrese su cédula..."
 								value="<%=usuarioLogueado.getDocumento()%>" disabled>
+							<%
+ if (request.getSession().getAttribute("errorCedula") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorCedula")%></span>
+								<%
+								}
+								%>
 							</label> <label>Teléfono <input type="number" name="telefono"
 								placeholder="Ingrese su teléfono..."
 								value="<%=usuarioLogueado.getTelefono()%>">
+								<%
+ if (request.getSession().getAttribute("errorTelefono") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorTelefono")%></span>
+								<%
+								}
+								%>								
 							</label> <label>Mail Personal <input type="text"
 								name="mailPersonal" placeholder="Ingrese su mail personal..."
 								value="<%=usuarioLogueado.getMailPersonal()%>">
+								<%
+ if (request.getSession().getAttribute("errorMailPersonal") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorMailPersonal")%></span>
+								<%
+								}
+								%>
 							</label> <label>Mail Institucional <input type="text"
 								name="mailInstitucional"
 								placeholder="Ingrese su mail institucional..."
@@ -72,9 +104,13 @@ ServiceJWT.comprobarSesion(request, response, "Perfil");
 								placeholder="Ingrese su contraseña..."
 								value="<%=usuarioLogueado.getClave()%>" /></label> <label>Fecha
 								de Nacimiento <input type="date" name="fechaNacimiento"
-								value="<%=usuarioLogueado.getFechaNacimiento()%>"> <%
- System.out.println(usuarioLogueado.getFechaNacimiento());
- %>
+								value="<%=usuarioLogueado.getFechaNacimiento()%>"> 
+								<%
+ if (request.getSession().getAttribute("errorFechaNacimiento") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorFechaNacimiento")%></span>
+								<%
+								}
+								%>
 							</label> <label>Género <select name="genero">
 									<option selected>Selecciona un género</option>
 									<%
@@ -91,8 +127,13 @@ ServiceJWT.comprobarSesion(request, response, "Perfil");
 									}
 									%>
 							</select>
-							</label> <label>ITR 
-							<select name="itr">
+							<%
+ if (request.getSession().getAttribute("errorGenero") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorGenero")%></span>
+								<%
+								}
+								%>
+							</label> <label>ITR <select name="itr">
 									<option selected>Selecciona un ITR</option>
 									<%
 									for (Itr oItr : ServiceItr.listarItrs()) {
@@ -107,6 +148,12 @@ ServiceJWT.comprobarSesion(request, response, "Perfil");
 									}
 									%>
 							</select>
+							<%
+ if (request.getSession().getAttribute("errorItr") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorItr")%></span>
+								<%
+								}
+								%>
 							</label> <label>Departamento <select name="departamento"
 								id="departamentoSelect" onchange="cargarLocalidades()">
 									<option selected>Selecciona un departamento</option>
@@ -121,11 +168,21 @@ ServiceJWT.comprobarSesion(request, response, "Perfil");
 									<%
 									}
 									%>
-							</select>
+							</select><%
+ if (request.getSession().getAttribute("errorDepartamento") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorDepartamento")%></span>
+								<%
+								}
+								%>
 							</label> <label>Localidad <select name="localidad"
 								id="localidadSelect" disabled>
 									<option selected>Selecciona una localidad</option>
-							</select>
+							</select><%
+ if (request.getSession().getAttribute("errorLocalidad") != null) {
+ %> <span style="max-width: 300px; font-size: 10px; color: red;"><%=request.getSession().getAttribute("errorLocalidad")%></span>
+								<%
+								}
+								%>
 							</label> <label>Rol <select name="rol" id="rolSelect"
 								onchange="mostrarCampos()" disabled>
 									<option selected>Seleccione su rol</option>
@@ -145,7 +202,7 @@ ServiceJWT.comprobarSesion(request, response, "Perfil");
 									%>
 							</select>
 							</label> <label id="areaLabel" style="display: none;">Área <select
-								name="area">
+								name="area" disabled>
 									<option selected>Seleccione su área</option>
 									<%
 									if (usuarioLogueado.getRol().getDescripcion().equals("Tutor")
@@ -159,16 +216,19 @@ ServiceJWT.comprobarSesion(request, response, "Perfil");
 											? "selected"
 											: "");
 									%>
-
 									<option value="<%=oArea.getDescripcion()%>"
 										<%=opcionSeleccionada%>><%=oArea.getDescripcion()%></option>
 									<%
 									}
+									%>
+									<input type="hidden" name="areaOculto"
+									value="<%=opcionDeUsuario%>">
+									<%
 									}
 									%>
 							</select>
 							</label> <label id="semestreLabel" style="display: none;">Semestre
-								<select name="semestre">
+								<select name="semestre" disabled>
 									<option selected>Seleccione su semestre</option>
 
 									<%
@@ -181,12 +241,16 @@ ServiceJWT.comprobarSesion(request, response, "Perfil");
 									<option value="<%=i%>" <%=opcionSeleccionada%>><%=i%></option>
 									<%
 									}
+									%>
+									<input type="hidden" name="semestreOculto"
+									value="<%=opcionUsuario%>">
+									<%
 									}
 									%>
 
 							</select>
 							</label> <label id="generacionLabel" style="display: none;">Generación
-								<select name="generacion">
+								<select name="generacion" disabled>
 									<option selected>Seleccione su generación</option>
 
 									<%
@@ -199,12 +263,15 @@ ServiceJWT.comprobarSesion(request, response, "Perfil");
 									<option value="<%=i%>" <%=opcionSeleccionada%>><%=i%></option>
 									<%
 									}
+									%>
+									<input type="hidden" name="generacionOculto"
+									value="<%=opcionUsuario%>">
+									<%
 									}
 									%>
 
 							</select>
 							</label>
-
 						</div>
 
 						<div class="btnContenido">
@@ -234,6 +301,6 @@ document.addEventListener("DOMContentLoaded", function() {
     mostrarCampos();
     cargarLocalidades();
     cargarLocalidadSeleccionada('<%=usuarioLogueado.getLocalidad().getNombre()%>');
-	});
+					});
 </script>
 </html>

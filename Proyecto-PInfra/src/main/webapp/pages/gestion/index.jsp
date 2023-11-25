@@ -1,3 +1,4 @@
+<%@page import="com.cliente.contexto.Fabrica"%>
 <%@page import="com.cliente.services.ServiceJWT"%>
 <%@page import="com.cliente.services.ServiceUsuario"%>
 <%@page import="com.servidor.entidades.Usuario"%>
@@ -6,10 +7,10 @@
 	pageEncoding="UTF-8"%>
 <%
 HttpSession sessionActual = request.getSession(false); // No crear una nueva sesión si no existe
-Usuario usuarioLogueado = (Usuario) sessionActual
-		.getAttribute("usuarioLogueado");
+Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado");
 
 ServiceJWT.comprobarSesion(request, response, "Gestion");
+Fabrica.limpiarMensajesDeError(request.getSession());
 %>
 <!DOCTYPE html>
 <html>
@@ -42,7 +43,8 @@ ServiceJWT.comprobarSesion(request, response, "Gestion");
 						<h2 class="tituloGestion">
 							Seleccione el <span class="textoResaltado">tipo de usuario</span>
 						</h2>
-						<p class="descripcionGestion">Ahorre tiempo con una herramienta de gestión eficaz.</p>
+						<p class="descripcionGestion">Ahorre tiempo con una
+							herramienta de gestión eficaz.</p>
 					</div>
 				</div>
 

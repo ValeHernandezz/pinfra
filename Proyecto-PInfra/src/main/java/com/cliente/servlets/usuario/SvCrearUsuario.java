@@ -41,7 +41,7 @@ public class SvCrearUsuario extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		Fabrica.limpiarMensajesDeError(request.getSession());
-		
+
 		String nombres = request.getParameter("nombres");
 		String apellidos = request.getParameter("apellidos");
 		String cedula = request.getParameter("cedula");
@@ -58,7 +58,7 @@ public class SvCrearUsuario extends HttpServlet {
 		String semestreTexto = request.getParameter("semestre");
 		String generacionTexto = request.getParameter("generacion");
 		String areaTexto = request.getParameter("area");
-		
+
 		String nombres2[] = nombres.split(" ");
 		String apellidos2[] = apellidos.split(" ");
 
@@ -67,7 +67,7 @@ public class SvCrearUsuario extends HttpServlet {
 
 		String primerApellido = apellidos2.length > 0 ? apellidos2[0] : "";
 		String segundoApellido = apellidos2.length > 1 ? apellidos2[1] : "";
-		
+
 		// Le ponemos un rol por defecto para que en la validación no se rompa
 		String rolValidacion = rolTexto.equals("Seleccione su rol") ? "estudiante"
 				: rolTexto.equals("Estudiante") ? "estudiante" : "funcionario";
@@ -100,6 +100,7 @@ public class SvCrearUsuario extends HttpServlet {
 			boolean oAnalistaCreado = Crear.usuario(oUsuarioNuevo, new Analista());
 
 			if (!oAnalistaCreado) {
+				Fabrica.limpiarMensajesDeError(request.getSession());
 				response.sendRedirect("/Proyecto-PInfra/pages/registro/index.jsp");
 				return;
 			}
@@ -110,6 +111,7 @@ public class SvCrearUsuario extends HttpServlet {
 					new Tutor(ServiceArea.listarAreasFiltro(areaTexto).get(0)));
 
 			if (!oTutorCreado) {
+				Fabrica.limpiarMensajesDeError(request.getSession());
 				response.sendRedirect("/Proyecto-PInfra/pages/registro/index.jsp");
 				return;
 			}
@@ -120,11 +122,12 @@ public class SvCrearUsuario extends HttpServlet {
 					new Estudiante(generacionTexto, new BigDecimal(semestreTexto)));
 
 			if (!oEstudianteCreado) {
+				Fabrica.limpiarMensajesDeError(request.getSession());
 				response.sendRedirect("/Proyecto-PInfra/pages/registro/index.jsp");
 				return;
 			}
 		}
-		
+
 		response.sendRedirect("index.jsp");
 	}
 

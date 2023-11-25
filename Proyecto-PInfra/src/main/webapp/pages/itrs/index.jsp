@@ -47,8 +47,6 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null
 					<h2>Gestión de ITRs</h2>
 				</div>
 
-				<jsp:include page="/components/filtro/index.jsp" />
-
 				<div class="crearUnItr">
 					<%
 					Itr oItrEditarExiste = request.getSession().getAttribute("itrEditar") == null ? null
@@ -153,7 +151,19 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null
 					}
 					%>
 				</div>
+				<jsp:include page="/components/filtro/index.jsp" />
 
+				<%
+				ArrayList<Itr> listaDeItrs = Buscar.itrsActivos(filtro);
+
+				if (listaDeItrs.size() == 0 || listaDeItrs == null) {
+				%>
+				<div class="mensajeDeTablaVacia">
+					<h4>No hay ningún ITR</h4>
+				</div>
+				<%
+				} else {
+				%>
 				<div class="tableContenido">
 					<table>
 						<thead>
@@ -165,11 +175,6 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null
 						</thead>
 						<tbody>
 							<%
-							ArrayList<Itr> listaDeItrs = Buscar.itrsActivos(filtro);
-
-							if (listaDeItrs == null) {
-								return;
-							}
 							for (Itr oItr : listaDeItrs) {
 							%>
 							<tr>
@@ -249,7 +254,9 @@ String filtro = request.getSession().getAttribute("filtroActivo") == null
 						</tbody>
 					</table>
 				</div>
-
+				<%
+				}
+				%>
 			</section>
 
 		</main>

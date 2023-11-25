@@ -117,8 +117,6 @@ public class Fabrica {
 				return buscarUsuarioPorNombreApellido(filtro, campo);
 			}
 			String valor = diccionarioCampo.get(campo);
-			System.out.println("Valor: " + valor + "----------------");
-			System.out.println("Filtro: " + filtro + "----------------");
 			if (campo.equals("Rol")) {
 				filtro = String.valueOf(ServiceRol.listarRolesFiltro(filtro).get(0).getIdRol());
 			}

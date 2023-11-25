@@ -19,10 +19,17 @@ Usuario usuarioLogueado = (Usuario) sessionActual.getAttribute("usuarioLogueado"
 			<li><a href="/Proyecto-PInfra/pages/gestion/index.jsp">Gestión
 					de usuarios</a></li>
 			<li><a href="/Proyecto-PInfra/pages/confirmacion/index.jsp">Confirmación
-					de usuarios <sup class="superindice"><%=Fabrica.getCantidadSinConfirmar()%></sup> </a></li>
+					de usuarios <%
+			if (!Fabrica.getCantidadSinConfirmar().equals("")) {
+			%> <sup
+					class="superindice"><%=Fabrica.getCantidadSinConfirmar()%></sup> <%
+ }
+ %>
+
+			</a></li>
 			<li><a href="/Proyecto-PInfra/pages/itrs/index.jsp">ITRs</a></li>
 		</ul>
-		
+
 
 		<%
 		}

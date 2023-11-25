@@ -3,8 +3,10 @@ package com.cliente.contexto.helpers;
 import java.util.ArrayList;
 import com.cliente.contexto.Fabrica;
 import com.cliente.services.ServiceAnalista;
+import com.cliente.services.ServiceEstudiante;
 import com.cliente.services.ServiceItr;
 import com.cliente.services.ServiceRol;
+import com.cliente.services.ServiceTutor;
 import com.cliente.services.ServiceUbicacion;
 import com.cliente.services.ServiceUsuario;
 import com.servidor.entidades.Analista;
@@ -72,14 +74,10 @@ public class Buscar {
 	// TUTOR-------------------------------------------
 	public static ArrayList<Tutor> tutorPorRol(String filtro) {
 
-		if (Fabrica.getListaDeTutores().size() == 0) {
-			Fabrica.cargarListas();
-		}
-
 		try {
 			ArrayList<Tutor> listaDeResultados = new ArrayList<Tutor>();
 
-			for (Tutor aux : Fabrica.getListaDeTutores()) {
+			for (Tutor aux : ServiceTutor.listarTutores()) {
 				if (aux.getUsuario().getRol().getDescripcion().equals(filtro)) {
 					listaDeResultados.add(aux);
 				}
@@ -93,13 +91,9 @@ public class Buscar {
 
 	public static ArrayList<Tutor> tutoresSinConfirmar() {
 
-		if (Fabrica.getListaDeTutores().size() == 0) {
-			Fabrica.cargarListas();
-		}
-
 		ArrayList<Tutor> listaDeRespuesta = new ArrayList<Tutor>();
 
-		for (var aux : Fabrica.getListaDeTutores()) {
+		for (var aux : ServiceTutor.listarTutores()) {
 			for (var aux2 : usuariosConfirmar("N")) {
 				if (aux2.getDocumento().equals(aux.getUsuario().getDocumento())) {
 					listaDeRespuesta.add(aux);
@@ -111,14 +105,10 @@ public class Buscar {
 	}
 
 	public static ArrayList<Tutor> tutorFiltro(String filtro, String campo) {
-		System.out.println("------------- Hola desde tutorFiltro ---------------------------------------------");
-		if (Fabrica.getListaDeTutores().size() == 0) {
-			Fabrica.cargarListas();
-		}
 
 		ArrayList<Tutor> listaDeRespuesta = new ArrayList<Tutor>();
 
-		for (var aux : Fabrica.getListaDeTutores()) {
+		for (var aux : ServiceTutor.listarTutores()) {
 			for (var aux2 : buscarUsuarioPorCampoYFiltro(filtro, campo)) {
 				if (aux2.getDocumento().equals(aux.getUsuario().getDocumento())) {
 					listaDeRespuesta.add(aux);
@@ -130,14 +120,11 @@ public class Buscar {
 	}
 
 	public static ArrayList<Tutor> listarTutoresActivos(String filtro) {
-		if (Fabrica.getListaDeTutores().size() == 0) {
-			Fabrica.cargarListas();
-		}
 		try {
 
 			ArrayList<Tutor> listaDeRespuesta = new ArrayList<Tutor>();
 
-			for (var tutorConDatos : Fabrica.getListaDeTutores()) {
+			for (var tutorConDatos : ServiceTutor.listarTutores()) {
 
 				for (var usuarioActivo : buscarUsuarioPorCampoYFiltro(filtro, "Activo")) {
 					if (usuarioActivo.getDocumento().equals(tutorConDatos.getUsuario().getDocumento())) {
@@ -153,12 +140,10 @@ public class Buscar {
 	}
 
 	public static ArrayList<Tutor> tutoresITR(String itr) {
-		if (Fabrica.getListaDeTutores().size() == 0) {
-			Fabrica.cargarListas();
-		}
+
 		ArrayList<Tutor> listaDeRespuesta = new ArrayList<Tutor>();
 
-		for (var tutorConDatos : Fabrica.getListaDeTutores()) {
+		for (var tutorConDatos : ServiceTutor.listarTutores()) {
 
 			if (tutorConDatos.getUsuario().getItr().getNombre().toUpperCase().contains(itr.toUpperCase())) {
 				listaDeRespuesta.add(tutorConDatos);
@@ -173,13 +158,9 @@ public class Buscar {
 	// ESTUDIANTE----------------------------------------
 	public static ArrayList<Estudiante> estudiantesSinConfirmar() {
 
-		if (Fabrica.getListaDeEstudiantes().size() == 0) {
-			Fabrica.cargarListas();
-		}
-
 		ArrayList<Estudiante> listaDeRespuesta = new ArrayList<Estudiante>();
 
-		for (var aux : Fabrica.getListaDeEstudiantes()) {
+		for (var aux : ServiceEstudiante.listarEstudiantes()) {
 
 			for (var aux2 : usuariosConfirmar("N")) {
 				if (aux2.getDocumento().equals(aux.getUsuario().getDocumento())) {
@@ -193,13 +174,9 @@ public class Buscar {
 
 	public static ArrayList<Estudiante> estudianteFiltro(String filtro, String campo) {
 
-		if (Fabrica.getListaDeEstudiantes().size() == 0) {
-			Fabrica.cargarListas();
-		}
-
 		ArrayList<Estudiante> listaDeRespuesta = new ArrayList<Estudiante>();
 
-		for (var aux : Fabrica.getListaDeEstudiantes()) {
+		for (var aux : ServiceEstudiante.listarEstudiantes()) {
 
 			for (var aux2 : buscarUsuarioPorCampoYFiltro(filtro, campo)) {
 				if (aux2.getDocumento().equals(aux.getUsuario().getDocumento())) {
@@ -213,14 +190,10 @@ public class Buscar {
 
 	public static ArrayList<Estudiante> estudiantesActivos(String filtro) {
 
-		if (Fabrica.getListaDeEstudiantes().size() == 0) {
-			Fabrica.cargarListas();
-		}
-
 		try {
 			ArrayList<Estudiante> listaDeRespuesta = new ArrayList<Estudiante>();
 
-			for (var tutorConDatos : Fabrica.getListaDeEstudiantes()) {
+			for (var tutorConDatos : ServiceEstudiante.listarEstudiantes()) {
 
 				for (var usuarioActivo : usuariosActivo(filtro)) {
 					if (usuarioActivo.getDocumento().equals(tutorConDatos.getUsuario().getDocumento())) {
@@ -236,12 +209,10 @@ public class Buscar {
 	}
 
 	public static ArrayList<Estudiante> estudianteITR(String itr) {
-		if (Fabrica.getListaDeEstudiantes().size() == 0) {
-			Fabrica.cargarListas();
-		}
+
 		ArrayList<Estudiante> listaDeRespuesta = new ArrayList<Estudiante>();
 
-		for (var estudianteConDatos : Fabrica.getListaDeEstudiantes()) {
+		for (var estudianteConDatos : ServiceEstudiante.listarEstudiantes()) {
 
 			if (estudianteConDatos.getUsuario().getItr().getNombre().toUpperCase().contains(itr.toUpperCase())) {
 				listaDeRespuesta.add(estudianteConDatos);
@@ -253,12 +224,10 @@ public class Buscar {
 	}
 
 	public static ArrayList<Estudiante> estudianteGeneracion(String filtro) {
-		if (Fabrica.getListaDeEstudiantes().size() == 0) {
-			Fabrica.cargarListas();
-		}
+
 		ArrayList<Estudiante> listaDeRespuesta = new ArrayList<Estudiante>();
 
-		for (var estudianteConDatos : Fabrica.getListaDeEstudiantes()) {
+		for (var estudianteConDatos : ServiceEstudiante.listarEstudiantes()) {
 
 			if (estudianteConDatos.getGeneracion().toUpperCase().contains(filtro.toUpperCase())) {
 				listaDeRespuesta.add(estudianteConDatos);
@@ -270,12 +239,10 @@ public class Buscar {
 	}
 
 	public static ArrayList<Estudiante> estudianteSemestre(String filtro) {
-		if (Fabrica.getListaDeEstudiantes().size() == 0) {
-			Fabrica.cargarListas();
-		}
+
 		ArrayList<Estudiante> listaDeRespuesta = new ArrayList<Estudiante>();
 
-		for (var estudianteConDatos : Fabrica.getListaDeEstudiantes()) {
+		for (var estudianteConDatos : ServiceEstudiante.listarEstudiantes()) {
 
 			if (String.valueOf(estudianteConDatos.getSemestre()).contains(filtro)) {
 				listaDeRespuesta.add(estudianteConDatos);
@@ -290,15 +257,11 @@ public class Buscar {
 	// ANALISTA----------------------------------------
 	public static ArrayList<Analista> analistasSinCsonfirmar() {
 
-		if (Fabrica.getListaDeAnalistas().size() == 0) {
-			Fabrica.cargarListas();
-		}
-
 		ArrayList<Analista> listaDeRespuesta = new ArrayList<Analista>();
 
 		var lista = usuariosConfirmar("N");
 
-		for (var aux : Fabrica.getListaDeAnalistas()) {
+		for (var aux : ServiceAnalista.listarAnalistas()) {
 
 			for (var aux2 : lista) {
 				if (aux2.getDocumento().equals(aux.getUsuario().getDocumento())) {
@@ -312,15 +275,11 @@ public class Buscar {
 
 	public static ArrayList<Analista> analistaFiltro(String filtro, String campo) {
 
-		if (Fabrica.getListaDeAnalistas().size() == 0) {
-			Fabrica.cargarListas();
-		}
-
 		ArrayList<Analista> listaDeRespuesta = new ArrayList<Analista>();
 
 		var lista = buscarUsuarioPorCampoYFiltro(filtro, campo);
 
-		for (var aux : Fabrica.getListaDeAnalistas()) {
+		for (var aux : ServiceAnalista.listarAnalistas()) {
 
 			for (var aux2 : lista) {
 				if (aux2.getDocumento().equals(aux.getUsuario().getDocumento())) {
@@ -334,13 +293,9 @@ public class Buscar {
 
 	public static ArrayList<Analista> analistasSinConfirmar() {
 
-		if (Fabrica.getListaDeAnalistas().size() == 0) {
-			Fabrica.cargarListas();
-		}
-
 		ArrayList<Analista> listaDeRespuesta = new ArrayList<Analista>();
 
-		for (var aux : Fabrica.getListaDeAnalistas()) {
+		for (var aux : ServiceAnalista.listarAnalistas()) {
 			for (var aux2 : usuariosConfirmar("N")) {
 				if (aux2.getDocumento().equals(aux.getUsuario().getDocumento())) {
 					listaDeRespuesta.add(aux);
@@ -352,14 +307,11 @@ public class Buscar {
 	}
 
 	public static ArrayList<Analista> analistasActivos(String filtro) {
-		if (Fabrica.getListaDeAnalistas().size() == 0) {
-			Fabrica.cargarListas();
-		}
-		try {
 
+		try {
 			ArrayList<Analista> listaDeRespuesta = new ArrayList<Analista>();
 
-			for (var analistaConDatos : Fabrica.getListaDeAnalistas()) {
+			for (var analistaConDatos : ServiceAnalista.listarAnalistas()) {
 
 				for (var usuarioActivo : usuariosActivo(filtro)) {
 					if (usuarioActivo.getDocumento().equals(analistaConDatos.getUsuario().getDocumento())) {
@@ -375,12 +327,10 @@ public class Buscar {
 	}
 
 	public static ArrayList<Analista> analistaITR(String itr) {
-		if (Fabrica.getListaDeAnalistas().size() == 0) {
-			Fabrica.cargarListas();
-		}
+
 		ArrayList<Analista> listaDeRespuesta = new ArrayList<Analista>();
 
-		for (var analistaConDatos : Fabrica.getListaDeAnalistas()) {
+		for (var analistaConDatos : ServiceAnalista.listarAnalistas()) {
 
 			if (analistaConDatos.getUsuario().getItr().getNombre().toUpperCase().contains(itr.toUpperCase())) {
 				listaDeRespuesta.add(analistaConDatos);
