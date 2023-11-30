@@ -127,7 +127,8 @@ public class Buscar {
 			for (var tutorConDatos : ServiceTutor.listarTutores()) {
 
 				for (var usuarioActivo : buscarUsuarioPorCampoYFiltro(filtro, "Activo")) {
-					if (usuarioActivo.getDocumento().equals(tutorConDatos.getUsuario().getDocumento())) {
+					if (usuarioActivo.getDocumento().equals(tutorConDatos.getUsuario().getDocumento())
+							&& usuarioActivo.getConfirmado().equals("S")) {
 						listaDeRespuesta.add(tutorConDatos);
 					}
 				}
@@ -193,11 +194,12 @@ public class Buscar {
 		try {
 			ArrayList<Estudiante> listaDeRespuesta = new ArrayList<Estudiante>();
 
-			for (var tutorConDatos : ServiceEstudiante.listarEstudiantes()) {
+			for (var estudianteConDatos : ServiceEstudiante.listarEstudiantes()) {
 
 				for (var usuarioActivo : usuariosActivo(filtro)) {
-					if (usuarioActivo.getDocumento().equals(tutorConDatos.getUsuario().getDocumento())) {
-						listaDeRespuesta.add(tutorConDatos);
+					if (usuarioActivo.getDocumento().equals(estudianteConDatos.getUsuario().getDocumento())
+							&& usuarioActivo.getConfirmado().equals("S")) {
+						listaDeRespuesta.add(estudianteConDatos);
 					}
 				}
 
@@ -314,7 +316,8 @@ public class Buscar {
 			for (var analistaConDatos : ServiceAnalista.listarAnalistas()) {
 
 				for (var usuarioActivo : usuariosActivo(filtro)) {
-					if (usuarioActivo.getDocumento().equals(analistaConDatos.getUsuario().getDocumento())) {
+					if (usuarioActivo.getDocumento().equals(analistaConDatos.getUsuario().getDocumento())
+							&& usuarioActivo.getConfirmado().equals("S")) {
 						listaDeRespuesta.add(analistaConDatos);
 					}
 				}

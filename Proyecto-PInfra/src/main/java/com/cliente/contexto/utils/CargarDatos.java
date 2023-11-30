@@ -1082,7 +1082,6 @@ public class CargarDatos {
 				"carla@gmail.com", "carla.sanchez", "Sanchez", "Carla", "Lucia", "", "092345678", "N", "S",
 				departamentoCreado8, generoCreado2, itrCreada2, localidadCreada2, rolCreado4);
 
-//		var oUsuarioCreado = Crear.usuario(oUsuarioNuevo, new Analista());
 		var oUsuarioCreado4 = Crear.usuario(oUsuarioNuevo4, new Analista());
 
 		var oUsuarioCreado5 = Crear.usuario(oUsuarioNuevo5, new Estudiante("2019", new BigDecimal(4)));

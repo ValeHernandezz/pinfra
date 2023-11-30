@@ -40,7 +40,7 @@ public class UsuarioBean implements UsuarioBeanRemote {
 						null);
 			}
 		} catch (Exception e) {
-			return new Respuesta("error", "Nombre de usuario o contraseña inválida.\nVuelva a intentarlo.", null);
+			return new Respuesta("error", "Nombre de usuario o contraseña no válido.\nVuelva a intentarlo.", null);
 		}
 
 	}
