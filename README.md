@@ -16,6 +16,10 @@ La interfaz se caracteriza por su **modernidad** y **eficiencia**, haciendo uso 
 
 ## 💻 Desarrollado por equipo `Error404`
 
-- [nicomelendez](https://github.com/nicomelendez)
-- [ValeHernandezz](https://github.com/ValeHernandezz)
-- [martina.fernandez](https://git.utec.edu.uy/martina.fernandez)
+<a href="https://github.com/valehernandezz/pinfra/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=valehernandezz/pinfra" />
+</a>
+
+## 👩‍💻 Sobre mí
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://valehernandez.vercel.app)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/valentina-hernandez-modino)
